@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- GitHub profile (GodModeArch) in person sameAs across all schema entities
 - Interactive tax estimator on zonal value pages
 - General Purpose (GP) column as distinct BIR classification
 - AEO infrastructure: llms.txt, answer-first hero, homepage FAQ schema
