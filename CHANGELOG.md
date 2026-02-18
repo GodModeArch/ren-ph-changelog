@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - AEO infrastructure: llms.txt, answer-first hero, homepage FAQ schema
 
 ### Fixed
+- Barangay headline values use median instead of max, fixing 930 barangays inflated by condo outliers
 - Province assignments for 85 cities across 13 regions (parser used global name map instead of RDO config)
 - Barangay pages in multi-RDO cities now show their specific RDO, not the merged city RDO list
 - Parking Slot (PS) separated from Commercial classification
