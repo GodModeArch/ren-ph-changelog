@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Full effectivity dates extracted from Excel barangay headers (e.g. "February 15, 2024" instead of just "2024")
 - Barangay-level search: 33K+ barangays searchable by name or "barangay city" combo
 - RDO-to-barangay mapping: each barangay now carries its specific RDO code and name
 - RDO grouping on multi-RDO city pages (Makati, QC, Manila, Cebu City, Davao City)
