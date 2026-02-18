@@ -8,17 +8,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Barangay-level search: 33K+ barangays searchable by name or "barangay city" combo
+- RDO-to-barangay mapping: each barangay now carries its specific RDO code and name
+- RDO grouping on multi-RDO city pages (Makati, QC, Manila, Cebu City, Davao City)
 - GitHub profile (GodModeArch) in person sameAs across all schema entities
 - Interactive tax estimator on zonal value pages
 - General Purpose (GP) column as distinct BIR classification
 - AEO infrastructure: llms.txt, answer-first hero, homepage FAQ schema
 
 ### Fixed
+- Province assignments for 85 cities across 13 regions (parser used global name map instead of RDO config)
+- Barangay pages in multi-RDO cities now show their specific RDO, not the merged city RDO list
 - Parking Slot (PS) separated from Commercial classification
-- Cross-region city merge collisions in zonal value parser
 - Street vicinity preservation in barangay headline values
 
 ### Changed
+- Province derivation: cities inherit province from their RDO config, with cross-province overrides only for RDO 045 (Rizal) and RDO 079 (Siquijor)
+- Removed 260-line CITY_PROVINCE_MAP and data-loader workarounds (PROVINCE_FIX, buildAcceptedRegions)
 - All pages set to fully static with 24h cache and on-demand revalidation
 - AEO bots allowed in robots.txt
 
