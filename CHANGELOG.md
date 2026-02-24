@@ -17,6 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Share buttons (X/Twitter, Facebook, LinkedIn, copy link) on report pages
 - Insights link in site header (desktop + mobile) and footer
 
+### Fixed
+- Markdown tables in report pages rendering as raw pipe-delimited text (missing remark-gfm plugin)
+
 ### Changed
 - Updated MASTER-TODO with live database stats: 25,264 broker profiles, 5,046 projects, 2,282 developers, 7,820 LTS records, 1,441 cities, 33,633 barangays, 199,674 zonal value records
 
