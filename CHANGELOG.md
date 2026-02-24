@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- /insights section with Reports and Blog subsections
+- "State of Philippine Real Estate 2025" data report: MDX-powered with sticky TOC, intersection observer active section tracking
+- AEO enhancements: JSON-LD Report + Dataset schemas, Key Figures box, APA/MLA citation block with copy buttons
+- Downloadable CSV data supplement (864 LTS records from DHSUD 2025 data)
+- Enhanced Open Graph tags with structured description for report pages
+- Share buttons (X/Twitter, Facebook, LinkedIn, copy link) on report pages
+- Insights link in site header (desktop + mobile) and footer
+
 ### Changed
 - Updated MASTER-TODO with live database stats: 25,264 broker profiles, 5,046 projects, 2,282 developers, 7,820 LTS records, 1,441 cities, 33,633 barangays, 199,674 zonal value records
 
