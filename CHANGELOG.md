@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Markdown tables in report pages rendering as raw pipe-delimited text (missing remark-gfm plugin)
+- Narrow tables (2-3 columns) no longer stretch to full width, auto-sized to content instead
 
 ### Changed
 - Updated MASTER-TODO with live database stats: 25,264 broker profiles, 5,046 projects, 2,282 developers, 7,820 LTS records, 1,441 cities, 33,633 barangays, 199,674 zonal value records
