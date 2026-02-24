@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - AEO enhancements: JSON-LD Report + Dataset schemas, Key Figures box, APA/MLA citation block with copy buttons
 - Downloadable CSV data supplement (864 LTS records from DHSUD 2025 data)
 - Enhanced Open Graph tags with structured description for report pages
+- Responsive ReportTable component: bordered table on desktop, stacked cards on mobile with auto numeric alignment
 - Share buttons (X/Twitter, Facebook, LinkedIn, copy link) on report pages
 - Insights link in site header (desktop + mobile) and footer
 
