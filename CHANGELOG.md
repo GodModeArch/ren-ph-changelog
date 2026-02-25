@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Blog system: full MDX-powered blog with post listing, TOC sidebar, share buttons, and SEO metadata
 - First blog post: "How to Compute Property Value in the Philippines"
-- 4-node JSON-LD @graph schema for blog posts: WebPage (reviewedBy, lastReviewed), TechArticle (mentions, dependencies), HowTo (5 steps for rich snippets), Person (root identity with knowsAbout/affiliation)
+- 3-node JSON-LD @graph schema for blog posts: WebPage (reviewedBy, lastReviewed), TechArticle (mentions, dependencies), HowTo (5 steps for rich snippets). Person references unified to site-wide `/#principal` @id.
 - Image MDX component with figure/figcaption rendering
 - /insights section with Reports and Blog subsections
 - "State of Philippine Real Estate 2025" data report: MDX-powered with sticky TOC, intersection observer active section tracking
@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Insights link in site header (desktop + mobile) and footer
 
 ### Fixed
+- Person @id aligned to `/#principal` across all JSON-LD graphs so Google connects them as a single entity
 - External nofollow links now correctly get both `nofollow` and `noopener noreferrer` rel attributes
 - Markdown tables in report pages rendering as raw pipe-delimited text (missing remark-gfm plugin)
 - Narrow tables (2-3 columns) no longer stretch to full width, auto-sized to content instead
