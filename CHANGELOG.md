@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Blog system: full MDX-powered blog with post listing, TOC sidebar, share buttons, and SEO metadata
+- First blog post: "How to Compute Property Value in the Philippines"
+- Article JSON-LD schema for blog posts (author, publisher, mentioned entities)
+- Image MDX component with figure/figcaption rendering
 - /insights section with Reports and Blog subsections
 - "State of Philippine Real Estate 2025" data report: MDX-powered with sticky TOC, intersection observer active section tracking
 - AEO enhancements: JSON-LD Report + Dataset schemas, Key Figures box, APA/MLA citation block with copy buttons
