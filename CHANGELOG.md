@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Insights link in site header (desktop + mobile) and footer
 
 ### Fixed
+- Zonal values: Sta. Rosa City (Laguna) now correctly separated from Biñan City in RDO 057. 16 barangays (Dita, Balibago, Macabling, Sinalhan, Tagapo, etc.) were incorrectly grouped under Biñan due to a parser regex that didn't handle abbreviated city names with periods (STA., STO., GEN.)
 - Person @id aligned to `/#principal` across all JSON-LD graphs so Google connects them as a single entity
 - External nofollow links now correctly get both `nofollow` and `noopener noreferrer` rel attributes
 - Markdown tables in report pages rendering as raw pipe-delimited text (missing remark-gfm plugin)
