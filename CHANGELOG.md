@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Zonal values footnote extraction: BIR Excel footnote legends parsed and linked to street entries. 5,825 streets now carry footnote annotations, 494 streets marked as deleted/defunct (not existing, transferred, merged, consolidated). 19,653 streets and 1,061 barangays had embedded asterisks stripped from display names
+- Zonal values validation tool: standalone script comparing parsed JSON against source Excel files, producing diff reports (JSON + markdown) showing parsed, missed, and mismatched values
 - Blog system: full MDX-powered blog with post listing, TOC sidebar, share buttons, and SEO metadata
 - First blog post: "How to Compute Property Value in the Philippines"
 - 3-node JSON-LD @graph schema for blog posts: WebPage (reviewedBy, lastReviewed), TechArticle (mentions, dependencies), HowTo (5 steps for rich snippets). Person references unified to site-wide `/#principal` @id.
@@ -23,6 +25,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - LTS Report v1.1: corrected Calamba emerging cities count (12 → 22 to match Top 20 table), clarified city name deduplication methodology note, added changelog section to report
+- Zonal values parser audit: 17 bugs fixed (BUG-1 through BUG-17) across critical, moderate, and minor severity. All 120 RDO files re-parsed. Value extraction jumped from ~99K to 1,017,019 values (10x improvement across 2,053 cities)
+- Zonal values BUG-1 (critical): multi-sheet parsing now captures all municipalities per Excel file, not just the latest sheet
+- Zonal values BUG-2 (critical): street/vicinity state reset correctly between barangays, fixing misattributed streets
+- Zonal values BUG-4 (critical): bare "A" agricultural classification code no longer silently dropped
+- Zonal values BUG-5 (critical): improved barangay header detection reduces false triggers from data rows
+- Zonal values BUG-6: avg_commercial calculated properly in city merges instead of hardcoded 0
+- Zonal values BUG-7: summary stats use merged cityIndex to avoid overcounting multi-RDO cities
+- Zonal values BUG-9: footnotes split into city-level and barangay-level dictionaries so city footnotes survive barangay-level changes
+- Zonal values BUG-10: DO year extraction rejects values < 1990 (were picking up DO number ranges)
+- Zonal values: slug collisions resolved. Streets like "A. MABINI ST." and "A. MABINI" both slugified to `a-mabini`, causing 11,432 value mismatches across 61 RDOs. Duplicate slugs now get `-2`, `-3` suffixes. Empty street slugs become `area-1`, `area-2`. L3 accuracy: 98.3% to 100.0%
+- Zonal values: deleted/defunct streets excluded from search index, province zone counts, and city min/max residential ranges (premerge finding)
+- Zonal values: newlines collapsed in street and barangay display names (premerge finding)
 - Zonal values: Sta. Rosa City (Laguna) now correctly separated from Biñan City in RDO 057. 16 barangays (Dita, Balibago, Macabling, Sinalhan, Tagapo, etc.) were incorrectly grouped under Biñan due to a parser regex that didn't handle abbreviated city names with periods (STA., STO., GEN.)
 - Zonal values: mixed barangay header formats within a single BIR Excel sheet now handled correctly. RDO 013 (Cagayan) had 19 municipalities stuck at 1 barangay each because some used "Barangay : NAME" format while others used "ZONE/BARANGAY NAME". RDO 078 (Negros Occidental) and RDO 091 (Zamboanga del Norte) had similar issues. Parser now detects barangay headers format-agnostically.
 - Zonal values: city names normalized to uppercase across all extraction formats, fixing duplicates from mixed-case Excel headers (e.g., "Himamaylan" vs "HIMAMAYLAN" merged)
