@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-03-03
+
 ### Added
 - Zonal values footnote extraction: BIR Excel footnote legends parsed and linked to street entries. 5,825 streets now carry footnote annotations, 494 streets marked as deleted/defunct (not existing, transferred, merged, consolidated). 19,653 streets and 1,061 barangays had embedded asterisks stripped from display names
 - Zonal values validation tool: standalone script comparing parsed JSON against source Excel files, producing diff reports (JSON + markdown) showing parsed, missed, and mismatched values
@@ -57,7 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Updated MASTER-TODO with live database stats: 25,264 broker profiles, 5,046 projects, 2,282 developers, 7,820 LTS records, 1,441 cities, 33,633 barangays, 199,674 zonal value records
 
-## [2026-02-20]
+## [1.5.0] - 2026-02-20
 
 ### Added
 - Full effectivity dates extracted from Excel barangay headers (100% coverage: 33,632/33,633 barangays, 1,441/1,441 cities)
