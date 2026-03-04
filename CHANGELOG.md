@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.1] - 2026-03-04
+
+### Fixed
+- LTS timezone off-by-one: `getFutureDatePH` used +08:00 offset that caused `setDate`/`getDate` to operate on UTC day, making all "expiring within N days" windows one day short on UTC servers (Vercel)
+- LTS placeholder dates: DHSUD sentinel values like "31-Dec-1899" now rejected (pre-2000 dates treated as missing)
+- LTS data quality: LTS number format classifier added (standard, regional, amendment, numeric_only) with confidence adjustments for amendment records
+- LTS expiry UI: verified projects with missing expiry dates now show dashed badge border and warning message instead of silently omitting the field
+- All date comparisons in LTS queries now use Philippine timezone (Asia/Manila) instead of UTC
+
 ## [2.0.0] - 2026-03-03
 
 ### Added
