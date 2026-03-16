@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-03-16
+
+### Added
+- Agentic zonal parser pipeline: 3-stage Python pipeline (structure, extraction, grounding) replaces rule-based parser. Processes 120 BIR RDO Excel files with PSGC entity resolution
+- Supabase zonal schema: 6 tables (regions, provinces, cities, barangays, values, slug aliases) with RLS, full-text search indexes, and RPC functions for stats/highlights
+- Import script with key-based ID mapping, street slug deduplication, and looped truncate for reliable re-imports
+- Paginated query layer (supabase-loader.ts) replacing static JSON data loader. Handles 39K+ barangays and 225K+ value rows without Supabase 1000-row limit truncation
+- RPC functions: get_city_stats, get_city_highlights, get_top_cities_by_residential, get_street_counts_per_barangay
+- City slug alias resolution for both city and barangay page routes
+- Popular cities homepage section powered by server-side aggregation
+
+### Changed
+- Zonal value data source: static JSON files (164 MB) replaced by Supabase queries
+- City stats computed server-side via single RPC (was duplicated client-side)
+- Barangay pages now show real city stats and RDO code/name from parent city
+- Zone types expanded: residential_condo, commercial_condo, institutional, government_land added to ZonalValues interface
+- Search sanitized against ILIKE wildcards and tsquery parse errors
+
+### Fixed
+- Import ID mapping: key-based composite matching replaces positional array index (prevented silent data corruption)
+- Deleted values excluded from stats, highlights, and assembled barangay data
+- Zero-value zone types preserved (|| null changed to ?? null)
+- City redirect loop guard on aliased slugs
+- Homepage metadata updated from 2025 to 2026
+
 ## [2.0.1] - 2026-03-04
 
 ### Fixed
