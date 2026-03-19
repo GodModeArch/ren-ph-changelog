@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.0] - 2026-03-19
+
+### Added
+- LTS pipeline rebuild: new `lts_records` table replaces `lts_verification_queue` and `project_research_queue`. Single-table design with direct DHSUD re-parse import, shared normalizer module, and streamlined admin review UI
+- LTS admin RPC functions (`link_lts_to_project`, `exclude_lts_record`) with SECURITY DEFINER and admin permission checks, replacing direct table writes that were silently failing due to RLS
+- Shared normalizer module (`src/shared/lib/normalize.ts`): consolidated developer name normalization, region normalization, and LTS grouping logic extracted from scattered scripts
+- React.cache() request deduplication on 8 query functions (profiles, realties, projects, accreditations) to reduce Supabase egress from layout/page/generateMetadata triple-calls
+- Query bounds (`.limit()`) on unbounded listing and hub fallback queries to prevent 35K+ row fetches
+- Zonal parser: street name normalization for DO merge (periods, initials, suffixes), DO vicinity superseding for stale entries, cross-city PSGC barangay deduplication
+
+### Changed
+- LTS admin pages rewritten for `lts_records` schema: queue review, manual entry, expiring records views
+- Admin sidebar updated with LTS record counts from new `get_lts_stats` RPC
+
+### Fixed
+- LTS admin write actions silently failing: RLS only allowed `service_role` but admin client used `authenticated` session. Now uses SECURITY DEFINER RPCs with `is_admin_or_service()` checks
+- 14 audit findings from adversarial review: RPC security (caller permission checks), publish_status validation, DHSUD parser newline handling, date fallbacks, regional format support
+- DROP FUNCTION statements with wrong parameter signatures leaving orphaned functions in database
+- `get_lts_stats` SECURITY DEFINER function missing `SET search_path = public`
+- Manila numbered barangay grounding: plain numbers ("10", "100") now matched as "BARANGAY N". Tondo coverage 0.2% to 52%, Caloocan 0% to 85%, Binondo 0% to 97%
+- 18 ungrounded cities resolved via BIR district overrides and DO-number-as-city overrides
+- Street suffix stripping preserving distinct street types (RIZAL ST vs RIZAL AVE no longer falsely merged)
+- Zonal import truncate timeout on large tables: uses psql TRUNCATE CASCADE instead of PostgREST DELETE
+
+### Removed
+- Dead LTS pipeline code: matcher, verification queue, research queue, bulk-create scripts, seed scripts
+- Old `lts_verification_queue` and `project_research_queue` tables (replaced by `lts_records`)
+
 ## [2.1.0] - 2026-03-16
 
 ### Added
