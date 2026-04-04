@@ -7,6 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.0] - 2026-04-04
+
+### Added
+- Cloudflare Workers deployment: migrated from Vercel to OpenNext on Cloudflare Workers with R2 cache, D1 tag cache, and ISR
+- Content-Security-Policy header with restrictive default policy
+- Security headers: HSTS (63072000s, includeSubDomains, preload), X-Frame-Options DENY, nosniff, Referrer-Policy, Permissions-Policy
+- Street dedup post-processor with vicinity-aware merge and phantom street filter
+- Reverse validator for zonal value pipeline (99.75% accuracy on 1000-sample test)
+- Max-value sanity cap and zero-value rejection for zonal value pipeline
+- Condo classification columns folded into residential/commercial stats
+
+### Changed
+- Hosting: Vercel to Cloudflare Workers ($5/month Workers Paid plan)
+- Images set to unoptimized (CF Free plan has no Image Resizing)
+- Static page generation limited to 200 cities + 500 barangays (ISR handles rest)
+- Removed `x-powered-by: Next.js` header disclosure
+- Barangay display names normalized to collapse multiple spaces
+
+### Fixed
+- `localhost:3000` baked into all canonical URLs, og:url, sitemap, robots.txt, and JSON-LD when building with local env vars. Build now requires production `NEXT_PUBLIC_APP_URL`
+- PostgREST 1000-row limit truncating city zonal values for large cities (batch fetch with size 10)
+- Barangay cards showing no values when only street-level data exists (fall back to street-level averages)
+- Manila NNN/DD barangay format grounding and stale-DO dedup across all regions
+- Phantom streets where display_name equals vicinity stripped from output
+- `city-of-` slug prefix normalization across all zonal value query paths
+- 6 grounding gaps: province expansion (Davao de Oro/Occidental), IGACOS districts, reverse base number matching, bare Poblacion fallback, compound barangay splitting, manual override ordering
+- 4 grounding issues: float barangays, zone sub-headers parsed as cities, province-as-city, footnote filter ordering
+- False city import from BIR zone/block numbers parsed as barangays
+- 10 ghost barangays (empty name/slug parser artifacts) deleted from production
+- Ungrounded BIR continuation sections merged into grounded parent barangays
+- Rizal cities (Antipolo, Rodriguez, San Mateo, Teresa) misclassified under Metro Manila
+- City highlights showing stale barangay defaults instead of street-level data
+- Empty-name barangay parsing artifacts appearing in city highlights
+
+### Data Quality
+- 95.1% barangay grounding rate (up from ~93%)
+- 1,621 cities, 36,080 barangays, 219,644 value rows in production
+- 310 barangays recovered via 6 systematic grounding fixes
+- Davao City grounding improved from 70% to 94%
+
 ## [2.2.0] - 2026-03-19
 
 ### Added
