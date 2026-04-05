@@ -7,11 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.3.0] - 2026-04-04
+## [2.3.0] - 2026-04-05
 
 ### Added
 - Cloudflare Workers deployment: migrated from Vercel to OpenNext on Cloudflare Workers with R2 cache, D1 tag cache, and ISR
-- Content-Security-Policy header with restrictive default policy
+- Content-Security-Policy header with restrictive default policy (includes GA4 allowlist)
 - Security headers: HSTS (63072000s, includeSubDomains, preload), X-Frame-Options DENY, nosniff, Referrer-Policy, Permissions-Policy
 - Street dedup post-processor with vicinity-aware merge and phantom street filter
 - Reverse validator for zonal value pipeline (99.75% accuracy on 1000-sample test)
@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 6 grounding gaps: province expansion (Davao de Oro/Occidental), IGACOS districts, reverse base number matching, bare Poblacion fallback, compound barangay splitting, manual override ordering
 - 4 grounding issues: float barangays, zone sub-headers parsed as cities, province-as-city, footnote filter ordering
 - False city import from BIR zone/block numbers parsed as barangays
+- Duplicate `validBarangays` declaration in import script preventing compilation
 - 10 ghost barangays (empty name/slug parser artifacts) deleted from production
 - Ungrounded BIR continuation sections merged into grounded parent barangays
 - Rizal cities (Antipolo, Rodriguez, San Mateo, Teresa) misclassified under Metro Manila
