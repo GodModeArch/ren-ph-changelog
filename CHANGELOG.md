@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.1] - 2026-04-13
+
+### Fixed
+- Empty Kalinga city in extractor (clean name before length guard)
+- Garbage "236/22" Manila city from BIR zone-reference formatting errors (reject numeric zone refs like `\d+/\d+`)
+- DO number "037-2022" misidentified as Atimonan barangay (REVISION skip now anchored to start-of-string, allowing location names that mention "revision" to pass through)
+- Footnote definition rows shadowing data rows with asterisked street names (skip footnote detection when row has a classification code)
+- Leading asterisks stripped from street display names (footnote markers, not part of the name)
+
+### Changed
+- Barangay page H1, SEO title/description, and Dataset schema now prefix "Brgy." to disambiguate from city pages (368 slug collisions nationwide)
+- Zonal import batch size reduced from 500 to 250 for remote Supabase stability
+- Import script now retries each batch up to 3 times with fresh Supabase client and exponential backoff; adds 2s delay between batches to avoid socket exhaustion
+
+### Added
+- `--resume` flag on zonal import script to continue value inserts after partial failure
+
 ## [2.3.0] - 2026-04-05
 
 ### Added
