@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.1] - 2026-05-09
+
+### Fixed
+- Academy Capital Gains Tax lesson: principal-residence exemption corrected from "once in a lifetime" to "once every 10 years" per NIRC Sec. 24(D)(2), in both the Quick Answer block and the pre-existing FAQ
+- Academy VAT on Real Estate lesson: Quick Answer now reflects CREATE Act (residential lot exemption repealed except socialized housing under RA 7279) and references the current BIR threshold instead of the pre-TRAIN P1.5M/P2.5M figures
+- Academy Documentary Stamp Tax lesson: filing deadline corrected to "5 days after the close of the month of notarization" per Sec. 200 NIRC; customary payor aligned with the FAQ on the same lesson
+- Academy Transfer Tax & LRA Fees lesson: scenario and FAQ now agree on how the LRA registration fee scales across the P3M-P5M range
+- Academy Commission Calculations lesson: description and Quick Answer reconciled on leasing commission convention
+- Academy date validation rejects impossible ISO dates (e.g., 2026-02-30) via round-trip check
+
+### Changed
+- Academy lesson and course schemas: separate `datePublished` and `lastReviewed` fields so future review bumps update only `dateModified` in JSON-LD, preserving original publication date for SEO freshness signals
+- Academy Quick Answer component renamed from `LessonQuickAnswer` to `QuickAnswerCallout` to reflect dual use on lesson and course pages
+- 11 Academy SEO titles trimmed to 60 chars or less to avoid SERP truncation: property classifications, commission calculations, DST, transfer tax, VAT, CWT, security deposit, eviction grounds, lease renewal, max allowable increase, rent control violations
+
+## [2.4.0] - 2026-05-06
+
+### Added
+- Academy Quick Answer block: above-the-fold answer callout on every lesson page and on the rent-control-essentials course hub
+- Last reviewed date stamp in lesson and course page headers
+- `datePublished` and `dateModified` (Schema.org) on Academy `LearningResource` and `Course` JSON-LD via the new `lastReviewed` field
+- LRA registration fee schedule topic and FAQ entry in the Transfer Tax & LRA Fees lesson, pointing to the LRA ERCF tool
+
+### Changed
+- Rewrote titles, meta descriptions, and Quick Answer copy across 17 Academy lessons and the rent-control-essentials course hub for SERP clarity and consumer comprehension
+- Lesson page header metadata row wraps on small screens to accommodate the new "Last reviewed" pill
+
 ## [2.3.1] - 2026-04-13
 
 ### Fixed
