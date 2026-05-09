@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.2] - 2026-05-09
+
+### Fixed
+- Academy "Last reviewed" pill: force UTC timezone in date formatter so 1st-of-month dates (e.g. 2026-06-01) no longer display the previous month when the runtime is west of UTC
+- Academy JSON-LD `datePublished` no longer drops silently when `datePublished` is malformed but defined; falls back to `lastReviewed` independently of `datePublished` validity
+
 ## [2.4.1] - 2026-05-09
 
 ### Fixed
