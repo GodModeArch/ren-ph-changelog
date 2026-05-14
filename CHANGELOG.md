@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Lead capture modal on barangay zonal value pages: 3-step Yelp-style flow (intent, timeline, contact), automatic lead scoring (hot/warm/cool/cold tiers), Resend transactional email notification for hot/warm tiers
+- `/admin/leads` inbox with tier and status filters, location and date filters, per-lead detail view with status updates (new/notified/called/qualified/closed/dead/nurture)
+- `/admin/diagnostics` page for verifying production Cloudflare Worker secrets by calling the real APIs (Resend, Turnstile, Supabase), without ever displaying values
+- Cloudflare Turnstile bot protection on the lead form with per-IP rate limit (sha256-hashed IP) and honeypot field
+- PH mobile number normalizer (`+63` country code) shared across the lead form and future forms
+- Migration `00031_lead_captures`: `leads` table with deny-all RLS (anon+authenticated cannot read or write directly; service-role server actions only)
+- Setup script runbook under `scripts/setup/` covering: Resend secrets, Turnstile keys, Supabase service-role key, production migration application via direct psql (bypassing the deferred 00025/00026 push trap), DB password rotation across local files, and connection-string testing
+
+### Changed
+- Content Security Policy allows `https://challenges.cloudflare.com` in `script-src` and `frame-src` so the Turnstile widget can load
+
 ## [2.4.2] - 2026-05-09
 
 ### Fixed
