@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.5.0] - 2026-05-14
+
 ### Added
 - Lead capture modal on barangay zonal value pages: 3-step Yelp-style flow (intent, timeline, contact), automatic lead scoring (hot/warm/cool/cold tiers), Resend transactional email notification for hot/warm tiers
 - `/admin/leads` inbox with tier and status filters, location and date filters, per-lead detail view with status updates (new/notified/called/qualified/closed/dead/nurture)
