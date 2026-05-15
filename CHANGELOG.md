@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.7.0] - 2026-05-15
+
+### Added
+- `LicensedBadge` component on broker pages: visible PRC licensure trust signal that shows the PRC license number when claimed and the cohort-verified credential when unclaimed. Returns null when no evidence on file rather than making an unbacked claim
+- Social media icons (Facebook, LinkedIn, Twitter/X, Instagram, YouTube, plus a generic fallback) rendered from the previously-unused `social_links` column. Same URLs also feed `Person.sameAs` in structured data
+- Badges section on broker pages rendering the previously-unused `badges` array as muted pills, visually distinct from verified badges so it's clear these are broker-supplied labels
+- `generateMetaDescription` utility composing varied per-broker meta descriptions from cohort era, seniority, exam location, service areas, and specializations, capped at 160 chars at a word boundary. 11 vitest cases
+
+### Changed
+- Broker JSON-LD `@type` upgraded from `Person` to `['Person', 'RealEstateAgent']` for Google rich-results compatibility
+- `Person.sameAs` populated from broker `website` plus valid http(s) URLs in `social_links` for entity disambiguation and AI search citation
+- `Person.workLocation` now carries `containedInPlace: Philippines` hierarchy on every Place; falls back to exam location for unclaimed brokers so every broker has at least one geographic signal
+- Broker pages now declare `isPartOf: REFS.dataset`, wiring the 24K profiles into the site-level identity graph in `schema-entities.ts`
+- Broker page meta description no longer a near-duplicate sentence across 24K pages: built from cohort, location, experience, service areas, specializations (replaces the previous one-sentence templated fallback)
+- Page title now includes the licensure city when known (`{Name} - Licensed Real Estate Broker, {City}`) so search snippets and tab labels differ between brokers with the same name root
+- Cohort narrative now fills the About section for any broker without a user-written bio (previously gated to unclaimed only), so claimed brokers who haven't written a bio see useful 3rd-person prose instead of an empty section. The broker's own bio still wins when set
+- Unclaimed claim CTA copy: "Are you {firstName}?" preamble above the Claim button so the empty state reads as a direct prompt
+
+### Notes
+- No content is AI-generated. The 24K unclaimed broker pages stay honestly thin in voice (claim-flow-supplied bios only); enhancement is via structured data, metadata variation, and surfacing fields that already existed
+- `profile.licenseStatus` is deliberately not consumed by `LicensedBadge` because that field is `'pending'` for every broker today (the claim flow never advances it). Fix belongs in the deferred PRC-verification workstream
+
 ## [2.6.0] - 2026-05-15
 
 ### Added
