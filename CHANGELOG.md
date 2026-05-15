@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.7.1] - 2026-05-15
+
+### Changed
+- Zonal value search (`/tools/zonal-value` autocomplete) rewritten as a single ranked Postgres RPC (`search_zonal_locations`). Trigram indexes (`gin_trgm_ops`) replace unindexed ILIKE scans on 36K barangays + 1,620 cities + 72 provinces; results are ranked by similarity + prefix bonus across all three entity types in one query. Autocomplete execution drops from seconds to single-digit milliseconds, and barangays are no longer starved out of the result set by client-side push order
+- Cities formatted "City of X" or "Municipality of X" (135 of 1,620 entries) now rank correctly against barangay namesakes. Previously, typing "tagaytay" surfaced 8 obscure barangays before "City of Tagaytay" because the formal prefix diluted the similarity score. Score now compares against the stripped name; full display name still drives recall
+- When scores tie, broader entities win: a query of "cebu" surfaces Cebu province, then City of Cebu, then barangay Cebu, not the other way around
+
+### Fixed
+- Zonal search no longer strips ñ and punctuation from the query, so accented place names like "Las Piñas" and "Sto. Niño" match when typed with the correct characters. Cross-accent folding ("pinas" matching "piñas") remains a separate follow-up that needs the `unaccent` extension
+- Autocomplete RPC errors now surface in server logs (`console.error` with code + message) instead of silently degrading to an empty dropdown, so permission-denied or RPC-missing failures are debuggable
+- `search_zonal_locations` carries an explicit `GRANT EXECUTE` to `authenticated, anon` matching the pattern used by every other RPC in the repo, so it works regardless of role-default state on production
+
+### Notes
+- Migration `00030_zonal_search_trgm_indexes.sql` is fully idempotent (`CREATE EXTENSION IF NOT EXISTS`, `CREATE INDEX IF NOT EXISTS`, `CREATE OR REPLACE FUNCTION`). Drops the now-unused tsvector FTS indexes from migration 00022 (`idx_zonal_cities_search`, `idx_zonal_barangays_search`) that the old `.fts(simple)` branch relied on
+- Applied to production via direct psql, not `supabase db push` (consistent with the 00031/00032 pattern)
+
 ## [2.7.0] - 2026-05-15
 
 ### Added
