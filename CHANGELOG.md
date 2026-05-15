@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.6.0] - 2026-05-15
+
+### Added
+- `lts_records` table on production: immutable DHSUD source data with normalized fields (project name, developer, city slug, region), confidence scoring (high/medium/low), parsed dates, and an optional FK to `projects` for linked records. RLS: public read, service-role write
+- `get_lts_stats()` RPC: returns total records, confidence breakdown, linked/unlinked counts, active/expired LTS counts, unique developer/city counts. SECURITY DEFINER with hardened search_path
+- `link_lts_to_project` and `exclude_lts_record` admin RPCs (gated by `is_admin_or_service()`) for the admin LTS queue
+- `scripts/verify-lts-records.ts`: end-to-end regression check (table read, RPC call, row count band, search query) usable against local or production via env vars
+- 9,922 LTS records imported to production from the 2026-05-15 DHSUD callback dump (97.5% high confidence, 2.5% medium, 0% low; covers 2,994 unique developers across 550 cities)
+
+### Fixed
+- `/verify/lts` and `/admin/lts` showed "0 LTS records" on production: schema drift caused by the original migration `00025_lts_pipeline_rebuild.sql` welding `CREATE TABLE lts_records` to a destructive `TRUNCATE projects/developers CASCADE`, so the migration was deferred indefinitely. Split the migration into a non-destructive form (table + RPCs only, fully idempotent), applied to production, and populated the table. `projects` and `developers` were not touched
+
+### Notes
+- **Local-dev recovery:** any developer who previously applied the OLD destructive `00025_lts_pipeline_rebuild.sql` to their local Supabase will have empty `projects` and `developers` tables. The renamed `00025_lts_records_table.sql` is purely additive and will not restore that data. Reseed locally or re-pull from production
+
 ## [2.5.0] - 2026-05-14
 
 ### Added
