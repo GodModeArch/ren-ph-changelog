@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.7.2] - 2026-05-16
+
+### Security
+- Open-redirect check on auth flows replaced with `safeRedirectPath` util. The previous inline guard (`raw.startsWith('/') && !raw.startsWith('//')`) allowed `/\evil.com` because the WHATWG URL parser normalizes backslashes in special schemes into forward slashes, turning the path into `//evil.com` after the check passed. Tabs and newlines were also stripped during URL resolution, so `/\t/evil.com` slipped through. The new util resolves against a sentinel origin and rejects anything that doesn't land back on the sentinel. One implementation, 10 tests, used by `callback/route.ts` and `login-form.tsx`
+
+### Added
+- Migration `00033_claim_integrity_constraints.sql`: enforces `UNIQUE(profiles.user_id)` (one auth account = one claimed profile) and a partial `UNIQUE(user_id, profile_id)` on incomplete claim challenges (dedupes in-progress quizzes). Includes a non-destructive pre-flight that raises with the duplicate count before any constraint is added
+
+### Fixed
+- `verifyAndClaimProfile` returned `{ success: true }` for zero rows after the `.eq('tier','unclaimed')` race-condition guard matched nothing. Action now selects the updated row and checks `updated.length`. The user no longer sees "claimed" UI while the DB still says unclaimed
+- Login form left users stranded after signup-with-session by clearing loading state before the navigation completed. Form now navigates via `window.location.assign` so the post-signup transition is reliable
+- OAuth callback redirect on Cloudflare Workers + OpenNext: `request.url`'s origin can be an internal host or wrong protocol behind the proxy. Callback now uses `x-forwarded-host` + `x-forwarded-proto` for the user-facing redirect base, falling back to `origin` for local dev. Fixes "signed in with Google, still logged out"
+- `verifyAndClaimProfile` now maps PG `23505` (unique_violation) from the new `UNIQUE(profiles.user_id)` constraint to `"You already have a claimed profile."` instead of the generic `"Failed to claim profile"`. Users who already own a profile now see why the second claim fails
+
+### Changed
+- `src/middleware.ts` renamed to `src/proxy.ts` to match the Next.js 16 spec. The deprecated `middleware.ts` name is not guaranteed to execute under OpenNext on Workers, which was the most likely root of intermittent "logged in but session lost" behavior
+
+### Notes
+- Migration `00033` deletes orphan in-progress claim challenges (per `(user_id, profile_id)` keep-most-recent dedup). Users mid-quiz at deploy time will need to restart the quiz; claim cooldowns are not affected. Coordinate deploy timing accordingly
+- The OAuth callback's reliance on `x-forwarded-host` is safe under the current Cloudflare Workers + OpenNext deployment because the Worker is the origin and CF normalizes the header. Trust boundary documented inline in `callback/route.ts` so the assumption is reviewable if the deployment topology ever changes
+
 ## [2.7.1] - 2026-05-15
 
 ### Changed
