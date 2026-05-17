@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.8.1] - 2026-05-18
+
+### Added
+- FAQ section on `/verify/broker` with 12 questions covering RA 9646, the PRC LERIS relationship, unclaimed vs verified profiles, DHSUD/LTS overlap, the broker vs salesperson distinction, and OFW remote-buying precautions. Server-rendered with native `<details>` (no client JS), first three open by default, content available to crawlers regardless of collapsed state
+- `FAQPage` JSON-LD on `/verify/broker` mirroring all 12 questions, so AI Overviews / ChatGPT / Perplexity can cite passage-level answers without scraping the rendered DOM. Cross-links the on-page answers to `/academy/courses/ra-9646-essentials` and `/verify/lts`
+
 ## [2.8.0] - 2026-05-18
 
 ### Added
