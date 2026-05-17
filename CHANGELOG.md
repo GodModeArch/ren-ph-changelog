@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.8.0] - 2026-05-18
+
+### Added
+- Pag-IBIG housing loan calculator at `/tools/pagibig-housing-loan-calculator`. Three calculation modes: "How much can I borrow?" computes the max loan from income against the 35% affordability rule with the right program ceiling applied; "Monthly on this property" derives the loan as price minus down payment and auto-detects whether 4PH applies based on income, property ceiling, and OFW status; "Monthly on this loan" runs the amortization formula directly on a chosen loan amount. Standard tier rate is iterated to a true fixed point so the displayed (rate, loan) pair always matches what Pag-IBIG would actually approve together
+- Repricing scenarios on the same calculator. For 4PH and the non-socialized promo, the post-subsidy scenarios anchor on the standard Pag-IBIG tier rate the loan actually reprices into (currently 5.875% to 9.75%), not on the subsidized rate plus or minus a small move. A 4PH borrower at 3% now sees an honest +30% to +75% jump in monthly amortization after the 5-year subsidy ends, instead of a misleadingly soft range around 3%
+- Prepayment what-if (compute time and interest saved from extra monthly payments) and a paginated full amortization schedule on the calculator
+- Standalone Pag-IBIG eligibility checker on the same page: contribution months, age at application, planned term, stable income, prior defaults, property location. Returns eligible / has issues / not eligible with hard vs soft severity. Age below 18 is treated as a hard issue, with distinct copy for the empty-input case
+- JSON-LD structured data on the calculator page: `WebApplication` (typed as `FinanceApplication`), `FAQPage` mirroring the on-page FAQs, and `HowTo` for the amortization formula
+- Pag-IBIG calculator wired into the Tools dropdown in the site header, promoted from "Coming Soon" into the `/tools` index grid, and surfaced as a related-tools cross-link on the new page
+
+### Changed
+- `/tools/transfer-tax-calculator` now accepts an optional `?price=` query parameter (e.g. `?price=3000000`). When present and positive, the selling-price field is prefilled and the tax breakdown auto-computes on first render. Used by the Pag-IBIG calculator's "Compute closing costs for this property" cross-link so users carry the same property value across both tools without retyping. Server-side `searchParams` shape (Next 16 `Promise<{ price?: string }>`) feeds an `initialPrice` prop into the form; no client-side `useSearchParams` in the form, so the React Compiler "no setState in useEffect" rule is satisfied
+
+### Notes
+- Standard tier rates (5.875% to 9.75%) in the rate config are indicative and should be cross-checked against pagibigfund.gov.ph before heavy promotion. The 4PH 3% rate and the 4.5% Non-Socialized Promo rate are confirmed from public news sources. The calculator surfaces this caveat under the hero and in the results disclaimer
+- Mortgage Redemption Insurance (MRI) premium is not included in the monthly amortization. Pag-IBIG's official calculator adds roughly PHP 45 + 0.225% of loan annually for MRI. The on-page disclaimer flags this
+- 4PH eligibility check sums primary + co-borrower income against the program's individual income ceiling. This is the conservative direction (more likely to flag a borrower as ineligible for the 3% subsidy). Pag-IBIG's actual rule applies the income ceiling to the principal applicant only; users wanting to check this can uncheck the co-borrower toggle
+- 4PH program defaults to a 5-year fixed pricing period in the calculator. Early-bird qualifiers (first 30,000 slots) get 10 years fixed but the calculator doesn't expose that flag yet; default 5 is the conservative assumption
+
 ## [2.7.3] - 2026-05-17
 
 ### Fixed
