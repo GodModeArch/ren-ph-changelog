@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.8.2] - 2026-05-18
+
 ### Fixed
 - Social previews (Open Graph and Twitter Card images) were 404ing on every page because `siteConfig.ogImage` pointed at `/og-image.png`, a static asset that does not exist in `/public`. Facebook, X, LinkedIn, Slack, iMessage, and AI link unfurlers all rendered a broken image (or no preview) when ren.ph URLs were shared. Replaced with Next.js dynamic OG routes (`/opengraph-image` and `/twitter-image`) backed by a shared `next/og` renderer that produces a branded 1200x630 PNG with the site name, tagline, and pillar chips at request time. Root layout, homepage, and `/resources/due-diligence-checklist` now point at the dynamic routes; per-page `images` blocks include explicit `width`, `height`, and contextual `alt` so the metadata is unambiguous under Next.js metadata shallow-merge. `siteConfig.ogImage` is renamed to `ogImagePath` (with a new `twitterImagePath` sibling) to make the role of the field clear at call sites
 - Organization JSON-LD on the homepage was still hardcoding `${siteConfig.url}/og-image.png` in its `image` field, shipping the same 404'ing URL to Google's knowledge graph and to any AI crawler that consumes Schema.org Organization data. Repointed at the dynamic OG route so the homepage's structured data, OpenGraph, and Twitter Card all advertise the same valid asset
