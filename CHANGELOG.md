@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Broker profile and project view counters were stuck at 0 (or 1) and never increased. Both pages set `revalidate=false` and called `trackProfileView` / `trackProjectView` from inside their Server Components, so the tracking RPC only ran when Next.js first rendered the page (top 500 brokers at build time, the rest on first on-demand visit). Every subsequent visit served cached HTML without re-running server code. Compounded on Cloudflare Workers, where the fire-and-forget async call was not wrapped in `waitUntil` and could be cancelled before the RPC landed, leaving many pages at 0 even after the first render. Replaced server-side tracking with a client beacon: a new `/api/track-view` route handler (same-origin guard, `cf-connecting-ip` for honest per-IP dedupe, `force-dynamic` to defeat caching) is called once per session per entity from a tiny `<TrackView>` client component using `navigator.sendBeacon` with a `fetch keepalive` fallback. Pages stay fully static, the cached HTML is unchanged, and view counts now reflect actual visitors
+- Deleted the orphaned server-side helpers (`src/shared/lib/view-tracking.ts`, `src/domains/directory/actions/views.ts`, `src/domains/projects/actions/views.ts`) so the obsolete pattern cannot be re-imported
+
 ## [2.8.3] - 2026-05-18
 
 ### Fixed
