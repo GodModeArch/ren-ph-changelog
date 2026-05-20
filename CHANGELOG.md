@@ -7,8 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.10.7] - 2026-05-20
+
 ### Fixed
 - Broker profile and project view counters were stuck at 0 (or 1) and never increased. Both pages set `revalidate=false` and called `trackProfileView` / `trackProjectView` from inside their Server Components, so the tracking RPC only ran when Next.js first rendered the page (top 500 brokers at build time, the rest on first on-demand visit). Every subsequent visit served cached HTML without re-running server code. Compounded on Cloudflare Workers, where the fire-and-forget async call was not wrapped in `waitUntil` and could be cancelled before the RPC landed, leaving many pages at 0 even after the first render. Replaced server-side tracking with a client beacon: a new `/api/track-view` route handler (same-origin guard via Origin header with Referer fallback, `cf-connecting-ip` for honest per-IP dedupe, `force-dynamic` to defeat caching) is called once per session per entity from a tiny `<TrackView>` client component using `navigator.sendBeacon` with a `fetch keepalive` fallback. Pages stay fully static, the cached HTML is unchanged, and view counts now reflect actual visitors
+- The view-tracking database functions (`track_profile_view` / `track_project_view`) had been throwing on every call since they were written: their `ON CONFLICT (…, DATE(viewed_at))` targeted an expression with no matching unique index (the unique index is on the stored `viewed_date` column), so Postgres rejected every insert and the error was swallowed by the caller, recording zero views. Repointed the conflict target at `viewed_date`, which carries the matching index and defaults to the current date on insert, preserving the one-view-per-viewer-per-day dedupe. This was the deepest cause of the stuck counters; without it the client-beacon rewrite above would still have recorded nothing
 - Deleted the orphaned server-side helpers (`src/shared/lib/view-tracking.ts`, `src/domains/directory/actions/views.ts`, `src/domains/projects/actions/views.ts`) so the obsolete pattern cannot be re-imported
 
 ## [2.10.6] - 2026-05-20
