@@ -11,6 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Some zonal value pages listed the same subdivision twice with contradictory prices, e.g. Santa Rosa, Laguna's "Dila" barangay showed GOLDEN CITY SUBDIVISION at ₱11,000/sqm next to GOLDEN CITY SUBD. at ₱5,500/sqm. The two rows came from two different Department Orders (a 2024 DO and a superseded 2019 DO) that the parser failed to reconcile: the "keep only the newest DO" merge keys on the city name, but the two orders spell the city differently (`STA. ROSA CITY` vs `SANTA ROSA`) and the abbreviation normalizer left a stray period (`SANTA. ROSA`), so the orders were treated as two different cities and both sets of values survived. Fixed the normalizer to expand `STA.`/`STO.` cleanly, and changed the merge to keep the newest Department Order per barangay rather than per city, which both removes the stale duplicates and stops un-re-issued barangays from being wiped when a newer order covers only part of a city. Corrections apply on the next zonal data refresh
 - Some zonal value street rows showed a stray "((NEW))" label. BIR marks newly added streets with a "(NEW)" annotation, which the parser was storing as the street's vicinity (location) and then wrapping in its own parentheses on display. The annotation is now recognized and dropped from the vicinity, leaving the street name clean. Corrections apply on the next zonal data refresh
 
+## [2.10.8] - 2026-05-21
+
+### Fixed
+- Claiming a broker profile via "Continue with Google" dropped you on the search page instead of the profile you were trying to claim. The intended destination rode along as a `?redirect=` query parameter on the sign-in callback URL, but that parameter is not reliably preserved through the Google OAuth round-trip. When it was lost, the callback fell back to `/profile`, and the dashboard then bounced brand-new users with no claimed profile to `/search`, so the claim flow never completed. The destination is now stashed in a short-lived first-party cookie before the round-trip and read back on return (the query parameter remains a fallback). Both values are sanitized so a tampered cookie cannot redirect you off-site. Magic-link and email-signup confirmations use the same mechanism
+
 ## [2.10.7] - 2026-05-20
 
 ### Fixed
