@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.11.1] - 2026-05-21
+
 ### Fixed
 - Some zonal value pages were missing their catch-all "ALL LOTS" street, and the street listed just above it showed prices that did not belong to it. BIR sheets name this street on a row whose first classification is footnoted out (e.g. `ALL LOTS | RR | ***`) and then list the real values on the rows beneath it, which rely on inheriting the street name from the row above. The parser recorded the street name only after deciding a row's own value survived, so the naming row (with the footnoted, value-less first classification) was skipped before its name was saved; the value rows beneath then inherited the previous street's name, welding "ALL LOTS" prices onto it. Where "ALL LOTS" was a barangay's first street, its rows became nameless and were dropped entirely. Example: Hermosa, Bataan. The parser now records the street/vicinity context for any row with a valid classification, even when that row's own value is footnoted out, so "ALL LOTS" (and any street named on a footnoted row) keeps its values. Bataan alone recovered 156 streets. Corrections apply on the next zonal data refresh
 
