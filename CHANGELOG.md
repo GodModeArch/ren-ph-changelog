@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.13.0] - 2026-05-23
+
+### Added
+- The Pag-IBIG Housing Loan Calculator now includes a step-by-step sample computation (a worked PHP 2.25M example with a year-by-year breakdown) and a quick-reference monthly amortization table covering common loan amounts at both the Standard 6.5% rate and the 4PH 3% rate. Both are computed from the same rate data the calculator uses, so they stay accurate, and they render as static HTML for search engines and AI Overviews.
+- BreadcrumbList structured data and an author reference on the calculator page, alongside the existing WebApplication, FAQPage, and HowTo schemas.
+- Internal links to the Pag-IBIG calculator from the homepage tools grid, the Transfer Tax Calculator, the BIR Zonal Value lookup, and the broker and License to Sell verification pages.
+
+### Changed
+- Updated the Pag-IBIG calculator's page title to lead with the 4PH 3% rate, and added a page-specific Twitter/X card so shared links no longer fall back to the site-wide default.
+- Removed the generic site-wide meta keywords tag, which search engines ignore.
+
 ## [2.12.1] - 2026-05-22
 
 ### Fixed
