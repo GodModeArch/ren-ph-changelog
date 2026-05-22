@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- The XML sitemap listed only about 2,800 URLs and was missing the vast majority of the site. Two causes: the broker query asked for up to 10,000 profiles but Supabase silently caps a single request at 1,000 rows, so roughly 34,000 of the ~35,000 broker profiles never made it into the sitemap; and barangay-level zonal value pages (tens of thousands of pages with unique street-level data) were left out entirely. Search engines were therefore left to discover most pages on their own through internal links, which is slow and incomplete.
+
+### Changed
+- Rebuilt the sitemap as a sitemap index. `/sitemap.xml` is now an index that points to per-type sitemap files (core pages, brokers, realties, barangays), each well under the 50,000-URL limit. Broker and realty lists now page through the full result set instead of stopping at 1,000. Broker profiles are included when they are backed by real PRC or exam-cohort data, and barangay pages are included when they have at least one street of zonal data, so empty placeholder pages stay out of the index. The sitemap rebuilds once daily.
+
 ## [2.11.1] - 2026-05-21
 
 ### Fixed
