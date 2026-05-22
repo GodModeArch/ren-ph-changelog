@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.12.1] - 2026-05-22
+
+### Fixed
+- The barangays section of the sitemap shipped in 2.12.0 listed only 1,000 barangay pages instead of all eligible ones. The query that counts streets per barangay to decide which pages have real data returns one row per barangay (tens of thousands), but Supabase silently caps a single response at 1,000 rows, so only the first 1,000 barangays were considered and the rest were dropped. That count query now pages through its full result set, so every barangay with at least one street of zonal data is included.
+
 ## [2.12.0] - 2026-05-22
 
 ### Fixed
