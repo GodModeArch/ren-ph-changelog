@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.13.2] - 2026-05-23
+
+### Fixed
+- Some barangay zonal value pages were still serving 1988-1993 prices (around PHP 2,500-6,000 per sqm) when the 2024 prices (PHP 55,000-350,000 per sqm) for the same barangay were available, e.g. Quezon City's Bagong Lipunan ng Crame. The parser keeps the newest Department Order per barangay, but it identifies barangays by their PSGC code, and older DOs sometimes spell the barangay differently from the current one ("B. Lipunan ng Crame" vs "Bagong Lipunan ng Crame", "St Ignatius" vs "Saint Ignatius", "Old Balara" vs "Matandang Balara"). The old spelling failed PSGC matching, the entry got a synthetic placeholder identity, and the "newest DO wins" step kept it alive alongside the correctly identified 2024 entry, so the page showed both. The barangay matcher now expands the periodless abbreviations "ST"/"SN" to "Saint"/"San" and applies a small curated translation map (Pagasa to Bagong Pag-asa, Bagong Buhay to Bagumbuhay). A safety net then folds an unmatched barangay onto a matched one in the same city when they share an exact rare token, with strict uniqueness guards so distinct barangays (e.g. San Jose vs San Jose Sico) are never merged. About 335 affected barangays across 123 cities were repaired in this pass. Corrections apply on the next zonal data refresh.
+
 ## [2.13.1] - 2026-05-23
 
 ### Fixed
