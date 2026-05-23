@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.13.1] - 2026-05-23
+
+### Fixed
+- Barangay zonal value pages in the 126 cities covered by more than one BIR Revenue District Office (including Manila, Quezon City, and Makati) listed every RDO for the whole city, e.g. "RDO 028, 038, 039, 040", as if a single office governed the barangay. A given barangay's values come from only one or two of those offices, so the page now reads "sourced from the BIR RDOs that cover {city}" instead of implying one jurisdiction. Single-RDO barangays are unchanged. (Display fix; per-street RDO attribution is planned separately.)
+
 ## [2.13.0] - 2026-05-23
 
 ### Added
