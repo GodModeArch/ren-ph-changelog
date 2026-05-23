@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.13.3] - 2026-05-23
+
+### Fixed
+- Quezon City barangay zonal value pages still surfaced a stale 1988-era floor (around PHP 2,500-6,000 per sqm) next to the correct 2024 values (PHP 55,000-350,000 per sqm) on the same street, e.g. Bagong Lipunan ng Crame showed "PHP 2,500 to PHP 170,000 per sqm" because the page reported the lowest street as the floor. The duplicates come from BIR Department Orders that rename the vicinity label across revisions, so the same physical street ends up as two database rows under different vicinity labels (1ST AVENUE under "CUBAO" at PHP 2,500 from an older DO, and under "BONNY SERRANO - NORTH RD." at PHP 55,000 from the 2024 DO). The street dedup step required vicinity labels to look alike before treating two same-name rows as a stale pair, so vicinity renames slipped through. The dedup now also fires on dissimilar-vicinity pairs when the values match the urban DO-vintage clash signature (residential ratio at least 5x with the low side under PHP 6,000 and the high side over PHP 30,000). The signature does not occur naturally in legitimate multi-vicinity streets, so rural agricultural sub-categories (Fishpond, Riceland, etc.) and other within-DO variation are not affected. About 843 stale street rows across 150 barangays nationwide will be repaired in this pass, overwhelmingly Quezon City (122 barangays) with a few in Manila, Makati, Cebu City, and Cagayan de Oro. Corrections apply on the next zonal data refresh.
+
 ## [2.13.2] - 2026-05-23
 
 ### Fixed
