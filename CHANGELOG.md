@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.13.7] - 2026-05-25
+
+### Fixed
+- Eight numbered barangays in Pasay City stopped appearing in the zonal value data after the v2.13.6 parser change took effect. Pasay has 201 numbered barangays per PSGC; the rebuild surfaced only 177 of them, dropping `Barangay 183`, `Barangay 187` through `Barangay 191`, `Barangay 197`, and `Barangay 201` outright (43 streets total). Cause: the v2.13.6 annotation classifier added a regex that was meant to catch zone-range descriptors like `195 TO 196 & 198 ZONE 20`, but it also matched the BARANGAY: header cell in BIR's newer Pasay Department Order 43-2023, which names every real barangay as `<N>     ZONE <Z>` (e.g. `183 ZONE 19`). 498 real Pasay rows were silently rejected; older Department Orders (9-89, 19-93, 38-09, 36-2018) papered over most of the loss with fallback data, but eight barangays only exist in the 2023 sheet and disappeared. Patch tightens the regex to require an explicit multi-number separator (comma, ampersand, or hyphen between digits) before `ZONE`, so single-number rows pass through. The two patterns that catch real range descriptors (`TO`-form and `,`-form) are unchanged. After the fix: all 8 barangays recovered, and two of them (Barangay 191, Barangay 197) now show more streets than they did before v2.13.6 because the newer 2023 Department Order data finally flows through. Corrections apply on the next zonal data refresh.
+
 ## [2.13.6] - 2026-05-25
 
 ### Fixed
