@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Several barangay zonal value pages in Metro Manila listed real-looking street data under a fake barangay name. Paranaque had `MARCELO` (1993 values from PHP 500 to 3,000 per sqm) sitting next to the real `Marcelo Green Village` (2023 values from PHP 24,000 to 179,000 per sqm); the 1987 BIR Department Order 85-87 used the legacy short form `MARCELO (7)` for Zone 7, which the parser was treating as a separate barangay. The same DO's row for San Martin De Porres read `SAN M DE PORES (13)` (BIR Zone 13), which surfaced as a fake `/san-m-de-pores` page next to the real `/san-martin-de-porres`. Paranaque, Makati, Pasay, Muntinlupa, Manila, and Taguig also had fake barangay pages built from BIR category labels like `LIST OF CONDOMINIUMS (CCT)`, `VARIOUS BARANGAYS (MAIN THOROUGHFARES)`, `POST PROPER NORTH SIDE`, and zone-range descriptors like `195 TO 196 & 198 ZONE 20`. DO 23-12 (East Makati, 2012) even wrote its own disclaimer in the source spreadsheet: "AYALA CENTER (MAKATI COMMERCIAL CENTER) IS NOT A BARANGAY BUT ONLY A PORTION OF BARANGAY SAN LORENZO". The parser was reading whatever followed `BARANGAY :` as a barangay name and trusting it. The parser now gates the `BARANGAY :` label match against a blocklist for these category and zone-descriptor patterns, drops the resulting empty-name barangays in a post-parse pass, and folds away legacy short-form names that are word-prefixes of a modern barangay in the same city (Iloilo's `LEGASPI`, `PALE`, `YULO`, `BURGOS`, `LOBOC` and Calaca's `CORAL` clear up in the same pass, alongside Paranaque's MARCELO). About 207 fake barangay pages drop nationwide. Corrections apply on the next zonal data refresh.
+
 ## [2.13.5] - 2026-05-24
 
 ### Fixed
