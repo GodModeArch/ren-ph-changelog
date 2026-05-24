@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.13.4] - 2026-05-24
+
+### Fixed
+- Some barangay zonal value pages still showed a stale floor price (around PHP 3,500-6,000 per sqm from 1988-1993 Department Orders) next to the correct modern values (PHP 55,000-350,000 per sqm from 2021-2024 DOs), e.g. Makati's Guadalupe Nuevo showed "PHP 3,500 to PHP 350,000 per sqm" because 47 stale 1991 EDSA streets sat under the same barangay as the 2021 streets in other vicinities. The previous fix in 2.13.3 dedupes same-named streets across vicinity renames, but it cannot reach this pattern: an entire batch of old-DO rows preserved under one vicinity label with no same-name twin in the modern DO. The parser now drops a vicinity outright when every street under it carries an older Department Order than the barangay's dominant DO and the values match the urban stale-DO clash signature (a cluster of at least 3 low rows under PHP 10,000 alongside another row in the same barangay above PHP 30,000 at a 5x ratio). A stricter variant of the same rule fires when a single vicinity contains both modern and stale rows: only the stale older-DO rows are dropped, and the in-vicinity modern rows survive (e.g. Quezon City's San Bartolome had 26 stale 1993 rows at PHP 1,200-6,000 alongside 2 modern 2024 rows at PHP 39,000 under the same vicinity label). About 1,300 stale street rows across roughly 200 barangays nationwide will be repaired in this pass, concentrated in Metro Manila (Makati's Guadalupe Nuevo, plus Quezon City's San Bartolome, Matandang Balara, Paraiso, and several Manila numbered barangays). A smaller residual class where stale rows spread thinly across multiple vicinities below the 3-row cluster threshold is deferred to a follow-up. Corrections apply on the next zonal data refresh.
+
 ## [2.13.3] - 2026-05-23
 
 ### Fixed
