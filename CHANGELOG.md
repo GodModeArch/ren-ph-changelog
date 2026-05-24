@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.13.5] - 2026-05-24
+
+### Fixed
+- Quezon City had two distinct orphan-barangay artifacts in the zonal value data, both originating in the 1988 Department Order 138-87 sheet. First, the Alta Vista subdivision in White Plains and Loyola Heights was parsed as its own BARANGAY: header in the 1988 sheet, so it surfaced as `/tools/zonal-value/metro-manila/quezon-city/alta-vista` with three streets all priced at PHP 1,000 per sqm in 1988 currency, while the real Alta Vista Subdivision rows under Loyola Heights and White Plains carry current 2024 values. Second, a fake city `boundary-of-caloocan-and-quezon` held 41 barangays at 1988 PHP 500-1,000 per sqm values, e.g. `/tools/zonal-value/metro-manila/boundary-of-caloocan-and-quezon/holy-spirit` showed PHP 500-1,000 per sqm while the real `/tools/zonal-value/metro-manila/quezon-city/holy-spirit` showed PHP 15,000-126,000 per sqm. The fake city came from the parser misreading the second line of a multi-line VICINITY: description ("ALONG QUIRINO HIGHWAY AND KATIPUNAN ROAD, / BOUNDARY OF CALOOCAN AND QUEZON CITY") as a city header, then attributing the next 40+ barangays under it. The parser now disqualifies a bare-city-header candidate when its row is indented and sits inside an open VICINITY: continuation block (catches the boundary-of-caloocan signature at source). A separate post-parse safety net drops an ungrounded pre-1995 barangay when its name appears as a subdivision-suffix street or vicinity (SUBD, SUBDIVISION, VILLAGE, HOMES, HEIGHTS, PARK) in another barangay of the same city (catches Alta Vista). Both fix layers ride the next zonal data refresh. Both URL families stop being generated and drop from the sitemap; cached pages drain on cache TTL or next deploy.
+
 ## [2.13.4] - 2026-05-24
 
 ### Fixed
