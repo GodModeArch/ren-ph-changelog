@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.15.0] - 2026-05-26
+
+### Added
+- Zero-downtime zonal data reimports via a parallel `zonal_staging` schema and atomic schema swap. Previously, every reimport ran `TRUNCATE ... CASCADE` against the live zonal tables and re-inserted at ~250 rows/batch for 10 to 15 minutes; during that window any SSR hit on a half-filled city or barangay returned 0 rows, the OpenNext page cache locked in that empty response, and the affected pages stayed stale until cache TTL or the next deploy. Several user-visible "this barangay shows 0 streets" incidents in the v2.11 to v2.13 series traced back to this exact window. The new path mirrors the 6 active zonal tables (regions, provinces, cities, barangays, values, slug_aliases) in a separate `zonal_staging` schema, runs the reimport against the mirror while the live `public.zonal_*` keeps serving traffic, validates the staged result against per-table count ranges (cities 1,500 to 1,700, barangays 40,000 to 44,000, etc.), then atomically promotes via `ALTER TABLE ... SET SCHEMA public` inside a single transaction. The cut is sub-second instead of 10 to 15 minutes; no user-visible window with empty tables. Operator-curated `zonal_slug_aliases` entries are preserved across the swap via in-transaction snapshot-and-restore so manual city-rename redirects don't get wiped. The 4 FK constraints, 24 RLS policies, and all indexes follow the table through `SET SCHEMA` by OID, empirically verified on local Supabase via a 3-cycle dress rehearsal. The previous `TRUNCATE` path remains available for now; the staging path will become the default after two clean prod cutovers.
+
+### Fixed
+- Production builds were sometimes shipping stale zonal data even after a fresh import landed in the database. Next.js `unstable_cache` persisted Supabase fetch results in `.next/cache/fetch-cache` across builds, so the build that immediately followed a reimport would render listing pages from the PRIOR import's data and the resulting HTML went out to the edge. v2.14.0's deploy hit this: three fake Metro Manila cities were removed in the DB and the build went out with the pre-removal HTML because the build re-used cached fetches. The prod build script now clears `.next/cache/fetch-cache` before every build (webpack/turbopack incremental compilation cache survives, so only fetch results are dropped). Every deploy from this version forward picks up the live database state at build time.
+- Migration `00035_zonal_province_misattribution_fix.sql` hardcoded 11 production region UUIDs that don't exist on a fresh local Supabase, breaking `supabase db reset` on a clean clone with a foreign-key violation. The fix rewrites PHASE A as a slug-based JOIN against `zonal_regions`, so it silently no-ops on fresh local (empty regions table) and continues to insert the 11 missing provinces correctly on production-like data. Pure dev-experience improvement; production was already past this migration before the rewrite.
+
 ## [2.14.1] - 2026-05-26
 
 ### Fixed
