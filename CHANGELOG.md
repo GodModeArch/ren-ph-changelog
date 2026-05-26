@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.15.1] - 2026-05-26
+
+### Fixed
+- Internal-only: `scripts/validate-zonal-staging.ts` pre-promote barangay-count range lowered from 40,000-44,000 to 36,000-42,000 to match actual prod state. The previous range was based on aspirational CLAUDE.md guardrails that never reflected reality (prod has run 36,251 to 39,434 barangays across the 2026 series, currently 38,879 since v2.14.0). False-FAILed the first Phase 4 zonal-staging cutover. No runtime or user-facing change; CLI tooling only.
+
 ## [2.15.0] - 2026-05-26
 
 ### Added
