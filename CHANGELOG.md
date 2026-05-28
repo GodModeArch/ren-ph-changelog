@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.17.3] - 2026-05-28
+
+### Fixed
+- Antipolo zonal value URL preserved across the Rizal region migration. The v2.17.2 deploy applied migrations 00039-00042 which moved the four Rizal cities (`city-of-antipolo`, `rodriguez`, `san-mateo`, `teresa`) from metro-manila to rizal/calabarzon. Prod was also serving `/tools/zonal-value/metro-manila/antipolo` as a working page, but that URL's data lived in OpenNext R2 cache rather than a live DB row at slug `antipolo`. Without a redirect, the URL would 404 once the cache flushed. This release adds two redirect entries covering `/metro-manila/antipolo` and `/metro-manila/antipolo/:barangay` pointing at `/rizal/antipolo`. The four `city-of-`-prefixed redirects from v2.17.0 stay in place for the post-reground future state.
+
+### Added
+- Migration 00043 (`00043_zonal_antipolo_actual_slug_fix.sql`) repoints any city row at slug=`antipolo` under metro-manila to rizal/calabarzon. Applied during this deploy and reported `moved 0 rows`, which confirms no such row exists in prod today; the migration stays for dev clones and future imports that might end up with the slug. Dual-applied against `zonal_staging` per the schema-swap contract from v2.15.0.
+
+### Internal notes
+- This release is a follow-on to v2.17.2 (the Cloudflare cost deploy that also shipped the v2.17.0 + v2.17.1 backlog). The Antipolo case surfaced when a slug-drift audit revealed prod was serving zonal data at 133 city slugs that differ from what the current parser produces (parser produces `city-of-X`, prod has `X`). The full slug-drift fix is deferred until the parser slug-stability question is investigated; this release ships only the user-visible Antipolo repair.
+- Migrations 00036 (view-tracking conflict_target fix), 00037 (zonal_staging schema), 00039, 00040, 00041, 00042 also landed in this deploy's `supabase db push --include-all` since they had never been recorded as applied on remote (they had previously been applied by hand via psql per the project's historical pattern). All explicitly idempotent per their headers; the push surfaced "already exists" / "moved N rows" notices, no errors.
+
 ## [2.17.2] - 2026-05-28
 
 ### Changed
