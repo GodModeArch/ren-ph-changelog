@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.17.2] - 2026-05-28
+
+### Changed
+- **Cloudflare cost reduction (Top-3 fixes shipped together).** Investigation traced the $46.81 May cycle to three structural drivers: every deploy invalidated the entire OpenNext R2 cache because `NEXT_BUILD_ID` was a fresh random nanoid each build (cache key includes the buildId), then crawler/user traffic re-hydrated all 60K cached pages via full SSR renders (Workers CPU + R2 PUTs); the Supabase auth middleware called `getUser()` on every public-page request even when OpenNext served HTML straight from R2; and 2-6 deploys per heavy day compounded the cache thrash. Three structural changes target an estimated $25-30/cycle savings ($15-22 final bill).
+
+- **Stable build ID from a hash of tracked source.** `next.config.ts` now sets `generateBuildId` to a SHA-256 of `src/`, `content/` (MDX guides + reports), `next.config.ts`, `package.json`, `package-lock.json`, `tsconfig.json`, `postcss.config.mjs`, `open-next.config.ts`. The hash is computed at build time via `git ls-files -z` + Node `fs`/`crypto` (no shell pipeline), so a deploy with no source change reuses the same build ID, R2 cache keys stay stable, and existing cached pages serve instead of being cold-rendered. A source change still flips the ID and cold-caches everything as intended.
+
+- **Middleware matcher narrowed to authenticated routes only.** `src/middleware.ts` previously ran `updateSession()` on every request matching `/((?!_next/static|...).*)`, which fired `supabase.auth.getUser()` on 60K+ cached public pages with no session-dependent rendering. The matcher now lists only the route trees whose server components or actions actually read the Supabase session: `/admin`, `/auth`, `/claim`, `/listings`, `/profile`, `/realty` (singular). Public realty profile pages live at `/realties` (plural) and are intentionally excluded. All `/api` routes were verified to make zero `getUser()` / `createServerClient` calls and are excluded too. A drift-warning comment in the matcher tells future authors to add new server-auth'd routes to the allowlist or users on the edge of token expiry will bounce to `/login`.
+
+- **Bundle-deploys discipline reinforced (process change, no code).** Heavy days in the May billing cycle (May 9: 3 deploys; May 26: 6 deploys) compounded the per-deploy cold-cache cost. Now that the build ID only flips on actual source changes, non-source deploys (config tweak, dep bump that doesn't alter rendered output) become free for the cache, and the existing Deploy Batching workflow in `CLAUDE.md` matters more, not less.
+
+### Added
+- **Dirty-tree assertion in the deploy script.** `scripts/setup/build-with-prod-env.sh` now runs `git status --porcelain` against the same `HASH_INPUTS` paths as `generateBuildId` before building, failing loud with "working tree is dirty in build-ID hash inputs" if either (a) an untracked file under `src/` would be invisible to the hash but bundled into the deploy (producing a stale-cache deploy that looks fresh), or (b) an uncommitted edit would produce a build ID nobody can reproduce from a `git checkout`. The two `HASH_INPUTS` lists in `next.config.ts` and the shell script must move in lockstep (cross-reference comments in both files make this explicit); a future SSOT via shared `.build-hash-inputs.txt` is noted but deferred until the list grows past ~10 entries.
+
+### Documentation
+- `CLAUDE.md` "Deploy Batching" section updated to call out the new cache-flush reality: a deploy with zero source changes no longer flushes the OpenNext R2 cache because the build ID stays stable. Workaround for pure data-only deploys (Supabase reimport with no code change) is to bundle the deploy with at least one source change (cheapest: bump a comment in any hashed file). In practice, data fixes almost always ship alongside at least one code fix in the batch.
+
+### Internal notes
+- This release pairs with v2.17.1 (SPLE cohort URL gate). Both branches went through two adversarial premerge rounds; the round-1 findings on this branch (rewrote the shell pipeline as Node `execFileSync` + `crypto`, fixed "committed source" wording, added drift warning) and the round-2 finding (added `content/` to both hash and dirty-check lists, closing the silent-stale-cache path for MDX edits) were addressed before merge. Premerge verdict on the merged state was SAFE TO MERGE with the round-2 fix in place.
+- The exact savings depend on traffic volume, deploy cadence, and whether a hidden `/api/revalidate { all: true }` caller exists. If May 9's $12 DO spike repeats on the next heavy deploy day, the next branch should hunt that caller down. Otherwise the structural fixes here should land the bill in the $15-22 range and a follow-up branch can pick up the next 4 items in the cost-reduction plan (revalidate caller audit, `/api/track-view` beacon batching, `generateStaticParams` coverage expansion, observability flag).
+
 ## [2.17.1] - 2026-05-28
 
 ### Fixed
