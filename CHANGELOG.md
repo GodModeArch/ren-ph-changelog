@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.18.0] - 2026-05-28
+
+### Added
+- **Parser-level dedup of stale-DO orphan barangays (Pass 4.5 + 4.6 in `dedup_streets.py`).** The agentic zonal parser now drops ungrounded pre-2010 barangays that BIR has since renamed/superseded but that were leaking 10-30 year old values onto the live site. Two new passes:
+  - Pass 4.5 (`prune_stale_sibling_orphan_as_barangay`): drops ungrounded brgys whose distinctive-token jaccard ≥ 0.5 matches a grounded sibling in the same city, where the sibling is ≥ 5 years newer and per-class freshness shows the orphan is uniformly stale (no shared class has orphan ≥ sibling AND at least one shared class has sibling ≥ 3× orphan). Catches Tagaytay's `MENDEZ JUNCTION` (eff 2007-10-22, BIR DO 38-07) which is the pre-rename name for what PSGC and the 2021 BIR DO call `Mendez Crossing East/West`. The page at `/tools/zonal-value/cavite/city-of-tagaytay/mendez-junction` had been serving 14-year-old residential values (P690-P4,815) alongside the modern Mendez Crossing East (P2,500-P30,500). Nationwide impact: 74 brgys / ~600 streets drop, spanning shapes like initial-expansion (`BO. BARRA` → `Barra` in Lucena, `INDL VALLEY` → `Industrial Valley` in Marikina, `P. DIAZ` → `Padre Diaz` in Bulan), range-headers (`NIOG I & NIOG II` → `Niog` in Bacoor, `LIGTONG 1 TO 4` → `Ligtong I` in Rosario), and comma-joined BIR rollup rows (Davao region's `BACULIN, BANA-O, BATAWAN...` → distinct grounded brgys).
+  - Pass 4.6 (`prune_known_not_a_barangay`): drops 9 ungrounded Makati BIR annotation rows (`LEGASPI VILL`, `LEGASPI VILLAGE`, `MAKATI COMML CENTER`, `MAKATI COMMERCIAL CENTER`, `AYALA CENTER`, `SALCEDO VILLAGE`, `ARNAIZ P. DEL PILAR N/S`, `RIZAL`) via a curated `(city_slug, brgy_slug)` blocklist mirroring the `KNOWN_BIR_ZONE_LABEL_FAKES` set in `src/domains/zonal-values/lib/supabase-loader.ts:52-62`. BIR's own footnote rows in DO 23-12 explicitly say these are not barangays (e.g., row 87: "AYALA CENTER (MAKATI COMMERCIAL CENTER) IS NOT A BARANGAY BUT ONLY A PORTION OF BARANGAY SAN LORENZO"). The generic annotation-pattern classifier (v2.13.6) can't detect named-place annotations, so this curated bridge handles them until a footnote-aware extractor lands. Once the parser drops these, the app-layer mask becomes redundant and can be removed in a separate cleanup.
+
+### Changed
+- **App-layer Makati blocklist (`KNOWN_BIR_ZONE_LABEL_FAKES`) is now redundant after a reground+import.** The 9 entries in `supabase-loader.ts:52-62` previously masked stale Makati rows at the application layer (returning "Barangay Not Found" templates instead of stale values). With Pass 4.6 dropping them at the parser level, the row never reaches Supabase. The TS list stays in place until a clean reground completes; planned removal in a follow-up release.
+
+### Internal notes
+- Two rounds of adversarial `/run-premerge` review surfaced four real bugs (a critical orchestrator persistence bug where the file-write conditional missed `stale_sibling_drops` and pure in-memory tests couldn't see; the design-plan-said-grounded-sibling-but-impl-allowed-any-sibling drift; silent loss of orphan-only-classification values without diagnostic surfacing; Roman-numeral mismatch where `BARANGAY IX` vs `Barangay 1` could false-match at jaccard 0.5) plus one dead-code helper. All resolved before commit. 18 unit tests cover positive cases, false-positive guards, and one end-to-end test that round-trips a region JSON through `process_region` and asserts the file on disk was rewritten — the test class that would have caught the orchestrator persistence bug.
+- Design plan: `docs/plans/2026-05-28-ungrounded-sibling-orphan-merge.md`. Investigation artifacts (scan scripts, side-by-side verify report, CSV exports) under `audit/ungrounded-stale-orphans*` and `audit/stale-eff-date-barangays*`.
+
 ## [2.17.3] - 2026-05-28
 
 ### Fixed
