@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.17.1] - 2026-05-28
+
+### Fixed
+- SPLE cohort URLs (`/cohorts/april-2023-sple`, `/cohorts/june-2024-sple`, `/cohorts/june-2025-sple`) now render. The cohort URL gate `isValidCohortFormat` in `src/domains/directory/queries/hubs.ts` rejected slugs with the `-sple` suffix because its regex only matched two parts (`month-year`), so every SPLE cohort page returned 404 even though the catalog metadata (`src/shared/lib/exam-catalog.ts`), narrative copy (`src/domains/directory/data/cohort-highlights.ts`), and era classification (`src/shared/lib/broker-content.ts`) were already in place for all three SPLE batches. The regex now accepts an optional `-sple` third group.
+- Cohort sort and "latest cohort" stats are now deterministic when the same month/year appears as both a regular and SPLE cohort (e.g., june-2024 and june-2024-sple). Without the tie-breaker, sort order flipped between cache refreshes and a city's "Latest cohort" widget could show either label inconsistently. Regular cohort outranks its SPLE sibling, mirroring the administrative ordering of the exam program.
+
+### Changed
+- Cohort labels now append " SPLE" for SPLE cohorts across page headers, breadcrumbs, structured data, and broker profile cohort references. `formatCohortDisplay` returns "June 2024 SPLE" instead of "June 2024" when the slug carries the `-sple` suffix; `formatCohortName` returns "June 2024 SPLE Board Exam Passers" for JSON-LD CollectionPage labels.
+- Unified the three previously-divergent cohort parsers (`formatCohortDisplay` in `hubs.ts`, `parseCohort` + `formatCohortDisplay` in `format.ts`, `formatCohortName` + `formatCohortMonthYear` in `schema-helpers.ts`) behind a single canonical parser `parseCohort` in `format.ts`. The parser now enumerates full English month names explicitly (`january|february|...|december`) so URL slugs like `foo-2024` no longer parse as valid cohorts. JSON-LD labels and the URL gate share one definition of "valid slug". Broken data renders raw rather than as a plausible-looking fake label.
+
+### Internal notes
+- New vitest specs lock in the URL-gate regex (`src/domains/directory/queries/hubs.test.ts`, 14 assertions) and the JSON-LD label formatters (`src/shared/lib/schema-helpers.test.ts`, 6 assertions). Tie-break coverage for `getLatestCohort` includes the regular-vs-SPLE sibling case and ignore-garbage behavior. 564 tests pass across the suite.
+- No DB schema or RLS changes; no migrations. If `/cohorts/june-2024-sple` still 404s after the next deploy, the prod `profiles` table has no rows with `exam_cohort` ending in `-sple`. That is a data-import concern separate from this release.
+
 ## [2.17.0] - 2026-05-28
 
 ### Fixed
