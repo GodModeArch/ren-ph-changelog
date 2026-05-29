@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.20.1] - 2026-05-29
+
+### Fixed
+- **Negros Oriental and Siquijor zonal pages now resolve to the correct province.** The Negros Island Region (NIR) was abolished in 2017, but the Philippine Standard Geographic Code still files its provinces under the region-18 prefix. The parser mapped all of region 18 to Western Visayas, which mismatched the Central Visayas tax district that serves Negros Oriental and Siquijor and caused those cities to be dropped from grounding. Region 18 is now resolved per-province: Negros Oriental and Siquijor route to Central Visayas (their post-NIR home), Negros Occidental stays in Western Visayas. As a result 31 cities ground with their real PSGC codes, and 131 Siquijor barangays move out of being mis-filed under Negros Oriental into their own Siquijor province.
+
+### Internal notes
+- Parser-only change: a single `_psgc_region_slug` helper now drives the cross-region guard, the city/region resolver, and the province-attribution validator so they cannot disagree. Inert against the live database until the next reground and import; when it lands, Siquijor URLs move from `/...negros-oriental...` to `/siquijor/...` and will need redirects, bundled into the next deploy. Tests: `test_cross_region_guard` 9/9, `test_resolve_city_region` 25/25.
+
 ## [2.20.0] - 2026-05-29
 
 ### Added
