@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **Street, barangay, and subdivision names now read in normal title case across zonal pages.** The BIR source schedule stores street names (and about a tenth of barangay names) in ALL CAPS, so pages previously showed entries like "CAMELLA MANORS CALOOCAN." Names now render as "Camella Manors Caloocan" everywhere they appear: the city and barangay summaries, the FAQ, value rankings, the barangay filter, the tax estimator, search results, market snapshots, vicinity clusters, page headings, and nearby-area links. Real Philippine naming conventions are respected: Roman numerals stay uppercase (BF Homes Phase III), genuine acronyms stay uppercase (EDSA, NHA, NIA, GSIS), ordinals lower their suffix (21st Avenue), block labels are left intact (S.B. Park 3B), and connectors read naturally (Biak na Bato). This is a display-only change; the stored data is untouched.
+- **City summaries drop the redundant "City of" lead-in.** The narrative paragraph on a city page now opens "Caloocan is a city in Metro Manila..." instead of "City of Caloocan is a city in Metro Manila...". The official city name is unchanged in titles, breadcrumbs, and structured data.
+
+### Internal notes
+- New `formatPlaceName()` and `stripCityOfPrefix()` in `src/shared/lib/utils/format.ts`, replacing the unused naive `formatName()`. The acronym and Roman-numeral sets were grounded against ~195K real street names in the parser output so the keep-uppercase list stays tight and does not freeze proper nouns. 26 unit tests cover acronyms, Roman numerals vs initials, ordinals, alphanumeric labels, possessives, accented letters, and connectors. Wired through `buildCitySummary`, `buildBarangaySummary`, `buildBarangayFAQ`, and 11 display components/pages. Full suite green (480 tests).
+
 ## [2.20.3] - 2026-05-29
 
 ### Fixed
