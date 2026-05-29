@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.18.3] - 2026-05-29
+
+### Fixed
+- **Property-value guide: corrected RMC 85-2024 attribution.** Step 4 of `/guides/how-to-compute-property-value-philippines` previously described one of the price-pattern cases as "areas where the BIR recently updated zonal values (like the 2024 update under RMC 85-2024)". That was wrong: RMC 85-2024 is the BIR's circularization of Republic Act No. 12001 (RPVARA), not a zonal-value revision for any district. A reader running the comp-adjustment math against that line would have anchored their pricing on a non-existent zonal update. Replaced with a neutral "areas where the BIR has recently revised its zonal value schedule for that district" that holds regardless of which DO actually moved.
+
+### Added
+- **Property-value guide: RPVARA / SMV transition note in Step 1.** Calls out that the BIR zonal-value system is being phased out under RA 12001 (effective July 5, 2024), that BLGF will administer a single Schedule of Market Values (SMV) updated every three years to replace the dual zonal/LGU setup, that the rollout is happening LGU-by-LGU so a property in 2026 may still be on the old zonal schedule or already on a new SMV (check both), that BIR zonal values have generally run *higher* than the old LGU schedules so the unified SMV will not automatically lower anyone's tax base, and that the RPT amnesty under RPVARA runs until July 5, 2026 (settle pre-2024 delinquencies penalty-free before then).
+- **Property-value guide: three new adjustment factors in Step 3.**
+  - **Title and legal status:** annotated adverse claims, unsettled estates, overlapping titles, and unresolved rights-of-way can knock 10-40% off realizable value regardless of comps, and in the worst cases make a lot effectively unsellable until the issue clears. Cross-linked to `/resources/due-diligence-checklist`.
+  - **Infrastructure, built vs. announced:** confirmed operational infrastructure supports value; announced or rumored projects (future expressway extensions, rail "coming soon") frequently slip or get shelved, especially in growth corridors like Cavite and Laguna. Don't pay today's premium for tomorrow's maybe.
+  - **Liquidity and time on market:** a comparable that sold in two weeks tells you something different from one that sat for a year. Thin demand, limited financing, or a shallow buyer pool means "market value" is theoretical until someone shows up with cash. Factor 6-12 month flat-market timelines into both asking price and expected timeline.
+
+### Internal notes
+- Content-only patch, no code paths affected. The branch (`fix/property-value-guide-rpvara-redline`) was originally cut before v2.18.1/v2.18.2 and merged main back in before stamping. The MDX file is in the stable build-ID hash input set, so the deploy bundles with the v2.18.2 parser-data refresh on the same cache-flush cycle. No reground, no migration, no DB change.
+
 ## [2.18.2] - 2026-05-29
 
 ### Fixed
