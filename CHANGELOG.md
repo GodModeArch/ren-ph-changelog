@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.18.1] - 2026-05-29
+
 ### Fixed
 - **Zonal `Dataset` JSON-LD now emits accurate, ISO 8601 `datePublished` + `dateModified`.** Barangay zonal-value pages (`/tools/zonal-value/[province]/[city]/[barangay]`) previously emitted a single `dateModified` set to the BIR Department Order effective date as a human-readable string (e.g. `"May 23, 2024"` on `/leyte/ormoc-city/san-pablo`). That conflated the data's provenance with the page's freshness and used a non-ISO format, so crawlers and AI assistants read the page as unchanged for ~2 years even though the data and page are current. The Dataset block now emits both fields in ISO 8601: `datePublished` carries the DO effective date (real provenance, e.g. `"2024-05-23"`), and `dateModified` carries the page's build/regeneration date (e.g. `"2026-05-29"`). Affects all ~33K barangay pages through the single shared route block.
 
