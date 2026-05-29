@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Zonal `Dataset` JSON-LD now emits accurate, ISO 8601 `datePublished` + `dateModified`.** Barangay zonal-value pages (`/tools/zonal-value/[province]/[city]/[barangay]`) previously emitted a single `dateModified` set to the BIR Department Order effective date as a human-readable string (e.g. `"May 23, 2024"` on `/leyte/ormoc-city/san-pablo`). That conflated the data's provenance with the page's freshness and used a non-ISO format, so crawlers and AI assistants read the page as unchanged for ~2 years even though the data and page are current. The Dataset block now emits both fields in ISO 8601: `datePublished` carries the DO effective date (real provenance, e.g. `"2024-05-23"`), and `dateModified` carries the page's build/regeneration date (e.g. `"2026-05-29"`). Affects all ~33K barangay pages through the single shared route block.
+
+### Internal notes
+- DO effective dates are stored in the DB as raw, inconsistent strings (`"May 23, 2024"`, `"02-Sept-06"`, `"05/31/2017"`, `"1-March-2004"`, `"16-Nov.-03"`). `parseEffectivityDate` (which already lived in the importer) was extracted to `src/shared/lib/zonal-date.ts` and is now shared by both the schema layer and the importer. It builds ISO from local day/month/year components rather than `new Date(s).toISOString()`, which in PHT shifts `"May 23, 2024"` to `"2024-05-22"` (the bug in the existing `formatSchemaDate` helper, deliberately not reused). `dateModified` reads a build-time `BUILD_DATE` env injected in `next.config.ts`, inlined into the SSG'd HTML, so it bumps exactly when pages re-render against the stable content-hash build ID. 20 unit tests added.
+
 ## [2.18.0] - 2026-05-28
 
 ### Added
