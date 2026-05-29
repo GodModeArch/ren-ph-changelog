@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.20.0] - 2026-05-29
+
+### Added
+- **City zonal-value pages now carry citable market insights.** Each city page (`/tools/zonal-value/[province]/[city]`) gained a layer of aggregated, plain-language insights aimed at the questions people actually ask and at being quotable by AI assistants:
+  - **Narrative summary** at the top: how many barangays and streets are indexed, the citywide residential and commercial ranges and medians, the most expensive and most affordable barangays by name, the single highest-valued street, and the BIR RDO, effective date, and PSGC code, all in one paragraph where every figure is a named anchor.
+  - **Quick-stats strip**: median residential, median commercial, barangays indexed, streets indexed, and buildings/condos tracked.
+  - **Three barangay rankings**: most expensive by residential value, most expensive by commercial value, and most affordable by residential value, each linked, with a "Top 10" or "Showing all N" label.
+  - **Worked tax examples**: estimated CGT and DST for 50, 100, and 200 sqm at the city's median residential value, as static text that mirrors the interactive estimator.
+  - **Market-value note**: a short text explanation that market value is not a multiple of the BIR zonal value, deferring to a licensed appraiser or broker (no link until per-city broker coverage matures).
+  - **Freshness signal**: the city's latest BIR schedule date plus the RA 12001 (RPVARA) transition note.
+  - **A-Z sort** toggle on the browse-all-barangays list (alongside the existing by-value order).
+
+### Changed
+- **City-page commercial and condo values are no longer understated.** The city-stats function (`get_city_stats`) now folds condominium classifications into the headline numbers: `residential_condo` into residential and `commercial_condo` into commercial, for the median, minimum, maximum, average, and counts. Condo-heavy business districts (Makati CBD, BGC, Ortigas), where commercial values are often published only as a condo classification, previously had those values dropped from the city totals entirely. This brings the single-city function to parity with the province-level function, which already did this. A new **commercial median** is also reported, computed on the same basis as the residential median so the two are directly comparable.
+
+### Internal notes
+- Migration `00045_city_stats_include_condo_and_commercial_median` redefines `get_city_stats` only (no table changes, so it is exempt from the zonal schema-swap dual-apply contract). Applied to production via `scripts/setup/apply-migration-00045.sh` ahead of this deploy and spot-checked against Makati. The currently-deployed code does not read the new field, so applying early is safe; cached city pages reflect the corrected numbers on the next cache-flush deploy.
+- New shared aggregation library under `src/domains/zonal-values/lib/` (stats, tax-utils, archetype, entity-type, street-grouping). The CGT/DST math was de-duplicated out of the barangay query and the interactive estimator into one `tax-utils` module. Building/subdivision detection is heuristic for now (condo-value columns and a name pattern) behind clean interfaces, pending a future parser-level type tag. 58 new unit tests; full suite green.
+- City aggregates compute once per page revalidation inside the existing cache boundary, not per request. No new database round-trips on the city page.
+
 ## [2.19.0] - 2026-05-29
 
 ### Added
