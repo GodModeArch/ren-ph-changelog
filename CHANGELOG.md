@@ -7,13 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.20.3] - 2026-05-29
+
+### Fixed
+- **Siquijor zonal pages keep working after the province move.** The per-province NIR fix (v2.20.1) reassigns Siquijor's 6 municipalities (Siquijor, Larena, Lazi, Maria, San Juan, Enrique Villanueva) from the Negros Oriental province path to their own Siquijor path. Once the reground and import land that move, the old `/tools/zonal-value/negros-oriental/<municipality>/...` addresses (the city pages and every barangay under them) would otherwise return "not found." Permanent redirects now send each old address to its new `/tools/zonal-value/siquijor/...` location, so existing links and search-engine results carry over cleanly.
+
+### Internal notes
+- New `src/shared/config/siquijor-region-migration-redirects.ts` (12 entries: 6 municipalities × {city page, `:barangay` wildcard}), wired into `next.config.ts`, same shape as `rizalRegionMigrationRedirects`. The wildcard covers all 133 grounded Siquijor barangays. Source slugs verified against prod (all 6 currently serve under `negros-oriental` with the expected bare slugs) and confirmed collision-free against real Negros Oriental municipalities. Inert until the bundled reground + truncate-import lands the province move; must deploy with or after that import, never ahead of it. Premerged SAFE TO MERGE.
+
 ## [2.20.2] - 2026-05-29
 
 ### Fixed
-- **Angeles City zonal pages will resolve once the next reground lands.** Highly urbanized and independent component cities carry their own pseudo-province code in the Philippine Standard Geographic Code, so the reference data files them under the last regular province in their region (Angeles and Olongapo under Aurora, Baguio under Apayao) rather than their geographic province. The parser scopes its first city-matching pass to the tax district's geographic province, so these cities are never in that pool. Most still resolve on a nationwide pass, but Angeles failed that fallback too because "Angeles" is also a common barangay name, which trips a safeguard against matching a city to a coincidental barangay. Angeles City and its 34 barangays were left ungrounded. A new region-scoped fallback now matches against the highly urbanized and independent cities in the tax district's own region when the earlier passes fail, recovering Angeles without weakening the safeguard.
+- **Angeles City zonal pages will resolve once the next reground lands.** Highly urbanized and independent component cities carry their own pseudo-province code in the Philippine Standard Geographic Code, so the reference data files them under the last regular province in their region (Angeles and Olongapo under Aurora, Baguio under Apayao) rather than their geographic province. The parser scopes its first city-matching pass to the tax district's geographic province, so these cities are never in that pool. Most still resolve on a nationwide pass, but Angeles failed that fallback too because "Angeles" is also a common barangay name, which trips a safeguard against matching a city to a coincidental barangay. Angeles City and its 33 barangays were left ungrounded. A new region-scoped fallback now matches against the highly urbanized and independent cities in the tax district's own region when the earlier passes fail, recovering Angeles without weakening the safeguard.
 
 ### Internal notes
-- Parser-only change in `agents/grounding.py`: a Phase-3 `match_city` fallback builds a region-scoped pool restricted to HUC/ICC city classes (about 38 cities nationwide) so it cannot pull a same-named municipality from another region. New `region_huc` match type is metadata-only. Inert against the live database until the next reground and import; bundled into the next deploy alongside the NIR fix. In-memory reground of RDO 021A confirms Angeles grounds to PSGC `0330100000` with 34 barangays; Baguio and Lucena still resolve via the nationwide pass unchanged. Tests: new `test_huc_region_fallback` 6/6, full parser suite (26 files) green.
+- Parser-only change in `agents/grounding.py`: a Phase-3 `match_city` fallback builds a region-scoped pool restricted to HUC/ICC city classes (about 38 cities nationwide) so it cannot pull a same-named municipality from another region. New `region_huc` match type is metadata-only. Inert against the live database until the next reground and import; bundled into the next deploy alongside the NIR fix. A full nationwide reground confirms Angeles grounds to PSGC `0330100000` with 33 barangays (100% of its PSGC barangays); Baguio and Lucena still resolve via the nationwide pass unchanged. Tests: new `test_huc_region_fallback` 6/6, full parser suite (26 files) green.
 
 ## [2.20.1] - 2026-05-29
 
