@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.19.0] - 2026-05-29
+
+### Added
+- **Broker profile takedown (admin).** Admins can now remove a broker's public profile page on request from a new console at `/admin/brokers`. A broker carries a `visibility_status` (active / no-index / delisted / erased) rather than a single on-off flag, so the consequences of each action are explicit. **Delisted** removes the profile page (it redirects to the broker's exam-passer roster) while keeping the broker's name on that published PRC roster as plain text, since the roster mirrors an official public record. **Erased** removes the page and the name entirely (reserved for data-privacy erasure) and is permanent. Every change is written to an append-only audit log. The takedown propagates to every surface that linked to the profile (cohort roster, search, location and realty listings, accredited-seller lists, and the structured-data graph) so no link points at a removed page. This release ships the database-backed enforcement, which takes effect on the next page rebuild; an instant edge-level takedown (Cloudflare KV) follows in a later release.
+
 ## [2.18.3] - 2026-05-29
 
 ### Fixed
