@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.21.0] - 2026-05-30
+
+### Added
+- **City zonal-value pages now show the BIR Department Order reference.** A city page header previously showed only "Effective: 4/9/2021" while its barangay pages showed the issuing order, e.g. "DO 004-2021 · Effective: 4/9/2021". City pages now show the DO too. A city that draws from several Department Orders (most large cities span multiple BIR district offices) lists the distinct orders, capped to keep the line tidy. Cities with no order recorded in the source still show none, nothing is invented.
+
+### Changed
+- **The city "Zonal Value Highlights" card now matches the cleaner barangay summary card.** Both cards share one design: a heading, a short summary, then a clean row of stat tiles (icon, label, large value, "/sqm"). The city card keeps its own content, a residential value range plus the named superlatives (highest commercial, highest residential, most affordable entry point) each with its location, so a city's wide value spread is never flattened into a single misleading number.
+
+### Fixed
+- **City page subtitles stop repeating the location for Metro Manila and other independent cities.** A Las Piñas city page read "Metro Manila, Metro Manila · RDO 053A" because the province and region are the same place for NCR cities. It now reads "Metro Manila · RDO 053A". The fix is general (any city whose province and region resolve to the same name), not a per-city patch.
+- **Barangay pages drop the redundant "City PSGC" code.** The header showed both the barangay PSGC and the parent city PSGC, but the city code is just the barangay code with its last three digits zeroed, so it added nothing. Only the barangay PSGC now shows. The parent-city relationship remains intact in the page's structured data.
+
+### Internal notes
+- New shared presentational layer `src/domains/zonal-values/components/ZonalSummaryCard.tsx` (`ZonalSummaryCard`, `StatTileGrid`, `StatTile`); `BarangaySnapshot` and `MarketSnapshot` both refactored onto it (barangay output is pixel-identical, no consumer prop changes). The city/barangay zonal pages are separate route templates with separate query files, so the change is scoped to the two `tools/zonal-value` pages; the `locations/[province]/[city]` page imports a different `market-snapshot` and is unaffected.
+- City DO derivation: `extractCityDoNumber` in `queries/city.ts` prefers the city-row `source_sheet`, which is NULL for multi-RDO cities (verified: City of Makati spans RDO 047/048/049/050), then falls back to aggregating the distinct DOs across the city's barangays (the same per-barangay `source_sheet` the barangay pages already read), deduped, sorted, capped at 3 with "+N more". Subtitle dedupe collapses `[provinceName, regionName]` by first-occurrence. `cityPsgcCode` removed from the barangay query (no longer rendered). Changed files clean under `tsc`; lint clean; 58 zonal-values tests pass. Premerged SAFE TO MERGE.
+
 ## [2.20.6] - 2026-05-30
 
 ### Fixed
