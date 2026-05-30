@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.20.6] - 2026-05-30
+
+### Fixed
+- **Nationwide stale zonal values from a reground that skipped the dedup pass.** The v2.20.2 reground imported the raw grounder output without running the dedup step, so roughly 15,600 superseded older-schedule street rows and a batch of duplicate short-form barangays went live across the country. Visible symptoms: Makati's Pinagkaisahan floored at ₱3,750 (an EDSA row from a 1991 schedule) against the real ₱123,000, Forbes Park at ₱13,000 against ₱338,000, and Parañaque served duplicate `MARCELO` and `SAN M DE PORES` pages alongside the real Marcelo Green Village and San Martin De Porres. A re-dedup (251,247 → 235,588 street rows) plus truncate-import corrects every affected page. Inert against cached pages until the bundled cache-flush deploy.
+
+### Internal notes
+- Root cause: the reground ran `generate_output.py` but not `dedup_streets.py`, silently reverting every coverage-supersession and orphan-prune pass plus the final field strip. Caught because the grounded output still carried the internal `do_year` / `source_rdo_*` / `source_sheet` / `effectivity_date` scaffolding that `strip_internal_fields` removes as its last step.
+- New guardrail (C36) at three layers so it cannot recur: a standalone check (`npm run zonal:check` → `scripts/agentic-parser/check_dedup_ran.py`), a structural import gate (`assertDedupRan()` in `import-zonal-to-supabase.ts` throws before any DB write if scaffolding fields survive — you physically cannot import un-dedup'd data), and a pre-build deploy gate in `build-with-prod-env.sh` (`ZONAL_DEDUP_OVERRIDE=1` escape). Two checks: deterministic scaffold-field presence, and a stale-signature sentinel (clean baseline 69 barangays, budget 150). 7 unit tests in `test_check_dedup_ran.py`; CLAUDE.md documents the non-negotiable two-step reground order. Premerged SAFE TO MERGE.
+
 ## [2.20.5] - 2026-05-30
 
 ### Fixed
