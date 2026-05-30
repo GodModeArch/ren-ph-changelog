@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.20.5] - 2026-05-30
+
 ### Fixed
 - **Seven phantom barangay pages will stop resolving once the next reground lands.** Each served a stale page under an address that does not exist in the Philippine Standard Geographic Code, while the real place lives on at its proper page: `Napico` in Pasig (a sitio inside Barangay Manggahan/Rosario), the two `INT'L VILLAGE` entries in Las Piñas (old printings of B. F. International Village), `Indl Valley` in Marikina (a 1991 abbreviation of Industrial Valley, which already has its own up-to-date page), `Barangay 176` in Caloocan (Bagong Silang, which the geographic code recoded to "Barangay 176-A" and whose current values already appear there), `Beverly` in Marikina (the Beverly Hills subdivision, whose real barangay is in Antipolo), and `New Subdivisions` in Manila (a 1993 catch-all bucket of homeowner-association entries, not a barangay). Examples of the gap removed: Napico showed ₱3,000 against the real ₱20,000; Marikina's Indl Valley showed ₱2,250 against Industrial Valley's ₱46,000. All seven now return "not found."
 
