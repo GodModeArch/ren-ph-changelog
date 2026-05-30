@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.22.0] - 2026-05-30
+
+### Added
+- **Manila zonal pages now resolve the modern (2019) values for ~70 barangays that were stranded under raw numeric codes.** The 2019 Manila schedule (BIR Department Order 78-19) listed many barangays under a bare run-together "zone+barangay" code (e.g. "73671" meaning barangay 671) that the matcher could not read, so those barangays kept showing their 2004 values, often ₱3,000–5,000/sqm. The parser now decodes these to the real barangay number and matches it across all 14 Manila districts, so roughly 70 stranded records fold into their barangay and about 121 pages lift to current values. Gated on the official geographic code, so a number that is not a real barangay never grounds.
+
+### Fixed
+- **A phantom Manila "114 115" page showing 1990 values now returns "not found".** The 1990 schedule grouped two barangays, 114 and 115, into a single "114 115" entry, but neither exists in the current Philippine Standard Geographic Code (both were abolished or merged out since), so the entry can never resolve to a real place. Rather than publish a page with 35-year-old values, the address now returns "not found". Scoped to City of Manila and to pre-2005 data so no current values are ever hidden, and the withheld entry is recorded internally for follow-up.
+
+### Internal notes
+- W1: `agents/grounding.py::_extract_metro_manila_brgy_number(name, manila=True)` decomposes a bare 4–6 digit Manila code to its last-3-digit barangay; the existing all-districts PSGC-membership match is the safety gate. W2: `is_unresolvable_manila_brgy_range` + a staleness- and City-of-Manila-scoped filter in `generate_output.py::process_rdo` withholds the phantom and logs it to `output/investigate-dropped-mm-phantoms.csv`. 15 new parser tests (W1 9, W2 6). Parser-only; takes effect on the next reground + import. Premerged MERGE WITH FIXES (both findings resolved).
+
 ## [2.21.0] - 2026-05-30
 
 ### Added
