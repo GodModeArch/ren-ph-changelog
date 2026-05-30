@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Three phantom barangay pages will stop resolving once the next reground lands.** `Napico` in Pasig and the two `INT'L VILLAGE` entries in Las Piñas were never real barangays. Napico is a sitio inside Barangay Manggahan (straddling Rosario) that a 25-year-old tax schedule happened to print as its own heading; the current schedule correctly files it as a street inside Manggahan and Rosario at far higher values. The two Las Piñas entries are decades-old printings of B. F. International Village. All three served stale pages (Napico showed a ₱3,000 floor against the real ₱20,000) under addresses that do not exist in the Philippine Standard Geographic Code. They are now removed so the addresses return "not found."
+
+### Internal notes
+- Parser-only change in `scripts/agentic-parser/dedup_streets.py`: three `(city_slug, barangay_slug)` tuples added to the curated `KNOWN_BIR_NOT_A_BARANGAY` set (`city-of-pasig/napico`, `city-of-las-pinas/int-l-village`, `city-of-las-pinas/intl-village`), which Pass 4.6 drops for any ungrounded barangay. These slip past both dedup prune passes: Pass 4.5 matches only on sibling *names* (the supersession proof lives in the siblings' street/vicinity fields), the Las Piñas twins carry blank effectivity dates that defeat the pre-2010 year gate, and none have a subdivision suffix for Layer 2. The parser set is now a superset of the app-layer `KNOWN_BIR_ZONE_LABEL_FAKES` mask, which is safe (the parser drops before insert). Inert against the live database until the next reground + truncate-import + cache-flush deploy. Three regression tests added to `test_stale_sibling_orphan_fix.py` (suite now 21 pass). Findings: `docs/plans/2026-05-30-pasig-napico-phantom-barangay-findings.md`.
+
 ## [2.20.4] - 2026-05-30
 
 ### Changed
