@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.23.2] - 2026-05-31
+
+### Fixed
+- **The broker sitemap now builds reliably again.** Production builds were failing while generating `/sitemap/brokers.xml` because the underlying query sorted every page of ~35,000 broker profiles by tier and last-updated date, a combination with no database index to back it. On deep pages the repeated full sort exceeded the database's statement timeout and aborted the build. The sitemap now lists brokers in slug order, which the database can serve directly from an existing index without sorting. The set of brokers in the sitemap is unchanged; only the internal ordering differs, which has no effect on search engines.
+
+### Internal notes
+- `domains/directory/queries/sitemap.ts`: `getSitemapBrokers` orders by `slug ASC` (backed by `idx_profiles_slug`) instead of `tier DESC, updated_at DESC`. No covering index exists for the old sort, and the `visibility_status = 'active'` filter cannot use the partial `idx_profiles_visibility_status` (it indexes only non-active rows), so each `.range()` page ran a full scan + sort and deep offsets tripped Postgres `statement_timeout` (57014) at `/sitemap/brokers.xml`. Slug is `UNIQUE NOT NULL` with a dedicated btree index, giving an index-ordered scan with no sort node and stable pagination. Sitemap row order does not affect SEO (priority/changefreq derive from `tier` per row). eslint clean; production build skips type validation.
+
 ## [2.23.1] - 2026-05-31
 
 ### Fixed
