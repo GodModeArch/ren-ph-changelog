@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.23.1] - 2026-05-31
+
+### Fixed
+- **The commercial value range in a city's summary now matches the "Highest Commercial" tile on the same page.** On the Quezon City page the summary read "Commercial values range from ₱26,774 to ₱209,733/sqm" while the Highest Commercial tile (and the Apolonio Samson barangay page) correctly showed ₱350,000 for the EDSA / Oliveros Drive frontage. The summary was reading a per-barangay rollup that averages a barangay's street commercial values when it has no single barangay-level figure, which clipped the true citywide maximum; it now reads the same live street-level figure the tile uses, so the two can no longer disagree. The minimum (₱26,774 for Quezon City) was already correct and is unchanged, and cities whose ranges were already right (Makati and Manila at ₱200,000) are unaffected.
+
+### Added
+- **Barangay cards on a city page now show a commercial range, not just residential.** Each card adds a "Commercial" line beneath the residential one, formatted identically: a single value when only one commercial figure exists, a low to high range otherwise, and nothing at all when the barangay has no commercial data (no empty line, no ₱0).
+
+### Changed
+- **The city page now uses one summary card instead of a floating paragraph plus a separate "Quick Summary" line.** The narrative description moves inside the "Zonal Value Highlights (2026)" card and the duplicate "Quick Summary:" line is gone, matching the single-card layout already used on barangay pages. The highlight and stat tiles are unchanged.
+
+### Internal notes
+- `queries/city.ts`: `computeMarketSnapshot` gains `lowestCommercial`; `buildCitySummary` sources the commercial min/max from `marketSnapshot` (the live `ZoneRow` scan that feeds the tile) instead of `stats.maxCommercial`/`minCommercial` (the `get_city_stats` RPC rollup). Residential range stays sourced from stats by design; the visibly-wrong case was commercial only. `getBarangayListForCity` computes `minStreetCommercial`/`maxStreetCommercial` in the same pass as the residential street range (no extra query); both fields added to `BarangayListItem`. The `BarangayFilter` card renders the commercial line mirroring the residential treatment. `MarketSnapshot` drops the `rdoCode`/`rdoName`/`minResidential`/`maxResidential` props in favor of a precomputed `summary` string; `page.tsx` no longer renders a separate floating summary paragraph. Verified live against prod: Quezon City summary max 209,733 to 350,000; Makati and Manila unchanged. Changed files clean under tsc; lint clean; 58 zonal-values tests pass. Premerged SAFE TO MERGE.
+
 ## [2.23.0] - 2026-05-31
 
 ### Fixed
