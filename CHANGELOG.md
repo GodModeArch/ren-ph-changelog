@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.23.0] - 2026-05-31
+
+### Fixed
+- **Single-digit barangays (1 through 9) nationwide now show their newest values instead of an older schedule.** Modern BIR schedules list these barangays with a two-cell "Zone/Barangay | N" header that puts just the digit in the value cell. The parser dropped lone-digit header values as noise, so barangays 1 through 9 were never recognized and fell back to an older Department Order, often serving values two to six times too low. For example Caloocan Barangay 9 (A. Mabini East) showed ₱14,670 commercial against ₱42,300 in the current 2023 order. Affected cities include Caloocan, Manila, Pasay and others that use single-digit barangay numbers. A companion fix recognizes the misspelled "Effictivity" date label on one Caloocan sheet that had left those barangays undated.
+
+### Internal notes
+- `agents/extractor.py`: `_extract_header_value` and `extract_location` now allow a lone digit through the barangay-header guards, gated to barangay-bearing labels (`ZONE/BARANGAY`, `BARANGAY`, `BRGY`); the bare `ZONE` label keeps the strict length rule so a `ZONE | N` row at sheet start cannot mint a false barangay. Effectivity-typo handling consolidated to one regex `EFF\w*(?:TIV|CIV)`. Validated with a nationwide before/after extract diff: net −302 raw values across 12 RDOs, every changed RDO gains on its newest Department Order sheet and sheds superseded older-DO rows, zero newest-DO rows lost (the −302 is stale-DO leakage removed at source). New test `test_single_digit_barangay_header.py` (9 cases). Full parser suite green. Parser-only; takes effect on the reground + import shipped with this version. Premerged SAFE TO MERGE.
+
+## [2.22.1] - 2026-05-31
+
+### Fixed
+- **About 60 Manila barangays that showed 2004 values now resolve to the 2019 schedule.** In the RDO-034 district (the Paco, Pandacan, Sta. Ana, San Andres compound), the 2019 schedule files barangays under a run-together "zone and barangay" code, for example "80739" meaning Zone 80, Barangay 739. The matcher welded that code to the wrong barangay by name similarity, so the whole Zone 80 block (barangays 734 to 742 and neighbors) kept its 2004 values: Barangay 739, for instance, showed about ₱3,290 against roughly ₱53,000 in the 2019 order. The parser now decodes these run-together codes to the real barangay number across all 14 Manila districts before any fuzzy match, and a code that does not decode to a real barangay stays unresolved rather than matching the wrong one.
+
+### Internal notes
+- `agents/grounding.py::_match_barangay_multi_district`: decompose bare 4 to 6 digit Manila tokens via PSGC membership before the per-district fuzzy loop, plus a fall-through guard so an undecodable code (e.g. 80999) stays unresolved instead of fuzzy-welding. RDO-034 is the only Metro Manila RDO with these concatenated tokens (1653 versus 0 elsewhere). The RDO-033 and RDO-032 stale singletons are tracked for follow-up, not in scope here. New test `test_grounding_manila_concat_zone_brgy.py` (5 cases); W1/W2 suites unchanged. Parser-only; takes effect on the reground + import shipped with this version. Premerged SAFE TO MERGE.
+
 ## [2.22.0] - 2026-05-30
 
 ### Added
