@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.23.8] - 2026-06-01
+
 ### Fixed
 - **Manila Barangay 236 (Tondo) now shows its 2019 values instead of a 2011 schedule.** The page read Department Order 14-11 (2011) at ₱4,781 residential / ₱18,830 commercial, even though the current order, DO 027-2019 for RDO 29 Tondo-San Nicolas, covers the barangay at roughly ₱30,000–₱35,000 residential and ₱40,000–₱70,000 commercial. In the source schedule that barangay's header block is shifted up one row, so its "236/22" barangay code landed on the City row and the line the parser reads was blank. The parser skipped the barangay in the 2019 schedule and fell back to the older one. It now recovers a barangay code stranded on the City row when the barangay line beneath it is empty. This pattern occurs once nationwide, so only Barangay 236 is affected.
 
