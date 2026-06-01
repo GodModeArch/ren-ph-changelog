@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.23.9] - 2026-06-01
+
+### Fixed
+
+- Zonal values: nationwide reground correcting stale BIR Department Order assignments. San Jose City (Nueva Ecija) barangays now serve current 2023 zonal values instead of 2017 figures (28 of 37 barangays lifted onto the newer DO), with stale DO assignments corrected across roughly 37 cities.
+- Zonal values: preserved two San Jose City barangays (Ferdinand E. Marcos, Raymundo Eugenio) whose pages were at risk of removal because BIR abbreviates their names ("F. E. Marcos", "R. Eugenio") and the grounder did not match them to the full PSGC names.
+
 ## [2.23.8] - 2026-06-01
 
 ### Fixed
