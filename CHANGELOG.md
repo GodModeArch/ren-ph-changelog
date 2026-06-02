@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **Zonal value footnotes now use a BIR-style legend.** Footnote markers (the asterisks BIR puts beside a street or vicinity) stay inline as small superscripts, and each footnote is explained once in a "Footnotes" section below the barangay's table, instead of repeating the full note on every row. This also surfaces footnotes that sit on the vicinity text (e.g. San Juan streets that previously showed bare unexplained asterisks). The "New / APD / Verified" badges are unchanged.
+
 ## [2.25.1] - 2026-06-02
 
 ### Fixed
