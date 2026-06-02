@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.24.3] - 2026-06-02
+
+### Fixed
+- **Pasay City barangays 1–9 will show their current (2023) zonal values instead of 1996 values.** These low-numbered barangays appear in the Bureau of Internal Revenue file under a "Barangay: N Zone Z" heading, and a parser bug dropped the single-digit barangay number, so their 2023 values were filed under a nameless "zone" entry and the barangay pages fell back to a 1996 tax order. The number is now preserved (e.g. Barangay 1's Roxas Boulevard is ₱325,000/sqm in the 2023 order, not the old value). Affects Pasay only. Takes effect on the next data refresh.
+
+### Internal notes
+- **Root cause + fix.** A v2.24.0 change (`_strip_value_leaders`, added for "junk-leader" corruption like stray dots / bled letters) stripped any leading single-character token, which also ate a single-digit barangay number: `BARANGAY : 1 ZONE 1` → `ZONE 1` (an ungrounded `zone-1` node holding the whole zone's streets). Single-digit barangays 1–9 in the `<N> ZONE <Z>` format lost their newest-DO data and fell back to an older DO; two-digit barangays were unaffected. Fix: `_strip_value_leaders` keeps a leading lone digit (`len==1 and not isdigit()`); letter/punctuation leaders still strip. C37 missed it because the misfiled-to-`zone-1` data hid the newer DO from the coverage audit, parking the barangays in the `genuine_old` baseline bucket — a reground + C37 coverage-audit rebaseline at deploy time clears that. Blast radius: Pasay only.
+
 ## [2.24.2] - 2026-06-02
 
 ### Fixed
