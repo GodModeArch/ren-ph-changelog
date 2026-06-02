@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Removed "ghost city" pages built from legal text in the tax-schedule files.** After the previous update, some Metro Manila and provincial pages appeared with garbled names taken straight from a Bureau of Internal Revenue order's intro paragraph, for example "Makati as shown in Annex A hereof", "Valenzuela under Revenue District Office No. 24", and "Parañaque under Revenue". Each duplicated a real city and served decades-old values. The parser now recognises this boilerplate and discards it, so only the real city pages remain (with current values). Takes effect on the next data refresh.
+
+### Internal notes
+- **Root cause.** v2.24.0 widened the header scan to read every row above the data region; that region holds each order's legal preamble, whose sentences embed the city name mid-clause. All three city-promotion branches accepted them because the shared annotation guard had no preamble vocabulary. Fix: a city-only `ANNOTATION_CITY_HEADER_PATTERNS` set (UNDER/REVENUE/JURISDICTION/AS SHOWN/ANNEX/HEREOF/PURSUANT/REVISION/SCHEDULE/PROVINCIAL/NCR) wired into `_is_annotation_city_header`, plus the `MUNICIPALITY OF` capture tightened to stop at the first comma (so "Municipality of San Fernando, Province of La Union" grounds as San Fernando). Verified nationwide: 13 ghost cities removed, 0 residual across 120 RDOs, real cities intact, all data gates green with no rebaselining.
+- **New guardrail C40** (`check_new_cities.py`, `npm run zonal:check:cities` + deploy gate, override `ZONAL_NEWCITY_OVERRIDE=1`). Check 1: hard-fail any city node whose name is preamble/annotation prose (baseline-free). Check 2: city-roster baseline-diff on province-qualified keys, fail on any new city node. Scoped to cities; barangays remain covered by the existing extraction + dedup annotation guards.
+
 ## [2.24.0] - 2026-06-01
 
 ### Fixed
