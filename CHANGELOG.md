@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.24.2] - 2026-06-02
+
+### Fixed
+- **A street that was mislabeled as a barangay no longer has its own page.** In Los Baños, Laguna, "Lopez Avenue" appeared as a barangay serving values from a 2002 tax order, when it is actually a street in Barangay Batong Malake (where it is correctly listed under the current 2023 order). The page was built from an old Bureau of Internal Revenue file that printed the street under a "Barangay:" heading. It is now removed, and the street's current values remain available under Batong Malake. Takes effect on the next data refresh.
+
+### Internal notes
+- **Root cause.** The abolished-barangay prune (C38) protects any ungrounded name containing a road word (ROAD/AVENUE/HIGHWAY/BLVD) because bare aggregate rows like "National Road" and "Along Provincial Road" carry real street data. "Lopez Avenue" was swept into that protection. Fix: a `is_named_street_phantom` branch in `prune_abolished_superseded_barangay` drops a name only when it is a proper noun + road suffix (`_is_named_road` distinguishes "Lopez Avenue" from bare "National Road"), it appears verbatim as a street/vicinity under a grounded barangay in the same city (so the data has a real home — zero loss), it is absent from PSGC, and it is superseded by ≥5 years. Nationwide this drops exactly `los-banos/lopez-avenue`; the other 13 road-named ungrounded pages have no grounded twin and are correctly kept. Lands on the next reground; `lopez-avenue` is the one expected new C38 drop to approve at rebaseline.
+
 ## [2.24.1] - 2026-06-02
 
 ### Fixed
