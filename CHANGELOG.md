@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.24.1] - 2026-06-02
+
 ### Fixed
 - **Removed "ghost city" pages built from legal text in the tax-schedule files.** After the previous update, some Metro Manila and provincial pages appeared with garbled names taken straight from a Bureau of Internal Revenue order's intro paragraph, for example "Makati as shown in Annex A hereof", "Valenzuela under Revenue District Office No. 24", and "Parañaque under Revenue". Each duplicated a real city and served decades-old values. The parser now recognises this boilerplate and discards it, so only the real city pages remain (with current values). Takes effect on the next data refresh.
 
