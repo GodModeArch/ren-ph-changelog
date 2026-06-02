@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Pasay Barangay 111 no longer serves stale 1996 values.** A parser bug treated the barangay number "111" (three identical digits) as decorative dot-leader padding and dropped it, so the 2023 tax order data was misfiled under an unnamed zone and Barangay 111 fell back to its 1996 values. It now resolves to the current 2023 tax order like its neighbours. (Same "Barangay N Zone Z" family as the v2.24.3 single-digit fix, which only covered numbers 1 through 9.)
+
 ## [2.25.0] - 2026-06-02
 
 ### Added
