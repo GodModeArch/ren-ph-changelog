@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.25.0] - 2026-06-02
+
+### Added
+- **Zonal value pages now show the Bureau of Internal Revenue footnote behind each street.** Streets carry small provenance badges: "New" (newly identified in this tax order), "APD" (Area for Priority Development), "Verified" (identified during the BIR ocular inspection), plus the footnote text itself. Previously these annotations were read by the parser and then thrown away, so a value appeared with no explanation. Roughly 26,800 streets nationwide now carry a footnote, about 21,000 of them flagged as newly identified.
+
+### Fixed
+- **Streets the BIR marked as deleted or no longer existing are now handled correctly.** Whole streets/roads marked "for deletion" or "no longer existing" are dropped (they were being shown with stale values), while agricultural class delistings ("A7 no longer exists in this barangay") keep the street and flag it, so no street data is lost.
+- **Single-digit barangays now resolve to their real pages nationwide, not just Pasay.** The same "Barangay N Zone Z" parser fix that corrected Pasay (v2.24.3) re-homes single-digit barangays in Lucban, San Pablo, Sta. Magdalena, Paoay and others to their correct barangay pages with current values.
+- **Lucban Poblacion no longer serves stale 2002 values.** Its streets are now served under the correct numbered barangays (Barangay 1 through 9) on the 2023 tax order; the leftover 2002 duplicate page was removed.
+- **Value cells with a trailing footnote marker are no longer dropped.** A value written as "2500*" in the source now reads as 2500 instead of being discarded.
+
+### Changed
+- **About 97 stale duplicate barangay pages were removed.** These were ungrounded catch-all labels (aggregate "all interior barangay" rows and superseded Poblacion/Centro entries) whose streets are already served fresher under the correct grounded barangays. No live street values were lost.
+
+### Internal notes
+- **Footnote resolver rewrite.** The old resolver was effectively inert (94 of 955,341 footnotes resolved nationwide): it matched footnote definitions single-pass forward-only, but the BIR commonly lists them below the data they annotate, and the city-scope footnote table was never populated. The rewrite is two-pass (collect all definitions per barangay/city section first), resolves city-scope and street-name markers, and classifies each footnote into the transparency flags. Flags flow through a new migration (00048, dual-applied to the staging schema), the importer, and the app loader.
+- **New C41 pre-import gate.** `zonal:check:regression` diffs the new grounded output against current live production and fails on any barangay whose tax order moves backward in time (a stale value resurfacing). It caught and prevented exactly that during this release (a single barangay), and caught a same-named-city key collision in its own first version. The C36 through C40 file gates plus C41 now form a defense-in-depth check before any import.
+
 ## [2.24.3] - 2026-06-02
 
 ### Fixed
