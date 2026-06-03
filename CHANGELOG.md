@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.29.0] - 2026-06-04
+
+### Fixed
+- **Renamed barangays now show their current tax order instead of an old one.** When BIR renames a barangay it prints the new name first and brackets the old one in the header (for example "Magsaysay [Formerly Magsaysay (Iloilo City)]", "Quezon [Formerly Quezon (Arevalo)]"). The bracketed form was not being recognized, so the new tax order's values landed on a hidden duplicate while the real barangay page kept showing a decades-old order. These now resolve to the real barangay on its latest tax order. Affects nine barangays, mostly in Iloilo City (Magsaysay, Quezon, Lopez Jaena Norte and Sur, and others), which jumped from 1998 values to 2021.
+- **Duplicate "ghost city" pages are gone.** A city whose tax order header was just the bare province-style name (for example "BATANGAS") sometimes produced a second, stale copy of the whole city alongside the real one, serving 1990s values under a duplicate URL. Three of these (Batangas, Cavite, and Cebu cities) are now collapsed into the real city page, and the old duplicate URL permanently redirects there.
+- **More misspelled-twin barangays merged.** Extends the v2.28.0 spelling-twin fix to sound-alike spellings that differ by more than a couple of letters (for example Pakil "Casimsim" to Casinsin, Liliw "Bungkal" to Bongkol, Santa Rosa "Pook" to Pooc). 46 additional misspelled barangays nationwide now merge into the correctly-spelled page and redirect instead of serving a separate stale price.
+- **Stale "various barangays" pages removed.** Some municipalities had an old catch-all "Various" page carrying a single 1990s blanket valuation while every real barangay in that town is now served on a current tax order. 29 of these non-specific aggregate pages (mostly 1995-era, across Cagayan province) were removed; the real barangay pages are unaffected.
+
 ## [2.28.0] - 2026-06-03
 
 ### Fixed
