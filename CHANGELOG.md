@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.28.0] - 2026-06-03
+
+### Fixed
+- **Misspelled duplicate barangays no longer serve stale prices alongside the real page.** When a BIR tax order printed a barangay's name with a slightly different spelling than the official PSGC name (Santa Cruz "Cogong" vs Oogong, Magdalena "Bukal" vs Bucal), the misspelled version became its own page carrying an old tax order while the correctly-spelled barangay was served fresh. These spelling twins are now merged into the real grounded barangay on its current tax order, and the old misspelled URL permanently redirects to the correct page instead of disappearing. About 206 such twins nationwide were folded; 91 of them were previously being deleted outright and are now preserved under the correct barangay instead.
+
 ## [2.27.0] - 2026-06-03
 
 ### Fixed
