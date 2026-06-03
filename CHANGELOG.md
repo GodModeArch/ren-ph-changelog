@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Cebu City barangay pages now show every zone instead of just one.** On the 2023 tax schedule, hillside and coastal barangays like Agsungot and Malubog list the same area (for example "All Areas" or a named street) at several locations: along the barangay road, interior, and watershed, each with its own price. The page was collapsing those into a single row and showing only the first price, so the interior and watershed values disappeared. They are now all shown. This affected barangays across about 48 cities whose newest tax order uses this newer sheet layout.
+- **Footnote markers are back on those pages.** The same Cebu-style sheets mark new entries with a small asterisk and a "New" note at the bottom. The short "New" note was being skipped, so the asterisks had nothing to explain them. The markers and their legend now render again.
+- **Two Cebu City barangays show the correct, newer effective date.** Babag and Suba (Poblacion) are covered by both the Cebu City North and South tax orders in the same year; the page was occasionally labeling them with the older order's date. They now show the later 2024 effective date.
+
 ## [2.29.0] - 2026-06-04
 
 ### Fixed
