@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.27.0] - 2026-06-03
+
+### Fixed
+- **Barangays that BIR has declared "no zonal value" no longer show stale prices.** When the latest BIR tax order footnotes out an entire barangay because the land is government-owned, inside a forest or watershed reserve, or covered by an ancestral-domain title, the page now says "No zonal value" and explains why, instead of falling back to an old tax order's per-square-meter prices. (Example: Bagong Silang in Los Baños, Laguna, which sits within the Makiling Forest Reserve, previously showed 2002 values although the 2017 tax order excluded it.)
+
 ## [2.26.0] - 2026-06-02
 
 ### Changed
