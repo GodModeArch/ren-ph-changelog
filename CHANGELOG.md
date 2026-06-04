@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Barangay zonal value pages no longer signal to search engines and AI that they are years out of date.** Each page's "last modified" date in the sitemap, plus a visible "Effective:" line, were both set to the BIR Department Order date, which is several years old for most barangays (81% predate 2024). Crawlers and AI assistants read those as the page's own age, so a current 2026 page could be shown as a 2022 (or older) document. The sitemap now reports the actual page refresh date, the page adds a clear "Data verified as of" line, and the BIR order date is relabeled "BIR schedule effectivity" so it is not mistaken for the page date. The underlying valuations are unchanged.
+
 ## [2.31.0] - 2026-06-04
 
 ### Fixed
