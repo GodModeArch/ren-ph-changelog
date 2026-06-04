@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.30.2] - 2026-06-04
+
 ### Changed
 - **Outdated (pre-2005) barangay valuations are no longer shown.** An audit found that every barangay still showing a pre-2005 BIR Department Order (294 pages) actually has a newer 2018-2024 order on file that our parser had failed to read, so the old figure was wrong, not a genuine current value. These pages (and the few whole-city pages in the same state, including Baguio City) now show a short "valuation being updated" notice instead of the stale numbers, and are removed from search indexing. They will automatically display the current values as the newer orders are parsed in. Serving a 20-year-old number as a tax reference is worse than serving none.
 
