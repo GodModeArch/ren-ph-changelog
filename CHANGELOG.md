@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.31.2] - 2026-06-05
+
+### Fixed
+- **Multi-barangay "Barangays:" list headings no longer knock town-center pages back to an old valuation.** The v2.31.0 plural-heading fix also matched BIR's other use of the plural word "Barangays:", which heads a shared list of many barangays at once (for example "Barangays: Alameda, Amorogtong, Anilawan, ..." or "Barangays: 1 to 6 (Poblacion)"). The parser was folding the whole list into one combined entry that absorbed the section's current values, leaving the real barangay (such as the Igbaras, Panay, Gandara and Villareal town centers) showing an older Department Order. Plural headings that name a single barangay still read the current order (the San Isidro, Isabela case from v2.31.0 is unchanged); list and number-range headings now correctly leave each named barangay on its own current schedule. The valuations themselves are unchanged.
+
 ## [2.31.1] - 2026-06-04
 
 ### Fixed
