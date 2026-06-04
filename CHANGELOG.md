@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.31.0] - 2026-06-04
+
+### Fixed
+- **Barangays listed under a plural "Barangays:" heading now show their current valuation.** Some BIR tax schedules label a single barangay with the plural word "Barangays:" instead of "Barangay:" (for example Gud, Nagbukel, Patanad and Rizal West in San Isidro, Isabela). The parser recognized only the singular form, so those barangays kept falling back to an older Department Order. They now read the current order. About 1,175 barangay headers across roughly 50 tax districts use this plural form.
+- **The Cebu City "Kamputhan" page now redirects to "Camputhaw".** Kamputhan is BIR's older spelling of the barangay the PSGC lists as Camputhaw, whose current 2023 valuation already has its own page. The old-spelling page, which carried a stale valuation, now permanently redirects to the current one.
+
 ## [2.30.2] - 2026-06-04
 
 ### Changed
