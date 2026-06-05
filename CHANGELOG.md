@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.34.0] - 2026-06-05
+
+### Fixed
+- **Old "subdivision" pages that duplicated condo listings already shown under real barangays are now removed.** Some older Department Orders grouped a block of properties under a heading that is not an actual barangay (for example Mandaluyong's "Wack-Wack Subdivision", a 2014 master-list of 93 condominiums and townhouses). Newer orders moved each of those properties to its real barangay (Barangka Drive, Wack-Wack–Greenhills East, and others), leaving the old heading as a stale duplicate page showing years-old prices. The pipeline now detects such a page when the overwhelming majority of its streets are already served, more recently, under real grounded barangays, and removes the duplicate so searches land on the current per-barangay valuation. A safety check only removes a page when its distinctive streets are provably served fresher elsewhere; numbered barangays, pages with their own unique data, and generic "all lots" listings are kept untouched.
+
 ## [2.33.0] - 2026-06-05
 
 ### Fixed
