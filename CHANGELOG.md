@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.33.0] - 2026-06-05
+
+### Fixed
+- **Barangay pages now describe their headline residential figure as an average across streets, not as an official per-barangay BIR value.** BIR publishes zonal values per street, never per barangay. For most barangays the summary number is the average across that barangay's classified streets, which can sit well above the typical street (a few high-value streets pull the average up). The page now reads "The average residential zonal value across classified streets is ₱X/sqm (median ₱Y/sqm)," labels the value tiles "Avg.," and adds a short note, so the figure is not mistaken for a single official BIR barangay rate. The rare barangays where BIR does publish a barangay-wide rate keep the exact "BIR barangay-wide" wording. No valuations changed.
+- **Street names now extract cleanly for AI assistants and crawlers.** A street's name sat directly beside its "New" badge and footnote markers with only a visual gap, so text-only readers saw run-together strings like "Bayani RoadNew\*\*\*\*\*". The name is now separated from the decorative markers, so a street reads as "Bayani Road" with its badges as distinct text.
+- **Barangay pages carry fuller structured data and social-share tags.** The PSGC code, BIR Department Order, issuing Revenue District Office, and page-verification date are now included in the page's machine-readable structured data (previously visible on-page only), and Twitter/X share cards use each page's own title and description instead of a generic sitewide one. Vicinity cards now say "no residential value" instead of a bare dash where a street has no residential classification.
+
 ## [2.32.0] - 2026-06-05
 
 ### Fixed
