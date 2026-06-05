@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Old "combined" zonal pages that lumped several barangays onto one line are now removed when each barangay already has its own up-to-date page.** Some older Department Orders listed a group of barangays together on a single price line (for example "San Roque / Lower Mainit / Tamban / Upper Biangan"). Newer orders split those into separate per-barangay schedules that the site already shows, leaving the old combined entry as a stale duplicate. The pipeline now detects a combined page whose every named barangay already exists as its own newer page and drops the duplicate, so searches land on the current per-barangay valuation instead of a decades-old combined one. A safety gate only removes a combined page when every part of it is provably served fresher elsewhere; combined pages with any part not yet covered are kept untouched.
+
 ## [2.31.2] - 2026-06-05
 
 ### Fixed
