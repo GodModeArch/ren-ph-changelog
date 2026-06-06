@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Broker search now finds people whose stored name includes a middle name or initial.** Searching "Gentry Viray" used to miss a broker saved as "Gentry D Viray" because the search looked for the whole phrase as one continuous run of text, and the middle initial broke it. Each word you type is now matched on its own, so every word just has to appear somewhere in the name or headline. This also tolerates extra middle names and first/last names typed in a different order. A search made up only of punctuation or wildcard characters now returns no results instead of the entire directory.
+
 ## [2.37.0] - 2026-06-06
 
 ### Fixed
