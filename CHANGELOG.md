@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.35.0] - 2026-06-06
+
 ### Fixed
 - **Manila barangays that showed decades-old valuations now show the current ones.** Older Department Orders wrote a Manila barangay heading as two separate cells (for example "Barangay: 838" next to "Zone: 91"), and the parser only read the number, which it could not match to a real barangay. So the barangay's own newer revision (2017 or 2019) lived on a separate page while the old page kept serving 2004 or even 1993 prices. Sixteen Manila barangays (including 307, 308, 838, 873 and others) now merge onto a single current page. The old numbered URLs that duplicated them are retired.
 - **Barili, Cebu now shows its 2020 valuation instead of 1997.** Barili's barangays were written with a "FOR ZONE/BARANGAY:" heading the parser did not recognise, so its entire December 2020 schedule was dropped and all 43 barangays kept serving a 1997 Department Order, 23 years stale. The heading is now read correctly and every Barili barangay shows the December 3, 2020 values.
