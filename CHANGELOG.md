@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Numbered barangays written with leading zeros now show their current valuation.** Some cities number their barangays (Barangay 1, Barangay 2, and so on) and older Department Orders write them zero-padded ("001", "026", or "Barangay 018-A"). The matcher kept the leading zeros, so "001" never lined up with "Barangay 1" and those barangays stayed on pages that could not be found or grounded. Worse, in Gingoog City the newer 2020 order also used the padded form, so the city was stuck serving 2002 values while the 2020 schedule sat unmatched. Leading zeros are now ignored when matching, so both the old and new padded forms resolve to the right barangay and the newest order wins. Gingoog's 26 numbered barangays move from 2002 to 2020, and the duplicate stale pages they had are removed. A safety check still requires the barangay to actually exist, so a number with no matching barangay is left alone rather than forced onto the wrong page.
+
 ## [2.36.0] - 2026-06-06
 
 ### Fixed
