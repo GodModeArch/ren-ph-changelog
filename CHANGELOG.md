@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Barangays that shared one valuation line with their neighbours now all show the current figures.** Some Department Orders list several barangays together on a single heading separated by slashes (for example "Aguioas / Bimmotobot / Mamat-ing / San Antonio" in Naguilian, La Union, from a 2019 order) because the same schedule applies to all of them. The parser only read the first name, so just one barangay got the new values while the rest kept serving a decades-old order or had no page at all. The schedule is now applied to every barangay on the line, but only when each name is confirmed to be a distinct real barangay in that town, so this rescues genuine shared lists without splitting a single barangay that happens to be spelled two ways. In Naguilian this moves most of the municipality from a 2002 order to the 2019 one.
+
 ## [2.35.0] - 2026-06-06
 
 ### Fixed
