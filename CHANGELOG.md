@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.41.0] - 2026-06-08
+
+### Fixed
+- **Several real towns that showed a "City not found" page now resolve, and dead road-label pages are removed.** Some Department Orders file a town under the province it belonged to before a provincial split, or under its older name, so the matcher could not place it and the page showed "City not found" even though it held real valuations. Ten such towns are now recognised and show their data on the correct page: Laak (filed as "San Vicente" under Davao del Norte, 42 barangays), Maitum (under South Cotabato, now Sarangani, 22), Talitay (Maguindanao del Norte, 9), Sagay in Camiguin (filed under Misamis Oriental, 9), Sorsogon City, San Carlos City, Enrique Villanueva in Siquijor, San Lorenzo in Guimaras, Datu Odin Sinsuat (formerly Dinaig) and Cotabato City. Separately, 18 pages whose "name" was actually a fragment of order text rather than a place ("Hi-Way Toledo", "Both sides of the national...", "...Municipalities, Surigao", and similar) are removed so they no longer appear as empty city pages or in the sitemap.
+
 ## [2.40.0] - 2026-06-07
 
 ### Fixed
