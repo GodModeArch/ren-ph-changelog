@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.40.0] - 2026-06-07
+
+### Fixed
+- **Two Isabela barangays now show their 2023 valuation instead of a 2002 one.** A 2023 Department Order for the Isabela district typed a semicolon instead of a colon after the "Barangay" label on two headings ("Barangay; San Patricio" in Delfin Albano and "Barangay; Sinamar Sur" in San Mateo). The parser only recognised the colon form, so it skipped both headings and those barangays kept serving their 2002 values. The header reader now accepts a semicolon too, and both barangays move to their 2023 schedule.
+- **Eight barangays move to their current valuation after a spelling drifted between orders.** When a newer Department Order spelled a barangay slightly differently from its official name (for example "Barongobong" for Barangobong in Luna, or "Barera Jr." for Barrera Jr. in Lupi), the new figures attached to the variant spelling while the page kept serving an older order. Eight such barangays are now folded back onto their official name so the newer values win, with the variant spelling redirecting to the correct page: Luna/Barangobong (2019), Lupi/Barrera Jr. (2024), Milaor/Borongborongan (2024), Nabas/Tagororoc (2021), Salug/Tambalang (2019), Ipil/Domandan (2019), Roseller Lim/Silingan (2019), and Pagalungan/Linandangan (2022). A safety check confirms each is a genuine spelling of the same barangay, not two distinct places, before merging.
+
 ## [2.39.0] - 2026-06-07
 
 ### Fixed
