@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.44.0] - 2026-06-08
+
+### Added
+- **A public Data Updates page now records how REN.PH keeps its zonal value and directory data current.** Available at /changelog (also reachable as /data-updates), it is a plain-language, newest-first log of data corrections, regroundings against the official PSGC register, new coverage, freshness updates, and methodology changes, grouped by category. Routine engineering work is deliberately left out so the page reflects changes to the data itself. City and barangay zonal value pages now also carry a "Data last verified" line linking to it, and the page cross-links with the data integrity and provenance protocol.
+
 ## [2.43.0] - 2026-06-08
 
 ### Changed
