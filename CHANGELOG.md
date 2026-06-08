@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.43.0] - 2026-06-08
+
 ### Changed
 - **The "Popular Locations" list on the zonal value page now shows the cities people actually look up, with accurate values.** It previously claimed to rank cities by residential value but quietly only counted barangays that BIR publishes as a single blanket figure. Big cities like Makati, Taguig and Cebu publish street-by-street schedules instead, so they were left out entirely and the list filled up with small towns topping out around 10,000 pesos per square metre. It is now a curated set of 16 high-demand cities (eight Metro Manila business districts plus one major city per region: Cebu, Davao, Iloilo, Angeles, Santa Rosa, Legazpi, General Santos and Baguio), each showing a real average that blends the barangay figure with its street values.
 
