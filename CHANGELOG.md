@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.46.0] - 2026-06-08
+
+### Fixed
+- **San Fernando, Mexico and Masantol in Pampanga no longer show duplicate or 1990-era zonal value pages.** The City of San Fernando BIR file still contains a 1990 schedule (Department Order 61-90) alongside its 2017 and 2024 updates, and the parser had kept the 1990 entries as their own pages ("Poblacion 001", "Pulungbulo 021") next to the current ones. Three more pages were near-duplicates from alternate or older spellings: Mexico's "Cauyan" (a 2002 misspelling of Cawayan), Masantol's "Niqui" (the historical spelling of Nigui), and a second "Pulongbulo" spelling in San Fernando. Each stale or duplicate page is now retired and redirected to the correct current barangay, and where the newer data sat on the alternate spelling (Nigui and Pulung Bulu) the current page is upgraded from 2017 to the 2024 schedule.
+
 ## [2.45.0] - 2026-06-08
 
 ### Fixed
