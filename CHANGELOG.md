@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.45.0] - 2026-06-08
+
 ### Fixed
 - **Davao City and ~40 other places no longer show outdated zonal values next to the current ones.** When BIR lists several barangays together on one line (for example "Alambre, Atan-awe, Tungkalan, Tiboloy, Tagluno, Camansi and Kilate"), that line becomes a single combined page. Over the years BIR reprints the same group with small wording changes (extra barangays added, "&" written as "and", spacing), so each Department Order produced a slightly different page and the older ones never got retired. Davao City was showing three such stale pages (from 2002 and 2017) alongside the current 2021 schedule, with values as low as 100 pesos per square metre next to the real 800. The current page is now kept and the older duplicates are retired and redirected to it, but only when the newer page provably lists every barangay the old one did (so nothing is lost). Eleven such duplicate pages are removed across the country; partial-overlap cases are left in place for manual review rather than guessed at.
 
