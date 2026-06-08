@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **The "Popular Locations" list on the zonal value page now shows the cities people actually look up, with accurate values.** It previously claimed to rank cities by residential value but quietly only counted barangays that BIR publishes as a single blanket figure. Big cities like Makati, Taguig and Cebu publish street-by-street schedules instead, so they were left out entirely and the list filled up with small towns topping out around 10,000 pesos per square metre. It is now a curated set of 16 high-demand cities (eight Metro Manila business districts plus one major city per region: Cebu, Davao, Iloilo, Angeles, Santa Rosa, Legazpi, General Santos and Baguio), each showing a real average that blends the barangay figure with its street values.
+
+## [2.42.0] - 2026-06-08
+
+### Added
+- **City zonal value pages now explain which BIR Revenue District Office covers each area, in plain text.** Cities split across several district offices (Quezon City spans four, Manila six, Makati four) previously showed that split only as section headings above the barangay list, which search engines and AI assistants could not read as a fact. Each multi-office city now carries a short "Which RDO covers your property?" passage naming every district office, how many barangays it covers, and a few example barangays; single-office cities get a one-line version. The wording is based on the Department Order that set each barangay's values, not a claim about where you legally file a transaction.
+- **Each barangay page now states its BIR district office as a plain sentence.** The office was previously shown only in the page heading; it now also appears in the barangay summary text (for example, "These zonal values are published by BIR RDO 28 (Novaliches), based on the BIR Department Order covering Kaligayahan."). Barangays with no district office in the data omit the sentence rather than guessing one.
+
+### Fixed
+- **The page no longer says BIR zonal values expire on July 5, 2026.** Under RA 12001 (RPVARA) zonal values stay in force until each LGU's new Schedule of Market Values is approved (Sec. 31); where none exists yet, the BIR keeps using the existing zonal value or the transaction price, whichever is higher (Sec. 29). The only thing that ends on July 5, 2026 is the real property tax amnesty on penalties, surcharges, and interest (Sec. 30). The footer now states this and links to the full text of the law.
+- **The "highest residential" figure no longer calls a condominium a street.** When the top residential value in a city belongs to a condominium (a value per square metre of unit floor area, not land), the page used to label it the "highest-valued residential street", comparing it like a land value. It now reads "highest residential zonal value ... (condominium)" and marks the condominium on the stat card, so a building is no longer presented as a street.
+- **Social share previews on zonal value pages now use the page's own title, description, and image.** City and province zonal pages were falling back to the generic site-wide preview text and card on Twitter/X, and were dropping the preview image entirely. Each page now carries its own matching Open Graph and Twitter preview.
+
 ## [2.41.0] - 2026-06-08
 
 ### Fixed
