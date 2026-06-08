@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.47.0] - 2026-06-09
+
+### Fixed
+- **Four barangays no longer show a duplicate 1990s-2000s zonal value page beside their current one.** When an old BIR Department Order printed a barangay with a local number in front of its name (for example "017: BEPZ" in Mariveles, Bataan), that numbered label became its own page that never got retired, so it sat next to the clean, up-to-date page for the same barangay. The stale numbered pages are now retired and redirected to the current page: Mariveles "017: BEPZ" (1996) to BEPZ (2014), Vintar "17, P.F. Alviar" and "30, Sto. Tomas" (2017) to their 2023 pages, and San Fabian "011 - Gomot" (2006) to Gomot (2023). A page is only retired when the number-stripped name exactly matches a same-town page with a strictly newer schedule, so nothing is lost.
+
 ## [2.46.0] - 2026-06-08
 
 ### Fixed
