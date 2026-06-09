@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Seventeen towns no longer show a stale 1990s-2000s "All barangays of …" page next to their current barangay-by-barangay values.** BIR's oldest Department Orders valued a whole town on a single blanket line ("All barangays of Balbalan", 1994), and later comprehensive Orders (Kalinga and Apayao's 2020 schedule, Malaybalay's 2022) replaced it with one page per barangay. The old blanket line had been kept as its own page, attached to the town itself, serving 1990s values beside the current ones. These blanket pages are now retired, but only where the town's individual barangays are at least 90% covered by a newer schedule, so nothing is lost: 13 Kalinga/Apayao towns (Balbalan, Tabuk City, Conner, Flora, Kabugao, Lubuagan, Pasil, Pinukpuk, Pudtol, Rizal, Santa Marcela, Tanudan, Tinglayan plus Calanasan), Malaybalay City, Surigao City and Pura, Tarlac. Towns whose newer schedule is still incomplete (Gattaran and Gonzaga in Cagayan) keep their blanket page for now rather than risk dropping coverage.
+
 ## [2.47.0] - 2026-06-09
 
 ### Fixed
