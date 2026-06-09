@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.49.0] - 2026-06-09
+
+### Fixed
+- **Eighteen barangays move to their current valuation after a spelling, abbreviation, or numbering drifted between Department Orders.** When a newer BIR order listed a barangay under a slightly different label from its official name, the new figures attached to that variant while the page kept serving an older order, sometimes from the early 2000s or 1990s. Each variant is now folded back onto the official barangay so the newer values win, with the old label redirecting to the correct page: the five Calauag, Quezon poblacion barangays where the order used Spanish numbers ("Uno"…"Cingco" → Barangay I…V, 2019); Baguio's "P. Burgos" → Padre Burgos (2023); Ramon, Isabela's "Gen. Aguinaldo" → General Aguinaldo and Iba, Zambales' "Zone III" → Zone 3 (Poblacion); and spelling variants in Lupi ("Bangangan" → Bagangan Sr., 2024), Cauayan City ("Bacolod" → Baculod), Delfin Albano ("Caloocan" → Calaocan), Besao ("Soquib" → Suquib), Bocaue ("Biang 2nd" → Biñang 2nd), Lopez Jaena ("Malatuhan Bajo" → Molatuhan Bajo), Malabang ("Tubuk" → Tuboc), Ipil ("Labe" → Labi), and Polanco ("Lapyanbaja" → Lapayanbaja). Each fold is confirmed one-to-one against the official PSGC register, with no same-town barangay of the variant name, before merging, so nothing is lost.
+
 ## [2.48.0] - 2026-06-09
 
 ### Fixed
