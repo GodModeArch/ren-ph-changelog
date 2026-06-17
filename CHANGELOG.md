@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.50.0] - 2026-06-17
+
+### Fixed
+- **Three abolished City of Manila barangays no longer have live zonal value pages.** The City of Manila dissolved several numbered barangays into roads and flyovers (BIR footnotes them "Abolished barangay per Manila Barangay Bureau certification"), but BIR's files kept printing their old data, so they stayed online: barangay 40 in Zone 3 (which sits between the still-existing 39 and 41) was serving a 2011 schedule with Marcos Road at ₱26,250/sqm, alongside the abolished 113 (Zone 9) and 854 (Zone 93). Because the official PSGC register lists every real Manila barangay, any Manila barangay that does not match it is one the city abolished, so these pages are now retired. Real barangays are unaffected, and a page is only retired when its number is confirmed absent from the official Manila roster.
+- **Barangay pages whose effectivity date was written as a plain number-dash date (for example "9-29-98") no longer serve a decades-old valuation.** The site hides any value older than 2005 behind a "valuation being updated" notice, but the date reader did not recognise the all-numeric month-day-year format some older orders use, so those pages slipped through and published a 1990s figure as if current (general-santos/uhaw was serving 1998 values). The reader now understands that format, so these pages are correctly suppressed until a newer schedule is found.
+
 ## [2.49.0] - 2026-06-09
 
 ### Fixed
