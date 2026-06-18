@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.52.0] - 2026-06-18
+
 ### Fixed
 - **About 113 barangays that were stuck on a "valuation being updated" notice now show their real current values.** When BIR spelled a barangay slightly differently from its official name (Genitligan vs Ginitligan, Dumuclay vs Domoclay, Quinyangan Tunga vs Quinayangan Tonga), the page failed to match the official register and was left as an empty placeholder with no values, even when BIR had a current 2022-2024 schedule for it. These barangays are now matched to their official record by a spelling-and-sound comparison and show their real schedule. The match is tightly guarded: it only fires when exactly one official barangay of that same town is a clear spelling match, never for numbered barangays or for north/south-type pairs, and never for lines that list several barangays together, so a barangay is never attached to the wrong record.
 - **The "valuation being updated" notice no longer makes a promise the BIR may not keep.** The notice on suppressed pages claimed "The BIR has issued a more recent Department Order … this page will show the current values once the latest schedule is published." That was misleading: some of these places are no longer official barangays at all, and under RA 12001 (the Real Property Valuation and Assessment Reform Act of 2024) the BIR is phasing out zonal values entirely, so a newer schedule may never come. The notice now honestly states that the only valuation on file is too old to rely on and points people to the BIR Revenue District Office or their local assessor instead.
