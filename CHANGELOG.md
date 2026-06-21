@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Claimed brokers can now remove their own public profile page.** A new Privacy & Visibility control on the dashboard lets a broker who has claimed their profile take down their public page themselves, without contacting support. Removing the page redirects visitors to the broker's licensure exam cohort roster; the broker's name stays on that published PRC passer roster, which is an official public record. The action is reversible, so a broker can restore their page anytime.
+- **The privacy policy now spells out exactly how to remove a profile.** The "Your Rights" section distinguishes a takedown (profile page removed, name retained on the official roster) from an erasure (full deletion under RA 10173), and gives a direct path for each: claimed brokers can take their page down themselves from the dashboard, and anyone else can request removal by email.
+- **Unclaimed broker profiles now show why claiming is worth it.** The "Claim This Profile" prompt notes that claiming unlocks early access to property listings, launching soon.
+
 ## [2.52.0] - 2026-06-18
 
 ### Fixed
