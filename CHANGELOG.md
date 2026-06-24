@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.53.1] - 2026-06-24
+
+### Changed
+- **The privacy policy is clearer about what an erasure removes.** The Erasure (RA 10173 deletion) description now spells out what gets deleted: your profile page and any account details, contact information, or computed fields we hold. It also states plainly that erasure is not reversible, and adds a summary noting that neither a takedown nor an erasure can remove your name from the official PRC passer roster.
+
 ## [2.53.0] - 2026-06-22
 
 ### Added
