@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.54.0] - 2026-06-27
+
+### Changed
+- **Zonal value location pages are now backed by a precomputed stats cache.** The per-city and per-province summary figures (averages, medians, min/max) used to be recalculated from the full zonal dataset on every page load and every build. They are now computed once per data refresh and stored, so the pages serve the same numbers with far less database work. No change to the values shown.
+
 ## [2.53.2] - 2026-06-27
 
 ### Fixed
