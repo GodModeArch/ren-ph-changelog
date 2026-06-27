@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.53.2] - 2026-06-27
+
+### Fixed
+- **The broker directory no longer gets stuck showing "No brokers found" after a database hiccup.** A brief database outage could cause the main directory listing to cache an empty result and keep serving an empty directory for up to a day, even after the database had fully recovered. The listing now refuses to cache an empty or failed result, so it returns to normal as soon as the database is back.
+
 ## [2.53.1] - 2026-06-24
 
 ### Changed
