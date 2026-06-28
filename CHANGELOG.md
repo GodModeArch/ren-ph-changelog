@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.55.0] - 2026-06-28
+
+### Added
+- **Unclaimed broker profiles now have a clear "why claim this profile?" panel.** It sits high on the page, under the broker's name, and lays out what claiming unlocks: becoming owner-verified, controlling the bio and contact details, receiving buyer inquiries, and early access to free property listings. Claiming is free and only confirms the broker's PRC license number.
+
+### Changed
+- **Broker profile pages now lead with the verified facts.** The page is ordered so the licensure verification, summary, and board-exam details come first, with the claim prompt presented as a clearly secondary panel. This keeps the factual part of the page clean for search engines and AI assistants that cite it, while the claim prompt still appears prominently for the broker.
+- **The broker profile look is calmer and more consistent.** Highlight and seniority labels that used to be yellow, blue, or purple are now neutral grey, leaving green as the single accent color reserved for verified-source and licensed signals.
+- **Unclaimed profiles no longer show a view count.** A low "views" number was unhelpful on pages the broker hasn't claimed yet; claimed brokers still see their view count.
+
 ## [2.54.0] - 2026-06-27
 
 ### Changed
