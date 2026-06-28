@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.56.0] - 2026-06-28
+
+### Changed
+- **Broker profiles no longer show the full PRC license number.** A broker's PRC registration number is no longer published on the profile page or in the page's underlying data. Licensure is still clearly shown through the "PRC Licensed" badge and the link to the official PRC board-exam results, so visitors can still confirm a broker is licensed without the full number being exposed.
+- **Phone and email are now private by default on broker profiles.** Contact details are hidden unless the broker chooses to show them. Each broker can turn their phone and email on individually from their profile editor, next to a clear note that the field will be visible to anyone who views the profile. Existing profiles start hidden until the broker opts in.
+
 ## [2.55.0] - 2026-06-28
 
 ### Added
