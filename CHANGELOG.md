@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **New Privacy Notice for Profile Verification.** A dedicated page at `/privacy/verification` explains, in plain language, how a broker's PRC ID is handled when they verify their identity to claim a profile: that the ID photo is self-redacted before upload, stored privately, reviewed by a person, and permanently deleted within 7 days; that the full license number is never stored (only a one-way hash and the last 4 digits are kept); the lawful basis; and the broker's rights under RA 10173. The notice is linked from the verification consent step and from the main Privacy Policy.
+
 ## [2.56.0] - 2026-06-28
 
 ### Changed
