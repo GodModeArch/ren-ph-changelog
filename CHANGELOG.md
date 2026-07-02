@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.58.0] - 2026-07-03
+
+### Added
+- **Frequently Asked Questions on the License to Sell checker.** The License to Sell verification page now includes an eight-question FAQ covering what a License to Sell is and who issues it, how to read the Active and Expired labels, how REN.PH's checker compares to verifying directly with DHSUD, which laws (PD 957 and BP 220) require an LTS, what to do when a project isn't found, and what to do if a developer cannot show a valid license. The FAQ is marked up so search engines and AI assistants can cite it.
+- **A "data current through" note on the License to Sell checker.** The page now shows the issue date of the most recent License to Sell in the database, so visitors can see at a glance how current the DHSUD data is. It updates automatically whenever the data is refreshed.
+
+### Changed
+- **The License to Sell database statistics are clearer.** The "Linked to Projects" figure, which was always zero, has been replaced with a count of distinct developers, which better reflects the breadth of the database.
+
 ## [2.57.0] - 2026-06-30
 
 ### Added
