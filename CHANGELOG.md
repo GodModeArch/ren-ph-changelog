@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Saving a lead's status in the admin tool is faster.** Updating a lead's status or notes no longer triggers redundant cache-revalidation and page re-fetch work on every save, so the change is recorded and confirmed noticeably quicker.
+
 ## [2.58.0] - 2026-07-03
 
 ### Added
