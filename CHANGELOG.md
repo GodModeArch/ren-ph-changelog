@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - **Saving a lead's status in the admin tool is faster.** Updating a lead's status or notes no longer triggers redundant cache-revalidation and page re-fetch work on every save, so the change is recorded and confirmed noticeably quicker.
 
+## [2.59.0] - 2026-07-07
+
+### Added
+- **New Estate Tax Calculator.** A calculator at `/tools/estate-tax-calculator` computes Philippine estate tax from the date of death: the flat 6% TRAIN rate for deaths on or after January 1, 2018, or the old graduated 5% to 20% rates for deaths from 1998 to 2017, each with the correct deductions for its era. It handles conjugal property (the surviving spouse's half share and a half-value family home), applies the 25% late surcharge and split-rate interest (20% per year up to 2017, then 12% from 2018), and shows a dated estate tax amnesty status with an eligible-or-excluded estimate under the pending HB 6614 extension. Real-property rows can look up the current BIR zonal value per square meter and link through to the zonal value page. The page includes two worked examples, a deductions-by-era table, an eight-question FAQ, and structured data so search engines and AI assistants can cite it.
+
 ## [2.58.0] - 2026-07-03
 
 ### Added
