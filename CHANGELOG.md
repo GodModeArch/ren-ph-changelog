@@ -7,14 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
-- **New Capital Gains Tax Calculator.** A calculator at `/tools/capital-gains-tax-calculator` computes Philippine capital gains tax for both real property and shares of stock. For real property it applies the flat 6% to the highest of the selling price, BIR zonal value, or tax-declaration FMV (and shows which of the three set the base), models the documentary stamp tax, local transfer tax, registration fee, and commission, and produces a seller net-proceeds ledger and a buyer total-cash-out ledger with standard, seller-pays-all, and buyer-pays-all presets. It includes a principal residence exemption wizard that computes the partial-utilization split, a classification gate that stops and explains when the property is an ordinary asset, and a late-payment penalty engine (25% surcharge plus split-rate interest from the 30-day deadline). A shares tab computes 15% on the net gain for unlisted shares and the CMEPA stock transaction tax for PSE-listed shares (0.1% for trades from July 1, 2025, 0.6% before). Real-property sales can look up the BIR zonal value per square meter from the barangay picker. The page includes two worked examples, a who-pays table, and a ten-question FAQ with structured data so search engines and AI assistants can cite it.
-
 ### Changed
 - **Admin and dashboard saves are faster across the board.** Publishing projects, reviewing verifications, editing your realty, listings, and profile, and managing accreditations no longer perform redundant cache-revalidation work on each action, and admin project/LTS tools now verify permissions locally instead of over the network. Saves complete and confirm noticeably quicker.
 
 ### Fixed
 - **Saving a lead's status in the admin tool is faster.** Updating a lead's status or notes no longer triggers redundant cache-revalidation and page re-fetch work on every save, so the change is recorded and confirmed noticeably quicker.
+
+## [2.60.0] - 2026-07-08
+
+### Added
+- **New Capital Gains Tax Calculator.** A calculator at `/tools/capital-gains-tax-calculator` computes Philippine capital gains tax for both real property and shares of stock. For real property it applies the flat 6% to the highest of the selling price, BIR zonal value, or tax-declaration FMV (and shows which of the three set the base), models the documentary stamp tax, local transfer tax, registration fee, and commission, and produces a seller net-proceeds ledger and a buyer total-cash-out ledger with standard, seller-pays-all, and buyer-pays-all presets. It includes a principal residence exemption wizard that computes the partial-utilization split, a classification gate that stops and explains when the property is an ordinary asset, and a late-payment penalty engine (25% surcharge plus split-rate interest from the 30-day deadline). A shares tab computes 15% on the net gain for unlisted shares and the CMEPA stock transaction tax for PSE-listed shares (0.1% for trades from July 1, 2025, 0.6% before). Real-property sales can look up the BIR zonal value per square meter from the barangay picker. The page includes two worked examples, a who-pays table, and a ten-question FAQ with structured data so search engines and AI assistants can cite it.
 
 ## [2.59.1] - 2026-07-08
 
