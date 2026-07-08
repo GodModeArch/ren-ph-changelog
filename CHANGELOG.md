@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - **Saving a lead's status in the admin tool is faster.** Updating a lead's status or notes no longer triggers redundant cache-revalidation and page re-fetch work on every save, so the change is recorded and confirmed noticeably quicker.
 
+## [2.59.1] - 2026-07-08
+
+### Fixed
+- **The Estate Tax Calculator is now discoverable from the site navigation.** It now appears in the Tools dropdown in the header, the Tools column in the footer, and the homepage tools grid, alongside the other calculators. The Pag-IBIG Housing Loan Calculator, which had been missing from the footer, was added there too.
+
 ## [2.59.0] - 2026-07-07
 
 ### Added
