@@ -7,11 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Saving a lead's status in the admin tool is faster.** Updating a lead's status or notes no longer triggers redundant cache-revalidation and page re-fetch work on every save, so the change is recorded and confirmed noticeably quicker.
+
+## [2.61.1] - 2026-07-11
+
 ### Changed
 - **Admin and dashboard saves are faster across the board.** Publishing projects, reviewing verifications, editing your realty, listings, and profile, and managing accreditations no longer perform redundant cache-revalidation work on each action, and admin project/LTS tools now verify permissions locally instead of over the network. Saves complete and confirm noticeably quicker.
 
 ### Fixed
-- **Saving a lead's status in the admin tool is faster.** Updating a lead's status or notes no longer triggers redundant cache-revalidation and page re-fetch work on every save, so the change is recorded and confirmed noticeably quicker.
+- **Withdrawing consent for a verified PRC ID now tells you if the badge could not be removed.** If the request to remove the "Verified Broker" badge failed, the withdrawal was still reported as successful, so you could be told your consent was withdrawn while the badge stayed live on your public profile. The withdrawal now confirms the badge was actually removed and asks you to retry if it was not.
 
 ## [2.61.0] - 2026-07-11
 
