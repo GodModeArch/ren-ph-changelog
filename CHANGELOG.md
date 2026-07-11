@@ -13,6 +13,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - **Saving a lead's status in the admin tool is faster.** Updating a lead's status or notes no longer triggers redundant cache-revalidation and page re-fetch work on every save, so the change is recorded and confirmed noticeably quicker.
 
+## [2.61.0] - 2026-07-11
+
+### Added
+- **The tax calculators can now put you in touch with us.** The Capital Gains Tax, Estate Tax, Transfer Cost, and Pag-IBIG Housing Loan calculators previously had no way to get help beyond a link to the broker directory. Each now offers the options that make sense for why you are there: the Transfer Cost calculator offers help with the title transfer itself, the Estate Tax calculator offers help settling the estate and moving the title to the heirs, the Capital Gains Tax calculator offers to sell the property or handle the transfer, and the Pag-IBIG calculator offers help finding a property to buy. On the calculators that produce a figure, the offer appears directly under your result and carries that figure with it, so the conversation starts from the number you were actually looking at.
+- **Help with transferring a title, as a distinct service.** People arrive at these pages years after a purchase that was never registered, or after inheriting property, and what they need is not a broker but someone to handle the BIR, the Treasurer's Office, and the Registry of Deeds. That is now something you can ask for directly, and it asks the questions that matter: what kind of transfer it is, what year the transaction happened, and where the property is. Choosing inheritance explains up front that the estate has to be settled before the title can move.
+- **Selling is now a first-class option on zonal value pages.** Most people looking up what a property is worth are the owner, not a buyer. The barangay zonal pages now ask what brings you there and lead with selling, collecting the property type, area, street, asking price, and title status, with the street list drawn from that barangay's own zonal data. Buying remains available alongside it.
+
+### Changed
+- **Every enquiry now asks for your consent before we contact you.** All lead forms carry a required consent checkbox linking to the Privacy Policy, and we record the exact wording you agreed to and when, in line with the Data Privacy Act.
+
+### Fixed
+- **Enquiries about selling or transferring a title are no longer at risk of going unanswered.** Notifications were previously sent only for enquiries that scored highly enough on a model built around buyers, which measured budget and purchase timeline. A title-transfer enquiry has neither, so it could score as low-priority and be recorded without anyone being alerted. Enquiries about selling and about title transfers now always notify us, regardless of score.
+
 ## [2.60.0] - 2026-07-08
 
 ### Added
