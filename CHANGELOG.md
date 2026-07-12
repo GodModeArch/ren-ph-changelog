@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Fixed
+- **The Pag-IBIG calculator now uses the June 2026 promo rates and the PHP 10 million ceiling.** Pag-IBIG cut its three-year fixed rate from 6.25% to 4.5% for loans above the socialized housing ceiling up to PHP 4.9 million, and to 5.75% for loans from PHP 4.9 million up to a new PHP 10 million maximum, for applications received until December 31, 2026. The calculator was still working off the older schedule, so it quoted rates as high as 9.75% and capped loans at PHP 6 million. It now prices every loan at the rate that actually applies, raises the ceiling to PHP 10 million, and automatically picks the promo rate for borrowers who do not qualify for 4PH, who were previously shown the far more expensive standard rate. The promo is only offered on three-year fixing, so if you choose a longer fixed period the calculator now shows you exactly what that certainty is costing you per month. The amortization table, worked examples, and FAQ have all been repriced, and the figures are checked against Pag-IBIG's own published examples.
 - **Saving a lead's status in the admin tool is faster.** Updating a lead's status or notes no longer triggers redundant cache-revalidation and page re-fetch work on every save, so the change is recorded and confirmed noticeably quicker.
 
 ## [2.61.1] - 2026-07-11
