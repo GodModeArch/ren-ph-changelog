@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **A monthly amortization calculator for Philippine home loans.** Bank calculators tell you the monthly payment and stop there. This one shows you where that payment actually goes: on a PHP 3 million loan at 7.5% over 20 years, the first payment of PHP 24,168 is PHP 18,750 of interest and only PHP 5,418 of principal, and it takes until month 130 before more of your payment goes to the loan than to the bank. You can enter either the loan amount or the property price and down payment, and the full year-by-year schedule is on the page and downloadable as a spreadsheet.
+- **See what paying extra actually saves you.** The calculator prices each strategy against your own loan rather than offering generic advice: an extra PHP 5,000 a month, or one extra amortization every December out of your 13th-month pay. Each suggestion shows the exact interest saved and years cut, and applying it re-runs the entire page. The 13th-month figure is computed as the December lump it really is, not smoothed into a monthly average, because the timing changes the answer.
+- **Simulate a rate repricing before your bank does one to you.** Most Philippine bank housing loans fix your rate for only the first one to five years, then reprice to prevailing rates. The calculator shows what that does to your payment, and surfaces something no other calculator does: because the new payment is computed on the balance you still owe, paying extra BEFORE the fixed period ends lowers the repriced payment. On the example loan, a rate moving from 7.5% to 9.5% after five years lifts the payment from PHP 24,168 to PHP 27,224. Paying PHP 5,000 extra a month through those first five years brings the repriced payment down to PHP 23,437 instead, which is lower than the original payment, at exactly the same new rate.
+
 ### Fixed
 - **Saving a lead's status in the admin tool is faster.** Updating a lead's status or notes no longer triggers redundant cache-revalidation and page re-fetch work on every save, so the change is recorded and confirmed noticeably quicker.
 
