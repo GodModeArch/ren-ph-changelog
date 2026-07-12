@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - **Saving a lead's status in the admin tool is faster.** Updating a lead's status or notes no longer triggers redundant cache-revalidation and page re-fetch work on every save, so the change is recorded and confirmed noticeably quicker.
 
+## [2.62.1] - 2026-07-12
+
+### Fixed
+- **The Real Estate Math course now teaches the current Pag-IBIG rates.** The lesson comparing bank, Pag-IBIG, and in-house financing still described Pag-IBIG as "3 to 5.375% interest, maximum PHP 6 million loan". Both figures were superseded by the June 2026 rate cut: the ceiling is now PHP 10 million, and the rate is 3% under the socialized 4PH program or a promo 4.5% to 5.75% fixed for three years, for applications received until December 31, 2026. The lesson's worked example has been repriced, which reverses its own conclusion: at the old rate Pag-IBIG was the cheapest per month but the most expensive overall, while under the promo it is now the cheapest on both counts. The lesson explains why that is unusual, and adds the point the old copy was missing: the promo rate is only fixed for three years, so a thirty-year total computed at that rate is not a rate anyone is guaranteed.
+
 ## [2.62.0] - 2026-07-12
 
 ### Fixed
