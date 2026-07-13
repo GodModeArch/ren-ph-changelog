@@ -12,8 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **See what paying extra actually saves you.** The calculator prices each strategy against your own loan rather than offering generic advice: an extra PHP 5,000 a month, or one extra amortization every December out of your 13th-month pay. Each suggestion shows the exact interest saved and years cut, and applying it re-runs the entire page. The 13th-month figure is computed as the December lump it really is, not smoothed into a monthly average, because the timing changes the answer.
 - **Simulate a rate repricing before your bank does one to you.** Most Philippine bank housing loans fix your rate for only the first one to five years, then reprice to prevailing rates. The calculator shows what that does to your payment, and surfaces something no other calculator does: because the new payment is computed on the balance you still owe, paying extra BEFORE the fixed period ends lowers the repriced payment. On the example loan, a rate moving from 7.5% to 9.5% after five years lifts the payment from PHP 24,168 to PHP 27,224. Paying PHP 5,000 extra a month through those first five years brings the repriced payment down to PHP 23,437 instead, which is lower than the original payment, at exactly the same new rate.
 
+## [2.62.2] - 2026-07-13
+
 ### Fixed
-- **Saving a lead's status in the admin tool is faster.** Updating a lead's status or notes no longer triggers redundant cache-revalidation and page re-fetch work on every save, so the change is recorded and confirmed noticeably quicker.
+- **Saving a lead's status in the admin tool no longer makes you wait.** The Save button used to stay disabled until the whole page had been re-rendered on the server, so a one-field change felt slow. The save now confirms as soon as the change is written, and the page refreshes behind you. Two redundant cache writes per save were removed along the way.
 
 ## [2.62.1] - 2026-07-12
 
