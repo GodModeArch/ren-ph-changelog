@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.64.0] - 2026-07-17
+
+### Changed
+- **Every step-by-step guide now lives in one place, at `/guides`.** The due diligence checklist, HOA rights guide, foreclosure guide, and condo turnover guide used to sit under `/resources`, alongside the document templates, which meant the site had two competing places to look for a walkthrough and neither held all of them. All four have moved to `/guides`, joining the title transfer and property valuation guides, and each now has a URL that says what it covers: the HOA guide is at `/guides/homeowners-association-rights-philippines` rather than `/resources/hoa-guide`. The old links still work and redirect to the new ones. `/resources` remains, now as what it always was underneath: the place to download templates.
+- **Guides have their own menu.** The header, the footer, and the homepage now list guides separately from calculators, so a walkthrough is no longer filed under Tools. The four moved guides also read as one hub rather than four separately styled pages: each opens with a short answer to the question in its title, and carries the author's PRC license, its sources, and the date it was last checked.
+- **The four moved guides are now in the sitemap.** They were previously absent, so search engines had to find them by following links. `/resources` and the legal templates page were missing too, and are listed as well.
+
+### Fixed
+- **The foreclosure guide no longer promises a clean title.** It said liens are cleared once the buyer consolidates ownership. Consolidation cancels the foreclosed mortgage, but real property tax liens run with the land and some annotations survive it, so the guide now says to verify the title rather than assume it is clear. Its redemption step also gave a flat 1 year, which is right for individual borrowers but not for corporations, which get a shorter window under the General Banking Law (RA 8791).
+- **The HOA guide credits the right agency.** It named the HLURB as the implementer of RA 9904. DHSUD absorbed the HLURB, adjudication now sits with the Human Settlements Adjudication Commission, and the governing rules are the 2024 Revised IRR. This matters for anyone using the guide to work out where to bring a complaint.
+
 ## [2.63.0] - 2026-07-14
 
 ### Added
