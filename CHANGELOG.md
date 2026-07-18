@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.65.0] - 2026-07-18
+
 ### Added
 - **The blog at `/insights/blog` is now backed by a content database.** Posts used to be files committed into the codebase, so publishing one meant a full site rebuild and redeploy. A post now goes live by saving it to the database and refreshing only the blog's own cache, in seconds, without rebuilding the roughly 60,000 property, location, and broker pages or touching how they are served. The two are kept completely separate: publishing a post can only ever refresh the blog index and that post's page, never anything else on the site.
 
