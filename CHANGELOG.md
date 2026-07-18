@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.64.1] - 2026-07-18
+
+### Fixed
+- **Page titles no longer show "REN.PH" twice.** Across the site, the browser tab and the search-result title read like "About REN.PH | REN.PH": each page added the site name, and the site-wide template added it again. Google drops a title it sees as doubled and falls back to the page's first heading instead, so the title nobody wrote was the one that showed. The brand is now added in exactly one place, and the title on social share cards matches the one in the tab.
+
 ## [2.64.0] - 2026-07-17
 
 ### Changed
