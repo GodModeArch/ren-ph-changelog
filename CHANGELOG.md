@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.65.5] - 2026-07-19
+
+### Fixed
+- **Near-empty brokerage pages and duplicate city pages are no longer offered to search engines as-is.** A brokerage profile with no description, no team, and no accreditations is now kept out of search results until it has real content, and every brokerage and city page now points search engines at a single clean address for itself. City pages still share their province's broker list for now, so this keeps sibling cities from being read as copies of each other while true city-by-city listings are built.
+
 ## [2.65.4] - 2026-07-19
 
 ### Fixed
