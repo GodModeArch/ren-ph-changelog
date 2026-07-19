@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.65.1] - 2026-07-19
+
+### Fixed
+- **A newly published blog post now appears within about a minute instead of up to half an hour.** On the first publish of a post, the edge held onto the "not found" response longer than expected because of how the hosting layer caches pages between regions. Blog pages now refresh that cached copy on a short cycle, so a published post shows up at its URL, on the blog index, and on the Insights page within roughly a minute, on any hosting plan. The rest of the site is unaffected.
+
 ## [2.65.0] - 2026-07-18
 
 ### Added
