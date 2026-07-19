@@ -7,11 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
-- **The transfer tax calculator now says what it actually does, and search engines can read its answers.** The tool estimates the full cost of transferring a property title, not just the transfer tax line, so the page title and description now say "total cost to transfer land title" and spell out the pieces it adds up (capital gains tax, documentary stamp tax, the local transfer tax, registration, and notarial fees). The page also now ships the same structured data its sibling calculators carry, so the calculator and its FAQ answers are eligible to appear as rich results and be quoted by AI search.
-
 ### Fixed
 - **The broker directory result count is now exact, and every licensed broker is listed.** The directory's total counted every professional on record, but the listing itself was quietly leaving some out, so the final page of results could come up short. The listing now matches the count exactly. Brokers whose individual profile has been removed still appear by name, since a name is public licensing record, but with no link to a profile page that no longer exists.
+
+## [2.65.2] - 2026-07-19
+
+### Changed
+- **The transfer tax calculator now says what it actually does, and search engines can read its answers.** The tool estimates the full cost of transferring a property title, not just the transfer tax line, so the page title and description now say "total cost to transfer land title" and spell out the pieces it adds up (capital gains tax, documentary stamp tax, the local transfer tax, registration, and notarial fees). The page also now ships the same structured data its sibling calculators carry, so the calculator and its FAQ answers are eligible to appear as rich results and be quoted by AI search.
 
 ## [2.65.1] - 2026-07-19
 
