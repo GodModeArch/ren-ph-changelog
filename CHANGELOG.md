@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **The Resources menu was removed from the top navigation.** The Legal Templates link it held is still available in the site footer. This trims the header to the sections readers actually use while the templates are still in preparation.
+
 ## [2.65.5] - 2026-07-19
 
 ### Fixed
