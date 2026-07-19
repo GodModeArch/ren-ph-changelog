@@ -10,6 +10,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - **The broker directory result count is now exact, and every licensed broker is listed.** The directory's total counted every professional on record, but the listing itself was quietly leaving some out, so the final page of results could come up short. The listing now matches the count exactly. Brokers whose individual profile has been removed still appear by name, since a name is public licensing record, but with no link to a profile page that no longer exists.
 
+## [2.65.3] - 2026-07-19
+
+### Changed
+- **The Tools, Guides, Resources, and Insights hub pages now describe their contents to search engines.** Each of these index pages lists real content but previously handed search engines no machine-readable map of what it links to. They now carry structured data listing every item on the page, so the hubs are eligible to show as list-style results and their contents are easier to discover and quote.
+
+### Fixed
+- **Thin and duplicate pages are no longer offered to search engines.** The broker search page (which can generate endless filtered and paginated variants of the same list), the legal-templates page (whose templates are still in preparation), and the blog index while it has no posts yet are now kept out of search results, so search engines spend their attention on the real broker, location, and guide pages instead. The board-passer pages for each exam batch now also point search engines at a single clean address, so filtered and paginated views are not treated as separate pages.
+
 ## [2.65.2] - 2026-07-19
 
 ### Changed
