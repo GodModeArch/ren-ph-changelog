@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.65.7] - 2026-07-20
+
+### Fixed
+- **The Insights hub lists published reports again.** The main Insights page had stopped showing the reports it links to, displaying "No reports published yet" even though the Reports section still listed them. The hub now reads its report list from a build-time source that stays available when the page refreshes in the background, so reports show consistently on both pages.
+
 ## [2.65.6] - 2026-07-20
 
 ### Removed
