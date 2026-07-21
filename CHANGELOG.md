@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Academy lesson text reads correctly again.** A past cleanup that removed em dashes had accidentally split sentences mid-thought across the free training courses, leaving lines like "It is a FINAL tax. not creditable against income tax." Every affected sentence across all nine courses (and one guide) has been repaired with the right punctuation. No tax rate, peso amount, deadline, or law reference was changed in the process, only the punctuation.
+- **The transfer-tax lesson no longer quotes unsourced LRA registration fees.** Specific peso estimates for the Land Registration Authority registration fee were removed, since we cannot cite an official figure for them. The lesson keeps the explanation of how the fee is structured and now points clearly to the LRA's official ERCF computation tool as the place to get the current amount before quoting a client.
+
 ## [2.65.7] - 2026-07-20
 
 ### Fixed
