@@ -7,7 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.65.9] - 2026-07-22
+
 ### Fixed
+- **Blog share links and canonical tags no longer point at localhost.** On the Insights blog, pages that re-render in the background could ship `http://localhost:3000` into the canonical tag, the social-share preview URL, and every share button when a configuration value was missing at runtime. A missing value now degrades to the live ren.ph domain instead of localhost, so links stay correct, and a build that would ship localhost is now caught and blocked before it goes out.
 - **Broker profiles no longer read as if the exam passing rate was the individual's own result.** The auto-generated "About" summary on unclaimed broker profiles described the batch's passing rate ("passing the exam with a 75.01% passing rate") in a way that could be read as that one broker's personal score. The passing rate is a statistic for the whole exam sitting (everyone who passed out of everyone who took it), never an individual figure. The summary now attributes it to the batch ("The April 2025 batch had an overall passing rate of 75.01%"), matching how the rest of the profile already frames it.
 - **Academy lesson text reads correctly again.** A past cleanup that removed em dashes had accidentally split sentences mid-thought across the free training courses, leaving lines like "It is a FINAL tax. not creditable against income tax." Every affected sentence across all nine courses (and one guide) has been repaired with the right punctuation. No tax rate, peso amount, deadline, or law reference was changed in the process, only the punctuation.
 - **The transfer-tax lesson no longer quotes unsourced LRA registration fees.** Specific peso estimates for the Land Registration Authority registration fee were removed, since we cannot cite an official figure for them. The lesson keeps the explanation of how the fee is structured and now points clearly to the LRA's official ERCF computation tool as the place to get the current amount before quoting a client.
