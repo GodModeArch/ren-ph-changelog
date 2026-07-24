@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.65.11] - 2026-07-24
+
+### Changed
+- **Simplified the main navigation by removing the "Insights" link from the top menu.** Insights (Reports and Blog) is still reachable from the site footer, so nothing was taken away, the top bar is just less crowded.
+
 ## [2.65.10] - 2026-07-24
 
 ### Fixed
