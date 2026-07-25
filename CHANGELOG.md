@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.67.0] - 2026-07-25
+
+### Changed
+- **One green across the whole site.** Pages had drifted into using two different greens plus blue, purple, teal, emerald and orange for things that carried no particular meaning, so nothing stood out because everything did. Buttons, links, badges and highlights now all use the single brand green, greys carry the rest, and around 940 stray colour choices were replaced with shared design tokens. Nothing moved on any page; only the colours changed.
+- **Amber is now reserved for genuine legal and deadline warnings.** It had spread onto routine disclaimers, tips and section icons, which made real warnings easy to miss. It is now used in six places only, including the estate tax amnesty status, an expired or expiring License to Sell, and the point in the condo turnover guide where signing acceptance documents becomes binding. Everywhere else those panels are now plain and readable.
+- **Page titles across the site now use the same serif face as the homepage headline**, so every page opens the same way. Body text stays as it was and figures stay in the monospaced face.
+- **Status badges now read as a scale rather than a set of unrelated colours.** Broker profile tiers, project build stages and listing states progress from a plain outline through to a solid green fill, so it is clearer at a glance which state ranks above which.
+- **The brand green was matched exactly to the approved design.** It is now slightly lighter and less saturated, and the mint tint behind the homepage hero was matched the same way.
+
+### Fixed
+- **Text on red buttons and the "Erased" status badge had no colour of its own.** A missing value in the design system meant the text colour was silently ignored, so these controls fell back to whatever colour they happened to inherit and could be hard to read. Affects the delete buttons on accreditations, listings, and realty membership.
+- **The two lightest bars on zonal value charts were effectively invisible.** Agricultural and General Purpose bars were too pale to see against their background, so the bar stopped conveying anything. The whole chart colour scale was rebuilt so every step is clearly visible in both light and dark mode.
+- **Chart keys now match the bars they describe.** On the amortisation charts the interest key was grey while the interest bar was green, so the key could not be matched to the bar.
+- **An expired License to Sell no longer looks the same as one that was never checked.** On project pages both states were shown identically in grey. An expired licence, and a count of licences expiring within 30 days, are now shown as warnings.
+- **Several small pieces of text failed contrast guidelines in dark mode**, including the "PRC Licensed" badge and the project build-stage labels, and a badge outline rendered a white ring on dark backgrounds.
+
 ## [2.66.0] - 2026-07-25
 
 ### Changed
