@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.66.0] - 2026-07-25
+
 ### Changed
 - **Refreshed the site's visual theme and logo.** Colours moved to a deeper, calmer forest-green palette with genuinely neutral greys, and the REN.PH mark is now an R inside a location pin that adapts to light and dark. The browser tab icon and Apple touch icon were updated to match.
 - **Redesigned the homepage hero.** The top of the homepage is now a two-column layout built around a search box as the primary action, with a live sample BIR zonal-value record shown as proof that the platform is a real, working index rather than a brochure. It shows honest counts of board-exam passers, License to Sell records, and BIR zonal values, each pulled from live data, and a clear, upfront note that REN.PH lists PRC board-exam records and not current license status, so you should always ask to see the physical PRC ID. The old headline that only repeated the site's own name has been replaced with one that speaks to what visitors come to do.
