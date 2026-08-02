@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.68.0] - 2026-08-02
+
 ### Added
 - **REN.PH now records how a visitor first arrived, not just where they happened to be when they filled in a form.** Previously an enquiry stored the referrer at the moment of submission, so anyone who browsed a second page before getting in touch was recorded as having come from REN.PH itself, and the site the visitor actually arrived from was lost. It also stored the page the form was on rather than the page they landed on, which threw away the tracking information that AI assistants and other sites attach to their outbound links. Both are now captured on the first page of a visit and kept separately from the submit-time referrer, so a visitor who arrives from one place, returns later from another and then enquires is recorded accurately as both.
 - **An optional "How did you find us?" question at the end of the enquiry form.** It never blocks sending the form and can be skipped. It exists because roughly 15% of enquiries arrive carrying no source information at all, which is what happens when someone follows a link from inside a mobile app, and a visitor's own answer is the only way to recover that.
