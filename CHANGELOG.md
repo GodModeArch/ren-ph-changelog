@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **REN.PH now records how a visitor first arrived, not just where they happened to be when they filled in a form.** Previously an enquiry stored the referrer at the moment of submission, so anyone who browsed a second page before getting in touch was recorded as having come from REN.PH itself, and the site the visitor actually arrived from was lost. It also stored the page the form was on rather than the page they landed on, which threw away the tracking information that AI assistants and other sites attach to their outbound links. Both are now captured on the first page of a visit and kept separately from the submit-time referrer, so a visitor who arrives from one place, returns later from another and then enquires is recorded accurately as both.
+- **An optional "How did you find us?" question at the end of the enquiry form.** It never blocks sending the form and can be skipped. It exists because roughly 15% of enquiries arrive carrying no source information at all, which is what happens when someone follows a link from inside a mobile app, and a visitor's own answer is the only way to recover that.
+- **A new internal report showing which pages AI assistants fetch.** When someone asks ChatGPT, Perplexity or Claude a question and the assistant reads a REN.PH page to answer it, that visit is now recorded, separately from the automated crawling that AI companies do to build their training sets. The two are counted apart because they mean completely different things. Most people who see a REN.PH page quoted in an AI answer never click through, so this measures reach that enquiry numbers alone cannot see.
+
+### Changed
+- **The consent line on enquiry forms now says that how you found the site is part of what is recorded.** Under the Data Privacy Act that information becomes personal once it is attached to a name and a contact number, so it belongs in what is being agreed to rather than being collected quietly alongside it. Enquiries submitted before this change keep the exact wording that was shown to those visitors at the time.
+
+### Fixed
+- **Source figures are now presented as a minimum rather than a total, everywhere they appear.** Attribution on the web is unavoidably incomplete: AI assistant mobile apps remove the source information, and Google's AI Overviews and AI Mode are indistinguishable from an ordinary Google search. Visits with no source are kept in their own category and are never quietly folded into "direct" or "search", which would have hidden exactly the traffic being measured. The reasons the real number is higher are stated permanently on the report itself, not left to be remembered.
+
 ## [2.67.0] - 2026-07-25
 
 ### Changed
