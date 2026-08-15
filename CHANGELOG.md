@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.68.2] - 2026-08-15
+
 ### Fixed
 - **Zonal value pages are served from the cache again, so they load faster and cost less to run.** Every zonal page said it should be built once and kept, but one shared caching setting quietly overrode that and gave all 788 of them a 24-hour expiry. Once a page passed that expiry it was served as out-of-date content, which browsers and the delivery network are not allowed to keep, so every single visit went all the way back to the server and rebuilt the page. The pages were correct, just needlessly slow and expensive. They now behave as intended: built once per release, served from the edge, and refreshed when new BIR data ships.
 - **A brief database problem can no longer make a zonal value page vanish until the next release.** The page code could not tell a failed database query apart from a place that genuinely does not exist, so a few seconds of trouble could publish a "not found" page for a real barangay, city or province, and with the caching fix above that wrong page would have stayed until the next release rather than fixing itself within a day. Failed queries are now recognised as failures: nothing is stored, and the next visit tries again.
