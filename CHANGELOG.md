@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Zonal value pages are served from the cache again, so they load faster and cost less to run.** Every zonal page said it should be built once and kept, but one shared caching setting quietly overrode that and gave all 788 of them a 24-hour expiry. Once a page passed that expiry it was served as out-of-date content, which browsers and the delivery network are not allowed to keep, so every single visit went all the way back to the server and rebuilt the page. The pages were correct, just needlessly slow and expensive. They now behave as intended: built once per release, served from the edge, and refreshed when new BIR data ships.
+- **A brief database problem can no longer make a zonal value page vanish until the next release.** The page code could not tell a failed database query apart from a place that genuinely does not exist, so a few seconds of trouble could publish a "not found" page for a real barangay, city or province, and with the caching fix above that wrong page would have stayed until the next release rather than fixing itself within a day. Failed queries are now recognised as failures: nothing is stored, and the next visit tries again.
+- **The "Popular Locations" list on the zonal value tool can no longer be published empty.** It is built from a heavier database query than everything else on that page, so it is the part most likely to fail while the rest succeeds, which would have left a blank section on the page for the rest of the release. Same fix: the failure is now treated as a failure instead of an empty list.
+- **Province pages no longer show a stale year.** A heading on each of the 82 province pages printed the current year at the moment the site was built, so a release made in December would have every province page claiming the wrong year from 1 January onward. The year has been removed rather than guessed: a province page covers cities whose BIR valuations carry different dates, and the dates that mean something are already shown per city and per barangay.
+
 ## [2.68.0] - 2026-08-02
 
 ### Added
