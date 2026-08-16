@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **The REN.PH logo is now much bigger in the browser tab and in Google search results.** The mark is unchanged, and so is its green: the artwork simply had a wide transparent margin built into the file, and it filled barely two-thirds of its own square. Google draws every site's icon inside a circle and shrinks the file to fit, so that built-in margin was being added to Google's own, and the logo appeared smaller than it needed to be everywhere it was shown small. Trimming the margin makes the mark fill 96% of the space instead of 69%, which also makes the R noticeably clearer at the 16-pixel size a browser tab uses.
+- **Icons added for the surfaces that previously had none.** A `favicon.ico`, which is the first file Google looks for and which was returning "not found" until now, along with properly sized versions for Android home screens, Chrome, and Safari's pinned tabs. The iPhone home screen icon also had the same margin problem and has been enlarged to match.
+
 ## [2.68.2] - 2026-08-15
 
 ### Fixed
