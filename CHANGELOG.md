@@ -7,8 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.70.0] - 2026-08-18
+
 ### Changed
 - **The REN.PH map pin now fills its icon, edge to edge.** The last release trimmed the transparent margin above and below the mark and got it to 94% of the height, but the sides would not budge: the old pin was a narrow teardrop, taller than it was wide, so a square icon around it had leftover width no amount of trimming could reach. The pin has been redrawn as a rounder, shorter-tailed shape instead. It now spans 92% of the icon's width rather than 75%, which is what actually decides how big the icon looks in a Google result, and the tip is very slightly blunted so it stays a point rather than blurring to grey at browser-tab size. The R inside it is not redrawn: it is the same letterform at the same proportions relative to the pin, enlarged to match. The green is unchanged.
+- **The logo in the site header, the footer and the dashboard now shows the same pin as the browser tab.** The header logo is drawn separately from the icon files, because it has to change colour between light and dark mode and an image file cannot do that. It was still carrying the old, narrower pin, so for a short time the site would have shown one shape in the tab and a different one at the top of the page. Both now come from the same artwork, and the logo is the same size on screen as before.
 
 ## [2.69.0] - 2026-08-16
 
