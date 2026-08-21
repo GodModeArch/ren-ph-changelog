@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Takedown requests handled by an administrator now go through.** A broker who asks for their profile page to be removed can do it themselves from their own dashboard, and that has always worked. The other route, an administrator applying the change on their behalf after a request by email or on legal grounds, has been failing silently since 21 June: the request errored before it reached the database, so nothing was recorded and nothing changed. Both routes now work, and the audit trail behind them is unchanged.
+
 ## [2.70.0] - 2026-08-18
 
 ### Changed
