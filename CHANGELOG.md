@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Aurora province was missing from the zonal value pages, and the cause has been fixed.** Aurora is the only province on the site with no zonal valuation data at all: its page has never had figures behind it. The reason was not the data. The BIR publishes valuations for all 122 revenue district offices, and this site holds all 122 source spreadsheets, but two of them (Baler in Aurora, and Bacolod City) were filed in the wrong folder when the set was first unpacked, so the tool that reads them never saw those two. It reported that it had skipped them and carried on, and because every existing data check compares each new run against the previous one, the gap was treated as normal from then on. Both files are now where they belong, and the tool refuses to run at all if any of the 122 are missing rather than quietly leaving out whatever it cannot find. Aurora's figures, and Bacolod City's, appear on the site with the next BIR data refresh.
+
 ## [2.70.1] - 2026-08-22
 
 ### Fixed
