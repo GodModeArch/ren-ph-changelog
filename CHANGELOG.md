@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Town centres that the government splits into several barangays now show their figures on every one of those barangays, instead of on whichever one happened to match first.** The BIR writes a town centre as a single heading that names its parts in brackets, such as "POBLACION (I, II, III, IV & V)" for Baler in Aurora, or "POBLACION (Zones I & II)" for Dinalungan. The tool that reads the spreadsheets removed anything in brackets before looking for a list, which is correct for a heading like "SANTO NINO (NACOCO/LUMANGBAYAN)" where the bracket is just a note. Applied to a town centre it left the word "Poblacion" on its own, so the whole schedule landed on one barangay and the rest of the town centre got nothing. About 17 towns across the country were affected. Baler now shows all 13 of its barangays instead of 9, Casiguran 24 instead of 17, and San Luis 18 instead of 15, each matching the government's official list exactly. Aurora as a whole goes from 132 barangays to 151, and nationwide the correction adds 48 barangays and 2,100 streets.
+- **Baler's town centre no longer redirects to an unrelated barangay.** Because the town centre had been left as a name the tool could not place, a later step matched it by spelling to "Obligacion", which is a real and entirely different barangay in the same town, and set up a redirect from one to the other. Baler's town centre is in fact Barangay I to V, and Obligacion is somewhere else. The redirect is gone and both now show their own figures.
+- **Four pages that had no official identity behind them are gone**, in Dilasag, General Tinio, Talavera and Paluan. Each was a town centre the tool could not match to the government's list, published anyway under a generic name. Their figures now sit on the real barangays they belong to. No new pages of that kind were created anywhere in the country.
+- **Dipaculao's South Poblacion was showing 1997 figures while North Poblacion showed 2023 ones.** Both halves are named in the same BIR heading and both now show the current 2023 schedule.
+
 ## [2.71.0] - 2026-09-01
 
 ### Fixed
