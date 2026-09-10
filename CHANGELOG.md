@@ -7,10 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.72.1] - 2026-09-10
+
 ### Fixed
 - **Bonifacio Global City's valuations were filed under Pitogo, a different barangay two kilometres away, and Taguig's two Post Proper barangays had no pages at all.** The BIR publishes BGC as two barangays, Post Proper Northside and Post Proper Southside, and both are real entries on the government's official list of places. The tool that reads the spreadsheets held a list of phrases that mark a heading as a note rather than a barangay, and "POST PROPER" was on it. That rejected both of them, 108 headings across two revenue district offices. A rejected heading does not merely lose its own page: the rows underneath it fall to whichever barangay was named last, so the entire BGC schedule ended up on Pitogo. Taguig now lists 38 barangays instead of 36, Post Proper Northside shows its own 178 streets and Southside its 384, and Pitogo drops from 550 streets to the 36 that are actually in it.
 - **The BIR writes one of those names with a space that the official list does not.** The spreadsheets say "POST PROPER NORTH SIDE" while the government's list says "Post Proper Northside", so even with the phrase removed from the reject list the two would not have matched. The tool now treats that one spacing difference as the same name. It is deliberately narrow rather than a general rule that ignores spaces, because elsewhere spacing is what separates two genuinely different barangays.
-- **A new check now refuses to let this class of mistake ship again.** Every phrase on the reject list is tested against all 42,011 barangays and all 1,656 cities and municipalities on the government's official list before any deploy can proceed. Any phrase that would reject a real place stops the deploy. The list had always claimed to have been checked this way; nothing had ever verified it.
+- **A new check now refuses to let this class of mistake ship again.** Every phrase on the reject list is tested against all 1,656 cities and municipalities on the government's official list, and every phrase that can apply to a barangay heading is tested against all 42,011 barangays, before any deploy can proceed. Any phrase that would reject a real place stops the deploy. The list had always claimed to have been checked this way; nothing had ever verified it.
 
 ## [2.72.0] - 2026-09-09
 
