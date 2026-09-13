@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.73.1] - 2026-09-13
+
+### Added
+- **The Data Updates page now covers July to September 2026.** Eight new entries: Aurora province, town-centre schedules reaching every poblacion barangay, Bonifacio Global City's two barangays, interior-lot and bracketed-street figures, Pangil's Mabato-Azufre, where the "licensed" description on broker listings comes from, and live homepage coverage figures.
+
 ## [2.73.0] - 2026-09-11
 
 ### Fixed
@@ -65,6 +70,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **A brief database problem can no longer make a zonal value page vanish until the next release.** The page code could not tell a failed database query apart from a place that genuinely does not exist, so a few seconds of trouble could publish a "not found" page for a real barangay, city or province, and with the caching fix above that wrong page would have stayed until the next release rather than fixing itself within a day. Failed queries are now recognised as failures: nothing is stored, and the next visit tries again.
 - **The "Popular Locations" list on the zonal value tool can no longer be published empty.** It is built from a heavier database query than everything else on that page, so it is the part most likely to fail while the rest succeeds, which would have left a blank section on the page for the rest of the release. Same fix: the failure is now treated as a failure instead of an empty list.
 - **Province pages no longer show a stale year.** A heading on each of the 82 province pages printed the current year at the moment the site was built, so a release made in December would have every province page claiming the wrong year from 1 January onward. The year has been removed rather than guessed: a province page covers cities whose BIR valuations carry different dates, and the dates that mean something are already shown per city and per barangay.
+
+## [2.68.1] - 2026-08-15
+
+### Changed
+- **Old cached copies of pages are now cleared out automatically after 60 days**, which keeps hosting costs in check. Every deploy confirms that rule is still in place before it goes ahead.
 
 ## [2.68.0] - 2026-08-02
 
@@ -332,6 +342,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Three abolished City of Manila barangays no longer have live zonal value pages.** The City of Manila dissolved several numbered barangays into roads and flyovers (BIR footnotes them "Abolished barangay per Manila Barangay Bureau certification"), but BIR's files kept printing their old data, so they stayed online: barangay 40 in Zone 3 (which sits between the still-existing 39 and 41) was serving a 2011 schedule with Marcos Road at ₱26,250/sqm, alongside the abolished 113 (Zone 9) and 854 (Zone 93). Because the official PSGC register lists every real Manila barangay, any Manila barangay that does not match it is one the city abolished, so these pages are now retired. Real barangays are unaffected, and a page is only retired when its number is confirmed absent from the official Manila roster.
 - **Barangay pages whose effectivity date was written as a plain number-dash date (for example "9-29-98") no longer serve a decades-old valuation.** The site hides any value older than 2005 behind a "valuation being updated" notice, but the date reader did not recognise the all-numeric month-day-year format some older orders use, so those pages slipped through and published a 1990s figure as if current (general-santos/uhaw was serving 1998 values). The reader now understands that format, so these pages are correctly suppressed until a newer schedule is found.
 
+## [2.49.1] - 2026-06-16
+
+### Fixed
+- **Changing whether a broker profile is listed, from the admin console, saves faster.**
+
 ## [2.49.0] - 2026-06-09
 
 ### Fixed
@@ -388,6 +403,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - **Two Isabela barangays now show their 2023 valuation instead of a 2002 one.** A 2023 Department Order for the Isabela district typed a semicolon instead of a colon after the "Barangay" label on two headings ("Barangay; San Patricio" in Delfin Albano and "Barangay; Sinamar Sur" in San Mateo). The parser only recognised the colon form, so it skipped both headings and those barangays kept serving their 2002 values. The header reader now accepts a semicolon too, and both barangays move to their 2023 schedule.
 - **Eight barangays move to their current valuation after a spelling drifted between orders.** When a newer Department Order spelled a barangay slightly differently from its official name (for example "Barongobong" for Barangobong in Luna, or "Barera Jr." for Barrera Jr. in Lupi), the new figures attached to the variant spelling while the page kept serving an older order. Eight such barangays are now folded back onto their official name so the newer values win, with the variant spelling redirecting to the correct page: Luna/Barangobong (2019), Lupi/Barrera Jr. (2024), Milaor/Borongborongan (2024), Nabas/Tagororoc (2021), Salug/Tambalang (2019), Ipil/Domandan (2019), Roseller Lim/Silingan (2019), and Pagalungan/Linandangan (2022). A safety check confirms each is a genuine spelling of the same barangay, not two distinct places, before merging.
+
+## [2.39.1] - 2026-06-07
+
+### Fixed
+- **Saving changes to an enquiry in the admin console is faster.**
 
 ## [2.39.0] - 2026-06-07
 
@@ -1136,6 +1156,8 @@ This version number was stamped on the `feature/migrate-property-value-guide` br
 ### Changed
 - Root `<html lang>` from `en` to `en-PH`. The article schema already used `inLanguage: en-PH`; aligning the document-level attribute closes the inconsistency and gives crawlers a stronger geo signal for the Philippines-specific catalog
 - Page metadata `title` and `description` on the new guide are tuned to fit Google SERP truncation: 63 chars for `<title>` (including the auto-appended `| REN.PH` suffix) and 143 chars for the meta description. Page-level `title` no longer carries the `| REN.PH` suffix in either openGraph or twitter blocks, deferring to the root layout's title template, which fixes the double-suffix issue (`Foo | REN.PH | REN.PH`) that also affected `/services/title-transfer` and `/guides` index on first render
+
+## [2.8.3] - 2026-05-18
 
 ### Fixed
 - v2.8.2 shipped `src/app/opengraph-image.tsx` and `src/app/twitter-image.tsx` as Next.js dynamic OG routes backed by `next/og` `ImageResponse`. Those routes returned HTTP 500 in production with `TypeError: Cannot read properties of undefined (reading 'default')`. Root cause: `next/og` pulls in `@vercel/og` which uses WASM-based satori + resvg; that bundle does not load through OpenNext's Cloudflare Workers pipeline. The pre-existing `/brokers/[slug]/opengraph-image` route was also silently broken under the same bug, returning 404 for valid broker slugs since the Cloudflare migration. Replaced both with static PNGs generated at build time using the same renderer (`satori` + `@resvg/resvg-js`) in a Node script, shipped from `/public/og/`. Social previews on Facebook, X, LinkedIn, Slack, Discord, iMessage, and AI link unfurlers now render the branded card instead of a broken image
