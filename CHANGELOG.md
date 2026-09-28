@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Every city and barangay zonal value page has a new layout.** City pages show each barangay's lowest and highest value on one shared chart, with a search box at the top, and a tax estimator that lets you pick the city median, the top barangay or the low end. Barangay pages plot every street's residential value so the spread is visible at a glance, and the estimator lets you pick a specific street. The full street schedule and barangay list are unchanged and can now be filtered and sorted.
 - **The homepage has a new layout.** One search box now covers brokers, License to Sell records and zonal values, and the tools, guides and professional sections are regrouped so the most used tools come first.
 
+### Fixed
+- **City page summaries now show the BIR's exact figures instead of whole pesos.** Many schedules publish values like PHP 5.50 or 287.50 per square metre. The opening paragraph rounded these to 6 and 288, so it disagreed with the figures shown beside it, and at the low end it overstated the value by up to 9%.
+
 ## [2.73.1] - 2026-09-13
 
 ### Added
