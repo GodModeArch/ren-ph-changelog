@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.74.0] - 2026-09-28
+
 ### Changed
 - **Every city and barangay zonal value page has a new layout.** City pages show each barangay's lowest and highest value on one shared chart, with a search box at the top, and a tax estimator that lets you pick the city median, the top barangay or the low end. Barangay pages plot every street's residential value so the spread is visible at a glance, and the estimator lets you pick a specific street. The full street schedule and barangay list are unchanged and can now be filtered and sorted.
 - **The homepage has a new layout.** One search box now covers brokers, License to Sell records and zonal values, and the tools, guides and professional sections are regrouped so the most used tools come first.
