@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.75.0] - 2026-09-29
+
 ### Added
 - **The April 2026 board exam batch.** All 1,863 people who passed the April 2026 Real Estate Brokers Licensure Examination now have profiles and a batch page at /cohorts/april-2026. PRC reported 1,863 passers out of 2,296 examinees (81.14%), the highest of any regular batch on the site.
 - **Every batch page shows PRC's figures for its exam.** Exam and release dates, passers out of examinees, exam centers, the board where PRC named it, and links to the sources. Batch pages also carry Dataset structured data.
