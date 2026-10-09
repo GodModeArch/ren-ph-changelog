@@ -11,6 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Brokers can upload a profile photo straight from their phone.** Photos over 1 MB used to fail with a technical error. Photos are now resized before upload, and unsupported files get a plain message.
 - **Listing photos and realty logos upload from a phone too.** They had the same 1 MB failure as profile photos. Logos keep their transparent background.
 
+## [2.75.1] - 2026-10-09
+
+### Fixed
+- **Signed-out visitors opening a dashboard page are sent to the login page.** Pages like your profile and new listing used to load a broken page with an error. They now redirect to sign in.
+
 ## [2.75.0] - 2026-09-29
 
 ### Added
