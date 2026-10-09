@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Brokers can upload a profile photo straight from their phone.** Photos over 1 MB used to fail with a technical error. Photos are now resized before upload, unsupported files get a plain message, and a new photo shows on the public profile right away.
+
 ## [2.75.0] - 2026-09-29
 
 ### Added
