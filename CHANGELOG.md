@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - **Brokers can upload a profile photo straight from their phone.** Photos over 1 MB used to fail with a technical error. Photos are now resized before upload, and unsupported files get a plain message.
+- **Listing photos and realty logos upload from a phone too.** They had the same 1 MB failure as profile photos. Logos keep their transparent background.
 
 ## [2.75.0] - 2026-09-29
 
