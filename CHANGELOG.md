@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-10-14
+
 ### Changed
 - **The site has a new look.** One typeface, one colour scale and one set of page headers, breadcrumbs and FAQ blocks now run across every page, along with a redesigned header and footer.
 - **Broker and License to Sell lookups have new pages.** Search sits in a dark header with the coverage figures beside it, and results and FAQs follow below.
