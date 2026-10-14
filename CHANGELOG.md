@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **The site has a new look.** One typeface, one colour scale and one set of page headers, breadcrumbs and FAQ blocks now run across every page, along with a redesigned header and footer.
+- **Broker and License to Sell lookups have new pages.** Search sits in a dark header with the coverage figures beside it, and results and FAQs follow below.
+- **Every calculator shares one layout.** Transfer tax, capital gains tax, estate tax, Pag-IBIG housing loan and monthly amortization calculators show inputs on one side and a results card that updates as you type. The tools index lists them as cards.
+- **Every guide has a new layout.** Guides open with a summary header and key figures, keep a table of contents beside the text on wide screens, and end with links to related tools. Cost tables fit on phone screens.
+- **Academy courses and lessons have a new layout,** and so does the About page.
+- **Province zonal value pages and the zonal value hub match the city and barangay pages.**
+
+### Fixed
+- **Guides and articles with photos no longer reload part of the page after opening.**
+
 ## [2.75.3] - 2026-10-14
 
 ### Changed
