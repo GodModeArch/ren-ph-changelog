@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **Pages load faster, especially on phones.** The homepage, the transfer tax calculator, zonal value pages and Academy pages now arrive complete instead of showing a placeholder first, and the homepage and transfer tax calculator no longer wait on the database for every visit.
+- **The footer says who built the site, in easier-to-read text.** It now reads "Built by a PRC-licensed real estate broker, using public records from PRC, DHSUD, and BIR." The old line implied that every listed broker is licensed, which board exam records cannot show.
+- **llms.txt now links to every tool, record lookup, guide and Academy course.**
+
 ## [2.75.2] - 2026-10-14
 
 ### Fixed
