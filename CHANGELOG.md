@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.0] - 2026-11-01
+
 ### Changed
 - **Brokers now claim their profile by uploading a photo of their PRC ID.** They cover their birthdate, signature and most of the license number before uploading, and a person reviews each one. The image is deleted within 7 days. This replaces the claim quiz.
 
