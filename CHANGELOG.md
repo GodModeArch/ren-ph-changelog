@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Links shared to X now show a large preview card with the page's own image.** Before, most pages sent X the site-wide image and the title "REN.PH".
+- **Academy, cohort, location and broker pages now show a preview image when shared.** Before, they showed none, or a broker's raw photo with no card.
+- **Search results can show large image previews for every page,** including pages that are not indexed.
 ## [3.1.0] - 2026-11-01
 
 ### Changed
