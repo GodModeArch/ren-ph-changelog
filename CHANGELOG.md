@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **Broker profiles now say "Board exam passer" instead of "PRC Licensed".** REN.PH's broker records come from published PRC board exam results, which show who passed an exam, not who holds a current license. Profile titles, badges, search pages and the data read by search engines and AI assistants now say what the records show.
+- **Broker counts in copy now come from the live directory,** shown rounded down, such as "27,000+".
+
+### Removed
+- **The "PRC Verified" label on realty pages,** which nothing on REN.PH reviewed.
+
 ## [3.2.0] - 2026-11-04
 
 ### Fixed
