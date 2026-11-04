@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - **The "PRC Verified" label on realty pages,** which nothing on REN.PH reviewed.
 
+## [3.2.1] - 2026-11-05
+
+### Fixed
+- **Realty principals can now remove a member from their team.** Before, removing a member showed no error but left them on the team.
+- **Tightened what a signed-in account can change on broker and realty profiles.** Verification status, tiers and team counts are now set only by REN.PH.
+
 ## [3.2.0] - 2026-11-04
 
 ### Fixed
