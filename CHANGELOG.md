@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.2.3] - 2026-11-05
+
+### Fixed
+- **A broker's hidden phone number and email now stay hidden everywhere.** Before, details a broker chose not to show were left off their page but could still be read from REN.PH's public data. The PRC license number typed when claiming a profile is now private too.
+
 ## [3.2.2] - 2026-11-05
 
 ### Changed
