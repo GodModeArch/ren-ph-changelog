@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.2.4] - 2026-11-05
+
+### Fixed
+- **Sold prices on upcoming listings are stored only when the broker chooses to show them.** A price the broker keeps private is never saved where the public can read it.
+
 ## [3.2.3] - 2026-11-05
 
 ### Fixed
